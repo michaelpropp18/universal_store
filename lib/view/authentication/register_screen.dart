@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
 
-  const SignIn({this.toggleView});
+  const Register({this.toggleView});
 
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
@@ -24,11 +24,11 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign in'),
+        title: Text('Create an account'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),
-            label: Text('Register'),
+            label: Text('Sign in'),
             onPressed: widget.toggleView,
           ),
         ],
@@ -40,6 +40,7 @@ class _SignInState extends State<SignIn> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                decoration: InputDecoration(hintText: 'Email'),
                 onChanged: (val) {
                   setState(() => email = val);
                 },
@@ -47,18 +48,20 @@ class _SignInState extends State<SignIn> {
               ),
               TextFormField(
                 obscureText: true,
+                decoration: InputDecoration(hintText: 'Password'),
                 onChanged: (val) {
                   setState(() => password = val);
                 },
                 validator: (val) => val.isEmpty ? 'Enter a password' : null,
               ),
               RaisedButton(
-                child: Text('Sign in '),
+                child: Text('Register'),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
-                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                    dynamic result =
+                        _auth.registerWithEmailAndPassword(email, password);
                     if (result == null) {
-                      setState(() => error = 'Could not sign in');
+                      setState(() => error = 'Error making account');
                     }
                   }
                 },

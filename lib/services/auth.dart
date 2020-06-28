@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/user.dart';
+import 'auth_exception_handler.dart';
 
+// Firebase authentication services
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -21,6 +23,7 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
@@ -30,15 +33,19 @@ class AuthService {
 
   // sign in with email & password
   Future signInWithEmailAndPassword(String email, String password) async {
+    AuthResultStatus _status;
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser user = result.user;
-      return _userFromFirebaseUser(user);
+      if (result.user != null) {
+        _status = AuthResultStatus.successful;
+      } else {
+        _status = AuthResultStatus.undefined;
+      }
     } catch (e) {
-      print(e.toString());
-      return null;
+      _status = AuthExceptionHandler.getException(e);
     }
+    return _status;
   }
 
   // sign in anonymously
