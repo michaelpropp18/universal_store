@@ -16,12 +16,13 @@ class _AccountTypeState extends State<AccountType> {
   @override
   Widget build(BuildContext context) {
     var scaffold = Scaffold(
+      resizeToAvoidBottomInset: false, // keep this so that we don't overflow if we go back from next screen with keyboard
       body: Stack(
         children: [
           BackgroundGradient(),
           Container(
             padding: EdgeInsets.symmetric(
-              horizontal: 40.0,
+              horizontal: 30.0,
               vertical: 50.0,
             ),
             child: Column(
@@ -41,7 +42,7 @@ class _AccountTypeState extends State<AccountType> {
                   fontColor: Colors.white,
                   text: 'Customer',
                   onPressed: () =>
-                      Navigator.pushNamed(context, RegisterCustomerRoute),
+                      Navigator.pushNamed(context, RegisterCustomerNameRoute),
                 ),
                 SizedBox(height: 30),
                 SubmitButton(
@@ -58,7 +59,7 @@ class _AccountTypeState extends State<AccountType> {
                 BottomButton(
                   text: 'Sign in to account',
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, HomeRoute);
+                    Navigator.pop(context);
                   },
                 ),
               ],

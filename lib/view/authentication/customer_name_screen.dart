@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/services/auth.dart';
-import 'package:universal_store/view/authentication/widgets/header_text.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 
+import 'widgets/back_arrow.dart';
 import 'widgets/background_gradient.dart';
-import 'widgets/bottom_button.dart';
 import 'widgets/error_text.dart';
 import 'widgets/input_field.dart';
-import 'widgets/submit_button.dart';
 
-class CustomerFields extends StatefulWidget {
+class RegisterCustomerNameScreen extends StatefulWidget {
   @override
-  _CustomerFieldsState createState() => _CustomerFieldsState();
+  _RegisterCustomerNameScreenState createState() =>
+      _RegisterCustomerNameScreenState();
 }
 
-class _CustomerFieldsState extends State<CustomerFields> {
-  final AuthService _auth = AuthService();
-
+class _RegisterCustomerNameScreenState
+    extends State<RegisterCustomerNameScreen> {
   FocusNode _firstNameFocus = new FocusNode();
   FocusNode _lastNameFocus = new FocusNode();
 
@@ -77,32 +75,37 @@ class _CustomerFieldsState extends State<CustomerFields> {
       body: Stack(
         children: <Widget>[
           BackgroundGradient(),
+          BackArrow(),
           Container(
             padding: EdgeInsets.symmetric(
-              horizontal: 40.0,
-              vertical: 50.0,
+              horizontal: 20.0,
+              vertical: 85.0,
             ),
             child: Column(
               children: <Widget>[
-                Icon(
-                  Icons.person_pin,
-                  size: 150,
-                  color: Colors.white,
-                ),
                 Text(
-                  'What\'s your name?',
+                  'What is your name?',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 25,
                   ),
                 ),
-                Spacer(),
+                SizedBox(height: 20),
                 InputField(
                   error: firstNameError != '',
                   textController: firstNameTextController,
                   focus: _firstNameFocus,
+                  autofocus: true,
+                  textInputAction: TextInputAction.next,
                   textInputType: TextInputType.text,
                   hintText: 'First name',
+                  onSubmitted: (t) {
+                    checkFirstNameError();
+                    if (firstNameError == '') {
+                      _firstNameFocus.unfocus();
+                      FocusScope.of(context).requestFocus(_lastNameFocus);
+                    }
+                  },
                   icon: Icons.person,
                 ),
                 ErrorText(firstNameError),
@@ -112,16 +115,26 @@ class _CustomerFieldsState extends State<CustomerFields> {
                   textController: lastNameTextController,
                   focus: _lastNameFocus,
                   textInputType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
                   hintText: 'Last name',
+                  onSubmitted: (t) {
+                    checkLastNameError();
+                    if (firstNameError == '' && lastNameError == '') {
+                      Navigator.pushNamed(
+                          context, RegisterCustomerEmailPasswordRoute);
+                    }
+                  },
                   icon: Icons.person,
                 ),
                 ErrorText(lastNameError),
-                SizedBox(height: 5),
-                Spacer(),
-                SubmitButton(onPressed: () {}, text: 'Continue'),
-                Spacer(),
-                BottomButton(
-                    text: 'Back', onPressed: () => Navigator.pop(context))
+                FlatButton(
+                  onPressed: () => Navigator.popUntil(
+                      context, ModalRoute.withName(Navigator.defaultRouteName)),
+                  child: Text(
+                    'Already have an account?',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ],
             ),
           ),
