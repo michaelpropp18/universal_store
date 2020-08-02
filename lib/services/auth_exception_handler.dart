@@ -51,7 +51,7 @@ class AuthExceptionHandler {
     String errorMessage;
     switch (exceptionCode) {
       case AuthResultStatus.invalidEmail:
-        errorMessage = "Username or password is incorrect";
+        errorMessage = "Invalid Email";
         break;
       case AuthResultStatus.wrongPassword:
         errorMessage = "Username or password is incorrect";
@@ -69,12 +69,10 @@ class AuthExceptionHandler {
         errorMessage = "Signing in with Email and Password is not enabled";
         break;
       case AuthResultStatus.emailAlreadyExists:
-        errorMessage =
-            "The email has already been registered. Please login or reset your password";
+        errorMessage = "This email is already taken";
         break;
       case AuthResultStatus.networkError:
-        errorMessage =
-            "Unable to connect to network";
+        errorMessage = "Unable to connect to network";
         break;
       default:
         errorMessage = "Could not sign in";

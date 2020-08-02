@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 class InputField extends StatelessWidget {
-  final TextEditingController textController;
   final FocusNode focus;
   final bool error;
   final TextInputType textInputType;
@@ -12,10 +11,10 @@ class InputField extends StatelessWidget {
   final bool autofocus;
   final TextInputAction textInputAction;
   final Function onSubmitted;
+  final Function onChanged;
 
   const InputField({
-    @required this.textController,
-    @required this.focus,
+    this.focus,
     @required this.error,
     @required this.icon,
     this.textInputType: TextInputType.text,
@@ -24,6 +23,7 @@ class InputField extends StatelessWidget {
     this.autofocus: false,
     this.onSubmitted,
     this.textInputAction: TextInputAction.done,
+    this.onChanged,
   });
 
   @override
@@ -48,7 +48,6 @@ class InputField extends StatelessWidget {
       height: 50.0,
       child: TextField(
         focusNode: focus,
-        controller: textController,
         keyboardType: textInputType,
         textInputAction: textInputAction,
         autofocus: autofocus,
@@ -60,6 +59,12 @@ class InputField extends StatelessWidget {
             onSubmitted(e);
           }
         },
+        onChanged: (e) {
+          if (onChanged != null) {
+            onChanged(e);
+          }
+        },
+        
         decoration: InputDecoration(
           border: InputBorder.none,
           contentPadding: EdgeInsets.only(top: 14.0),
