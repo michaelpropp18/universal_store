@@ -5,7 +5,8 @@ const String LoginRoute = '/login';
 
 //registration
 const String RegisterTypeRoute = '/register/type';
-const String RegisterCustomerRoute = '/register/customer_fields';
+const String RegisterCustomerNameRoute = '/register/customer/name';
+const String RegisterCustomerEmailPasswordRoute = '/register/customer/email';
 const String RegisterManagerRoute = '/register/manager_fields';
 
 //drawer

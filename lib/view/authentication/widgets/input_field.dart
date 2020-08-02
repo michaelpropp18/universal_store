@@ -9,15 +9,22 @@ class InputField extends StatelessWidget {
   final IconData icon;
   final String hintText;
   final bool obscureText;
+  final bool autofocus;
+  final TextInputAction textInputAction;
+  final Function onSubmitted;
 
-  const InputField(
-      {@required this.textController,
-      @required this.focus,
-      @required this.error,
-      @required this.icon,
-      this.textInputType: TextInputType.text,
-      this.hintText: '',
-      this.obscureText: false});
+  const InputField({
+    @required this.textController,
+    @required this.focus,
+    @required this.error,
+    @required this.icon,
+    this.textInputType: TextInputType.text,
+    this.hintText: '',
+    this.obscureText: false,
+    this.autofocus: false,
+    this.onSubmitted,
+    this.textInputAction: TextInputAction.done,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +50,16 @@ class InputField extends StatelessWidget {
         focusNode: focus,
         controller: textController,
         keyboardType: textInputType,
+        textInputAction: textInputAction,
+        autofocus: autofocus,
         style: TextStyle(
           color: Colors.white,
         ),
+        onSubmitted: (e) {
+          if (onSubmitted != null) {
+            onSubmitted(e);
+          }
+        },
         decoration: InputDecoration(
           border: InputBorder.none,
           contentPadding: EdgeInsets.only(top: 14.0),

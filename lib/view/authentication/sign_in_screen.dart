@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/services/auth_exception_handler.dart';
 import 'package:universal_store/view/authentication/widgets/background_gradient.dart';
@@ -103,7 +104,7 @@ class _SignInState extends State<SignIn> {
           BackgroundGradient(),
           Container(
             padding: EdgeInsets.symmetric(
-              horizontal: 40.0,
+              horizontal: 30.0,
               vertical: 50.0,
             ),
             child: Column(
@@ -146,7 +147,7 @@ class _SignInState extends State<SignIn> {
                 Text('Not a member?', style: TextStyle(color: Colors.white)),
                 BottomButton(
                     text: 'Create Account',
-                    onPressed: () => Navigator.pushReplacementNamed(
+                    onPressed: () => Navigator.pushNamed(
                         context, RegisterTypeRoute)),
               ],
             ),
