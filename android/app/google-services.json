@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "246452207881",
+    "firebase_url": "https://universal-store-db.firebaseio.com",
+    "project_id": "universal-store-db",
+    "storage_bucket": "universal-store-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246452207881:android:54852e7a55c983b69913d8",
+        "android_client_info": {
+          "package_name": "com.luckymobility.universal_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246452207881-ni9sr33u4739srat2pcglqc0r72ddmbj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwJCX8r8w4EKoBBzXn9WjM2Zx2YhJA8vA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246452207881-ni9sr33u4739srat2pcglqc0r72ddmbj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "246452207881-72l824fmm79drduc0cqot3fqruk9ivel.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.luckymobility.universalStore"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
