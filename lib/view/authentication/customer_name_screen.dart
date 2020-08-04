@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:universal_store/routing/routing_constants.dart';
+import 'package:universal_store/view_models/register_customer_view_model.dart';
 
 import 'widgets/back_arrow.dart';
 import 'widgets/background_gradient.dart';
@@ -17,52 +19,8 @@ class _RegisterCustomerNameScreenState
   FocusNode _firstNameFocus = new FocusNode();
   FocusNode _lastNameFocus = new FocusNode();
 
-  final firstNameTextController = TextEditingController();
-  final lastNameTextController = TextEditingController();
-
-  // text field states
-  String firstNameError = '';
-  String lastNameError = '';
-
-  void checkFirstNameError() {
-    setState(() {
-      if (firstNameTextController.text == '') {
-        firstNameError = 'First name cannot be empty';
-      } else {
-        firstNameError = '';
-      }
-    });
-  }
-
-  void checkLastNameError() {
-    setState(() {
-      if (lastNameTextController.text == '') {
-        lastNameError = 'Last name cannot be empty';
-      } else {
-        lastNameError = '';
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _firstNameFocus.addListener(() {
-      if (!_firstNameFocus.hasFocus) {
-        checkFirstNameError();
-      }
-    });
-    _lastNameFocus.addListener(() {
-      if (!_lastNameFocus.hasFocus) {
-        checkLastNameError();
-      }
-    });
-  }
-
   @override
   void dispose() {
-    firstNameTextController.dispose();
-    lastNameTextController.dispose();
     _firstNameFocus.dispose();
     _lastNameFocus.dispose();
     super.dispose();
@@ -70,6 +28,7 @@ class _RegisterCustomerNameScreenState
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<RegisterCustomerViewModel>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -92,44 +51,49 @@ class _RegisterCustomerNameScreenState
                 ),
                 SizedBox(height: 20),
                 InputField(
-                  error: firstNameError != '',
-                  textController: firstNameTextController,
+                  error: viewModel.firstNameError != '',
                   focus: _firstNameFocus,
                   autofocus: true,
                   textInputAction: TextInputAction.next,
                   textInputType: TextInputType.text,
                   hintText: 'First name',
                   onSubmitted: (t) {
-                    checkFirstNameError();
-                    if (firstNameError == '') {
+                    viewModel.checkFirstNameError();
+                    if (viewModel.firstNameError == '') {
                       _firstNameFocus.unfocus();
                       FocusScope.of(context).requestFocus(_lastNameFocus);
                     }
                   },
+                  onChanged: (t) {
+                    viewModel.firstName = t;
+                  },
                   icon: Icons.person,
                 ),
-                ErrorText(firstNameError),
+                ErrorText(viewModel.firstNameError),
                 SizedBox(height: 5),
                 InputField(
-                  error: lastNameError != '',
-                  textController: lastNameTextController,
+                  error: viewModel.lastNameError != '',
                   focus: _lastNameFocus,
                   textInputType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   hintText: 'Last name',
                   onSubmitted: (t) {
-                    checkLastNameError();
-                    if (firstNameError == '' && lastNameError == '') {
+                    viewModel.checkLastNameError();
+                    if (viewModel.firstNameError == '' &&
+                        viewModel.lastNameError == '') {
                       Navigator.pushNamed(
                           context, RegisterCustomerEmailPasswordRoute);
                     }
                   },
+                  onChanged: (t) {
+                    viewModel.lastName = t;
+                  },
                   icon: Icons.person,
                 ),
-                ErrorText(lastNameError),
+                ErrorText(viewModel.lastNameError),
                 FlatButton(
-                  onPressed: () => Navigator.popUntil(
-                      context, ModalRoute.withName(Navigator.defaultRouteName)),
+                  onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                      context, HomeRoute, (route) => false),
                   child: Text(
                     'Already have an account?',
                     style: TextStyle(color: Colors.white),

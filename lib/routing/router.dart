@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:universal_store/view/authentication/account_type_screen.dart';
 import 'package:universal_store/view/authentication/customer_email_screen.dart';
 import 'package:universal_store/view/authentication/customer_name_screen.dart';
@@ -11,6 +12,7 @@ import 'package:universal_store/view/customer/drawer/profile_screen.dart';
 import 'package:universal_store/view/customer/drawer/purchases_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
+import 'package:universal_store/view_models/register_customer_view_model.dart';
 
 import 'routing_constants.dart';
 
@@ -24,9 +26,19 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RegisterTypeRoute:
       return MaterialPageRoute(builder: (context) => AccountType());
     case RegisterCustomerNameRoute:
-      return MaterialPageRoute(builder: (context) => RegisterCustomerNameScreen());
+      return MaterialPageRoute(
+        builder: (context) => ChangeNotifierProvider<RegisterCustomerViewModel>(
+          create: (BuildContext context) => RegisterCustomerViewModel(),
+          child: RegisterCustomerNameScreen(),
+        ),
+      );
     case RegisterCustomerEmailPasswordRoute:
-      return MaterialPageRoute(builder: (context) => RegisterCustomerEmailPasswordScreen());
+      return MaterialPageRoute(
+        builder: (context) => ChangeNotifierProvider<RegisterCustomerViewModel>(
+          create: (BuildContext context) => RegisterCustomerViewModel(),
+          child: RegisterCustomerEmailPasswordScreen(),
+        ),
+      );
     case RegisterManagerRoute:
       return MaterialPageRoute(builder: (context) => ManagerFields());
 
