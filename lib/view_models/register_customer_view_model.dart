@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:universal_store/services/auth.dart';
 import 'package:universal_store/services/auth_exception_handler.dart';
+import 'package:universal_store/services/database.dart';
 
 ///////////////////////////////////////////////////
 /// ViewModel for customer account creation
@@ -108,37 +109,49 @@ class RegisterCustomerViewModel with ChangeNotifier {
   /// Create Account
   /////////////////////////////////////////////////
 
-  Future createAccount() async {
-    if (_emailError == '' &&
+  bool inputValid() {
+    return _emailError == '' &&
         _passwordError == '' &&
         _confirmPasswordError == '' &&
         _email != '' &&
         _password != '' &&
-        _confirmPassword != '') {
-      _loading = true;
-      notifyListeners();
-      dynamic status =
-          await _auth.registerWithEmailAndPassword(_email, _password);
-      _loading = false;
-      if (status != AuthResultStatus.successful) {
-        if (status == AuthResultStatus.emailAlreadyExists ||
-            status == AuthResultStatus.invalidEmail) {
-          _emailError = AuthExceptionHandler.generateExceptionMessage(status);
-        } else {
-          _registerError =
-              AuthExceptionHandler.generateExceptionMessage(status);
-        }
-        notifyListeners();
-        return true;
-      }
-      notifyListeners();
-      return false;
-    } else {
+        _confirmPassword != '';
+  }
+
+  Future createAccount() async {
+    if (!inputValid()) {
       checkEmailError();
       checkPasswordError();
       checkConfirmPasswordError();
       return true;
     }
+
+    // set loading = true so UI shows loading animation
+    _loading = true;
+    notifyListeners();
+
+    //register with firebase
+    dynamic status = await _auth.registerCustomer(
+        firstName: _firstName,
+        lastName: _lastName,
+        email: _email,
+        password: _password);
+    _loading = false;
+
+    //registration successful
+    if (status == AuthResultStatus.successful) {
+      return false;
+    }
+
+    //registration unsuccessful
+    if (status == AuthResultStatus.emailAlreadyExists ||
+        status == AuthResultStatus.invalidEmail) {
+      _emailError = AuthExceptionHandler.generateExceptionMessage(status);
+    } else {
+      _registerError = AuthExceptionHandler.generateExceptionMessage(status);
+    }
+    notifyListeners();
+    return true;
   }
 
   /////////////////////////////////////////////////

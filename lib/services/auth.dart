@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import '../models/user.dart';
 import 'auth_exception_handler.dart';
+import 'database.dart';
 
 // Firebase authentication services
 class AuthService {
@@ -18,13 +20,21 @@ class AuthService {
   }
 
   // register with email & password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerCustomer(
+      {@required String firstName,
+      @required String lastName,
+      @required String email,
+      @required String password}) async {
     AuthResultStatus _status;
+    print('auth.dart');
+    print(firstName);
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       if (result.user != null) {
         _status = AuthResultStatus.successful;
+        await DatabaseService(uuid: result.user.uid).createNewCustomer(
+            firstName: firstName, lastName: lastName, email: email);
       } else {
         _status = AuthResultStatus.undefined;
       }
