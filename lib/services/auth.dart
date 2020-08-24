@@ -26,8 +26,6 @@ class AuthService {
       @required String email,
       @required String password}) async {
     AuthResultStatus _status;
-    print('auth.dart');
-    print(firstName);
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);

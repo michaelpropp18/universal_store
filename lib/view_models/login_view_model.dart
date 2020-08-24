@@ -71,11 +71,11 @@ class LoginViewModel with ChangeNotifier {
       notifyListeners();
       dynamic status =
           await _auth.signInWithEmailAndPassword(_email, _password);
+      _loading = false;
       if (status != AuthResultStatus.successful) {
-        _loading = false;
         _loginError = AuthExceptionHandler.generateExceptionMessage(status);
-        notifyListeners();
       }
+      notifyListeners();
     } else {
       checkEmailError();
       checkPasswordError();

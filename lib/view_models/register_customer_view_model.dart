@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:universal_store/services/auth.dart';
 import 'package:universal_store/services/auth_exception_handler.dart';
-import 'package:universal_store/services/database.dart';
 
 ///////////////////////////////////////////////////
 /// ViewModel for customer account creation
@@ -118,12 +117,15 @@ class RegisterCustomerViewModel with ChangeNotifier {
         _confirmPassword != '';
   }
 
+  /*
+  Returns true if successful, false otherwise
+  */
   Future createAccount() async {
     if (!inputValid()) {
       checkEmailError();
       checkPasswordError();
       checkConfirmPasswordError();
-      return true;
+      return false;
     }
 
     // set loading = true so UI shows loading animation
@@ -140,7 +142,7 @@ class RegisterCustomerViewModel with ChangeNotifier {
 
     //registration successful
     if (status == AuthResultStatus.successful) {
-      return false;
+      return true;
     }
 
     //registration unsuccessful
@@ -151,7 +153,7 @@ class RegisterCustomerViewModel with ChangeNotifier {
       _registerError = AuthExceptionHandler.generateExceptionMessage(status);
     }
     notifyListeners();
-    return true;
+    return false;
   }
 
   /////////////////////////////////////////////////

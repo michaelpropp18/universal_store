@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/authentication/widgets/bottom_button.dart';
-import 'package:universal_store/view/authentication/widgets/forgot_password_button.dart';
 
 import 'widgets/background_gradient.dart';
 import 'widgets/header_text.dart';
