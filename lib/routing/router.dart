@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:universal_store/view/authentication/account_type_screen.dart';
 import 'package:universal_store/view/authentication/customer_email_screen.dart';
 import 'package:universal_store/view/authentication/customer_name_screen.dart';
@@ -12,7 +12,6 @@ import 'package:universal_store/view/customer/drawer/profile_screen.dart';
 import 'package:universal_store/view/customer/drawer/purchases_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
-import 'package:universal_store/view_models/register_customer_view_model.dart';
 
 import 'routing_constants.dart';
 
@@ -27,18 +26,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => AccountType());
     case RegisterCustomerNameRoute:
       return MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider<RegisterCustomerViewModel>(
-          create: (BuildContext context) => RegisterCustomerViewModel(),
-          child: RegisterCustomerNameScreen(),
-        ),
-      );
+          builder: (context) => RegisterCustomerNameScreen());
     case RegisterCustomerEmailPasswordRoute:
       return MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider<RegisterCustomerViewModel>(
-          create: (BuildContext context) => RegisterCustomerViewModel(),
-          child: RegisterCustomerEmailPasswordScreen(),
-        ),
-      );
+          builder: (context) => RegisterCustomerEmailPasswordScreen());
     case RegisterManagerRoute:
       return MaterialPageRoute(builder: (context) => ManagerFields());
 
@@ -58,7 +49,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     // default. We should never get here, but if we do return home or login screen based on login status
     default:
-      print('got here 2');
+      debugPrint(
+          'Used default route in route.dart. You probably attempted to use an undefined route!');
       return MaterialPageRoute(builder: (context) => Wrapper());
   }
 }

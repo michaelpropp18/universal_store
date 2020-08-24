@@ -108,37 +108,52 @@ class RegisterCustomerViewModel with ChangeNotifier {
   /// Create Account
   /////////////////////////////////////////////////
 
-  Future createAccount() async {
-    if (_emailError == '' &&
+  bool inputValid() {
+    return _emailError == '' &&
         _passwordError == '' &&
         _confirmPasswordError == '' &&
         _email != '' &&
         _password != '' &&
-        _confirmPassword != '') {
-      _loading = true;
-      notifyListeners();
-      dynamic status =
-          await _auth.registerWithEmailAndPassword(_email, _password);
-      _loading = false;
-      if (status != AuthResultStatus.successful) {
-        if (status == AuthResultStatus.emailAlreadyExists ||
-            status == AuthResultStatus.invalidEmail) {
-          _emailError = AuthExceptionHandler.generateExceptionMessage(status);
-        } else {
-          _registerError =
-              AuthExceptionHandler.generateExceptionMessage(status);
-        }
-        notifyListeners();
-        return true;
-      }
-      notifyListeners();
-      return false;
-    } else {
+        _confirmPassword != '';
+  }
+
+  /*
+  Returns true if successful, false otherwise
+  */
+  Future createAccount() async {
+    if (!inputValid()) {
       checkEmailError();
       checkPasswordError();
       checkConfirmPasswordError();
+      return false;
+    }
+
+    // set loading = true so UI shows loading animation
+    _loading = true;
+    notifyListeners();
+
+    //register with firebase
+    dynamic status = await _auth.registerCustomer(
+        firstName: _firstName,
+        lastName: _lastName,
+        email: _email,
+        password: _password);
+    _loading = false;
+
+    //registration successful
+    if (status == AuthResultStatus.successful) {
       return true;
     }
+
+    //registration unsuccessful
+    if (status == AuthResultStatus.emailAlreadyExists ||
+        status == AuthResultStatus.invalidEmail) {
+      _emailError = AuthExceptionHandler.generateExceptionMessage(status);
+    } else {
+      _registerError = AuthExceptionHandler.generateExceptionMessage(status);
+    }
+    notifyListeners();
+    return false;
   }
 
   /////////////////////////////////////////////////
