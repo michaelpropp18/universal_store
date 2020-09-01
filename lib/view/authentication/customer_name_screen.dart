@@ -7,25 +7,9 @@ import 'widgets/back_arrow.dart';
 import 'widgets/background_gradient.dart';
 import 'widgets/error_text.dart';
 import 'widgets/input_field.dart';
+import 'widgets/submit_button.dart';
 
-class RegisterCustomerNameScreen extends StatefulWidget {
-  @override
-  _RegisterCustomerNameScreenState createState() =>
-      _RegisterCustomerNameScreenState();
-}
-
-class _RegisterCustomerNameScreenState
-    extends State<RegisterCustomerNameScreen> {
-  FocusNode _firstNameFocus = new FocusNode();
-  FocusNode _lastNameFocus = new FocusNode();
-
-  @override
-  void dispose() {
-    _firstNameFocus.dispose();
-    _lastNameFocus.dispose();
-    super.dispose();
-  }
-
+class RegisterCustomerNameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<RegisterCustomerViewModel>(context);
@@ -52,18 +36,10 @@ class _RegisterCustomerNameScreenState
                 SizedBox(height: 20),
                 InputField(
                   error: viewModel.firstNameError != '',
-                  focus: _firstNameFocus,
                   autofocus: true,
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                   textInputType: TextInputType.text,
                   hintText: 'First name',
-                  onSubmitted: (t) {
-                    viewModel.checkFirstNameError();
-                    if (viewModel.firstNameError == '') {
-                      _firstNameFocus.unfocus();
-                      FocusScope.of(context).requestFocus(_lastNameFocus);
-                    }
-                  },
                   onChanged: (t) {
                     viewModel.firstName = t;
                   },
@@ -73,27 +49,36 @@ class _RegisterCustomerNameScreenState
                 SizedBox(height: 5),
                 InputField(
                   error: viewModel.lastNameError != '',
-                  focus: _lastNameFocus,
                   textInputType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                   hintText: 'Last name',
-                  onSubmitted: (t) {
-                    viewModel.checkLastNameError();
-                    if (viewModel.firstNameError == '' &&
-                        viewModel.lastNameError == '') {
-                      Navigator.pushNamed(
-                          context, RegisterCustomerEmailPasswordRoute);
-                    }
-                  },
                   onChanged: (t) {
                     viewModel.lastName = t;
                   },
                   icon: Icons.person,
                 ),
                 ErrorText(viewModel.lastNameError),
+                SizedBox(height: 5),
+                SubmitButton(
+                    onPressed: () {
+                      if (viewModel.firstName != '' &&
+                          viewModel.lastName != '' &&
+                          viewModel.firstNameError == '' &&
+                          viewModel.lastNameError == '') {
+                        Navigator.pushNamed(
+                            context, RegisterCustomerEmailPasswordRoute);
+                      } else {
+                        viewModel.checkFirstNameError();
+                        viewModel.checkLastNameError();
+                      }
+                    },
+                    text: 'Next'), //on pressed send reset email
                 FlatButton(
-                  onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                      context, HomeRoute, (route) => false),
+                  onPressed: () {
+                    viewModel.clearAll();
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, HomeRoute, (route) => false);
+                  },
                   child: Text(
                     'Already have an account?',
                     style: TextStyle(color: Colors.white),

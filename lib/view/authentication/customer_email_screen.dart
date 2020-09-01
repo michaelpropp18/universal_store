@@ -8,28 +8,9 @@ import 'package:universal_store/view_models/register_customer_view_model.dart';
 import 'widgets/background_gradient.dart';
 import 'widgets/error_text.dart';
 import 'widgets/input_field.dart';
+import 'widgets/submit_button.dart';
 
-class RegisterCustomerEmailPasswordScreen extends StatefulWidget {
-  @override
-  _RegisterCustomerEmailPasswordScreenState createState() =>
-      _RegisterCustomerEmailPasswordScreenState();
-}
-
-class _RegisterCustomerEmailPasswordScreenState
-    extends State<RegisterCustomerEmailPasswordScreen> {
-
-  FocusNode _emailFocus = new FocusNode();
-  FocusNode _passwordFocus = new FocusNode();
-  FocusNode _confirmPasswordFocus = new FocusNode();
-
-  @override
-  void dispose() {
-    _emailFocus.dispose();
-    _passwordFocus.dispose();
-    _confirmPasswordFocus.dispose();
-    super.dispose();
-  }
-
+class RegisterCustomerEmailPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<RegisterCustomerViewModel>(context);
@@ -55,18 +36,8 @@ class _RegisterCustomerEmailPasswordScreenState
               SizedBox(height: 20),
               InputField(
                 error: viewModel.emailError != '',
-                focus: _emailFocus,
-                autofocus: true,
-                textInputAction: TextInputAction.next,
                 textInputType: TextInputType.emailAddress,
                 hintText: 'Email',
-                onSubmitted: (t) {
-                  viewModel.checkEmailError();
-                  if (viewModel.emailError == '') {
-                    _emailFocus.unfocus();
-                    FocusScope.of(context).requestFocus(_passwordFocus);
-                  }
-                },
                 onChanged: (t) {
                   viewModel.email = t;
                 },
@@ -76,18 +47,9 @@ class _RegisterCustomerEmailPasswordScreenState
               SizedBox(height: 5),
               InputField(
                 error: viewModel.passwordError != '',
-                focus: _passwordFocus,
-                textInputAction: TextInputAction.next,
                 textInputType: TextInputType.text,
                 hintText: 'Password',
                 obscureText: true,
-                onSubmitted: (t) {
-                  viewModel.checkPasswordError();
-                  if (viewModel.passwordError == '') {
-                    _passwordFocus.unfocus();
-                    FocusScope.of(context).requestFocus(_confirmPasswordFocus);
-                  }
-                },
                 onChanged: (t) {
                   viewModel.password = t;
                 },
@@ -97,24 +59,26 @@ class _RegisterCustomerEmailPasswordScreenState
               SizedBox(height: 5),
               InputField(
                 error: viewModel.confirmPasswordError != '',
-                focus: _confirmPasswordFocus,
                 textInputType: TextInputType.text,
                 hintText: 'Confirm Password',
                 obscureText: true,
-                onSubmitted: (t) async {
-                  _confirmPasswordFocus.unfocus();
-                  dynamic successful = await viewModel.createAccount();
-                  if (successful) {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, HomeRoute, (route) => false);
-                  }
-                },
                 onChanged: (t) {
                   viewModel.confirmPassword = t;
                 },
                 icon: Icons.lock,
               ),
+              SizedBox(height: 5),
               ErrorText(viewModel.confirmPasswordError),
+              SizedBox(height: 10),
+              SubmitButton(
+                  onPressed: () async {
+                    dynamic successful = await viewModel.createAccount();
+                    if (successful) {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, HomeRoute, (route) => false);
+                    }
+                  },
+                  text: 'Create Account'),
               ErrorText(viewModel.registerError),
             ],
           ),
