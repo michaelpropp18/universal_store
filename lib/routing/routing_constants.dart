@@ -8,6 +8,7 @@ const String RegisterTypeRoute = '/register/type';
 const String RegisterCustomerNameRoute = '/register/customer/name';
 const String RegisterCustomerEmailPasswordRoute = '/register/customer/email';
 const String RegisterManagerRoute = '/register/manager_fields';
+const String ForgotPasswordRoute = '/register/forgot_password';
 
 //drawer
 const String ProfileRoute = '/drawer/profile';
