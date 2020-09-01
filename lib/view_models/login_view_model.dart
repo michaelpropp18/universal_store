@@ -114,7 +114,7 @@ class LoginViewModel with ChangeNotifier {
     if (_resetEmail != '' && _resetEmailError == '') {
       dynamic status = await _auth.resetPassword(_resetEmail);
       if (status != AuthResultStatus.successful) {
-        _resetEmailError =
+        _resetRequestError =
             AuthExceptionHandler.generateExceptionMessage(status);
         notifyListeners();
         return false;
@@ -150,6 +150,10 @@ class LoginViewModel with ChangeNotifier {
 
   String get resetEmailError {
     return _resetEmailError;
+  }
+
+  String get resetRequestError {
+    return _resetRequestError;
   }
 
   String get passwordError {

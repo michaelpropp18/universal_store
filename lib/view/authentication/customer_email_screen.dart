@@ -72,8 +72,7 @@ class RegisterCustomerEmailPasswordScreen extends StatelessWidget {
               SizedBox(height: 10),
               SubmitButton(
                   onPressed: () async {
-                    dynamic successful = await viewModel.createAccount();
-                    if (successful) {
+                    if (await viewModel.createAccount()) {
                       Navigator.pushNamedAndRemoveUntil(
                           context, HomeRoute, (route) => false);
                     }

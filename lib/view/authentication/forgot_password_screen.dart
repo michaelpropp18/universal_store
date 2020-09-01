@@ -8,15 +8,14 @@ import 'package:universal_store/view_models/login_view_model.dart';
 import 'widgets/back_arrow.dart';
 import 'widgets/background_gradient.dart';
 import 'widgets/input_field.dart';
+import 'widgets/password_reset_alert.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   createAlertDialog(BuildContext context) {
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text("Email Sent"),
-          );
+          return PasswordResetAlert();
         });
   }
 
@@ -60,7 +59,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     onPressed: () async {
                       if (await viewModel.resetPassword()) {
                         createAlertDialog(context);
-                      } 
+                      }
                     },
                     text: 'Send Reset Email'), //on pressed send reset email
                 SizedBox(height: 20),
