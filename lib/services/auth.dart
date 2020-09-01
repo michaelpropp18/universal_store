@@ -71,6 +71,12 @@ class AuthService {
     }
   }
 
+  // TODO: reset password
+  Future resetPassword(String email) async {
+    AuthResultStatus _status = AuthResultStatus.successful;
+    return _status;
+  }
+
   // sign out
   Future signOut() async {
     try {

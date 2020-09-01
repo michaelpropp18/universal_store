@@ -104,6 +104,20 @@ class RegisterCustomerViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void clearFields() {
+    _firstName = '';
+    _lastName = '';
+    _email = '';
+    _password = '';
+    _confirmPassword = '';
+    notifyListeners();
+  }
+
+  void clearAll() {
+    clearFields();
+    clearErrors();
+  }
+
   /////////////////////////////////////////////////
   /// Create Account
   /////////////////////////////////////////////////
@@ -142,6 +156,7 @@ class RegisterCustomerViewModel with ChangeNotifier {
 
     //registration successful
     if (status == AuthResultStatus.successful) {
+      clearAll();
       return true;
     }
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 class InputField extends StatelessWidget {
-  final FocusNode focus;
   final bool error;
   final TextInputType textInputType;
   final IconData icon;
@@ -14,7 +13,6 @@ class InputField extends StatelessWidget {
   final Function onChanged;
 
   const InputField({
-    this.focus,
     @required this.error,
     @required this.icon,
     this.textInputType: TextInputType.text,
@@ -47,7 +45,6 @@ class InputField extends StatelessWidget {
       ),
       height: 50.0,
       child: TextField(
-        focusNode: focus,
         keyboardType: textInputType,
         textInputAction: textInputAction,
         autofocus: autofocus,
