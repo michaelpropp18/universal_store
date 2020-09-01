@@ -15,15 +15,23 @@ class LoginViewModel with ChangeNotifier {
   String _emailError;
   String _passwordError;
   String _loginError;
+
+  String _resetEmail; // email on reset password screen
+  String _resetEmailError; // error for email on reset password screen
+  String _resetRequestError; // error for password request itself
+
   final AuthService _auth = AuthService();
   bool _loading; // true if loading icon should be shown on the screen
 
   LoginViewModel() {
     _email = '';
     _password = '';
+    _resetEmail = '';
     _emailError = '';
     _passwordError = '';
     _loginError = '';
+    _resetEmailError = '';
+    _resetRequestError = '';
     _loading = false;
   }
 
@@ -42,6 +50,17 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void checkResetEmailError() {
+    if (_resetEmail == '') {
+      _resetEmailError = 'Email field cannot be empty';
+    } else if (!_resetEmail.contains('@')) {
+      _resetEmailError = 'Please enter a valid email';
+    } else {
+      _resetEmailError = '';
+    }
+    notifyListeners();
+  }
+
   void checkPasswordError() {
     if (_password == '') {
       _passwordError = 'Password field cannot be empty';
@@ -55,6 +74,8 @@ class LoginViewModel with ChangeNotifier {
     _emailError = '';
     _passwordError = '';
     _loginError = '';
+    _resetEmailError = '';
+    _resetRequestError = '';
     notifyListeners();
   }
 
@@ -83,10 +104,39 @@ class LoginViewModel with ChangeNotifier {
   }
 
   /////////////////////////////////////////////////
+  /// Forgot Password Reset
+  /////////////////////////////////////////////////
+
+  /*
+  Returns true if successful, false otherwise
+  */
+  Future resetPassword() async {
+    if (_resetEmail != '' && _resetEmailError == '') {
+      dynamic status = await _auth.resetPassword(_resetEmail);
+      if (status != AuthResultStatus.successful) {
+        _resetEmailError =
+            AuthExceptionHandler.generateExceptionMessage(status);
+        notifyListeners();
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      checkResetEmailError();
+      notifyListeners();
+      return false;
+    }
+  }
+
+  /////////////////////////////////////////////////
   /// Getters
   /////////////////////////////////////////////////
 
   String get email {
+    return _email;
+  }
+
+  String get resetEmail {
     return _email;
   }
 
@@ -96,6 +146,10 @@ class LoginViewModel with ChangeNotifier {
 
   String get emailError {
     return _emailError;
+  }
+
+  String get resetEmailError {
+    return _resetEmailError;
   }
 
   String get passwordError {
@@ -117,6 +171,12 @@ class LoginViewModel with ChangeNotifier {
   set email(String email) {
     _email = email;
     checkEmailError();
+    notifyListeners();
+  }
+
+  set resetEmail(String resetEmail) {
+    _resetEmail = resetEmail;
+    checkResetEmailError();
     notifyListeners();
   }
 
