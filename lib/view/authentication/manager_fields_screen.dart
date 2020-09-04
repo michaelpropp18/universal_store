@@ -45,7 +45,7 @@ class ManagerFieldsScreen extends StatelessWidget {
                 },
                 icon: Icons.person,
               ),
-              ErrorText(viewModel.emailError),
+              ErrorText(viewModel.storeNameError),
               SizedBox(height: 5),
               InputField(
                 error: viewModel.emailError != '',
