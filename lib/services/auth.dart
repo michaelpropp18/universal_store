@@ -46,8 +46,22 @@ class AuthService {
     {@required String storeName,
     @required String email,
     @required String password}) async {
-      
+    AuthResultStatus _status;
+    try {
+      AuthResult result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      if (result.user != null) {
+        _status = AuthResultStatus.successful;
+        await DatabaseService(uuid: result.user.uid).createNewManager(
+            storeName: storeName, email: email);
+      } else {
+        _status = AuthResultStatus.undefined;
+      }
+    } catch (e) {
+      _status = AuthExceptionHandler.getException(e);
     }
+    return _status;
+  }
 
   // sign in with email & password
   Future signInWithEmailAndPassword(String email, String password) async {
