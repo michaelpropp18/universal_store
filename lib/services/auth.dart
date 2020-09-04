@@ -42,6 +42,13 @@ class AuthService {
     return _status;
   }
 
+  Future registerManager(
+    {@required String storeName,
+    @required String email,
+    @required String password}) async {
+      
+    }
+
   // sign in with email & password
   Future signInWithEmailAndPassword(String email, String password) async {
     AuthResultStatus _status;

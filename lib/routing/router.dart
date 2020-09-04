@@ -32,7 +32,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (context) => RegisterCustomerEmailPasswordScreen());
     case RegisterManagerRoute:
-      return MaterialPageRoute(builder: (context) => ManagerFields());
+      return MaterialPageRoute(builder: (context) => ManagerFieldsScreen());
 
     case ForgotPasswordRoute:
       return MaterialPageRoute(builder: (context) => ForgotPasswordScreen());

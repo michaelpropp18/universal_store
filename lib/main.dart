@@ -8,6 +8,7 @@ import 'view/wrapper.dart';
 import 'services/auth.dart';
 import 'view_models/login_view_model.dart';
 import 'view_models/register_customer_view_model.dart';
+import 'view_models/register_manager_view_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +25,11 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => RegisterCustomerViewModel(),
           ),
           ChangeNotifierProvider<LoginViewModel>(
-              create: (BuildContext context) => LoginViewModel()),
+              create: (BuildContext context) => LoginViewModel(),
+          ),
+          ChangeNotifierProvider<RegisterManagerViewModel>(
+            create: (BuildContext context) => RegisterManagerViewModel(),
+          ),
         ],
         child: MaterialApp(
           home: Wrapper(),
