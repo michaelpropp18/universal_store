@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_store/routing/routing_constants.dart';
-import 'package:universal_store/view_models/register_customer_view_model.dart';
+import 'package:universal_store/view_models/registration_view_model.dart';
 
 import 'widgets/back_arrow.dart';
 import 'widgets/background_gradient.dart';
@@ -12,13 +12,16 @@ import 'widgets/submit_button.dart';
 class RegisterCustomerNameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<RegisterCustomerViewModel>(context);
+    final viewModel = Provider.of<RegistrationViewModel>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: <Widget>[
           BackgroundGradient(),
-          BackArrow(),
+          BackArrow(onSubmitted: () {
+            viewModel.resetViewModel();
+            Navigator.pop(context);
+          }),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 20.0,
@@ -75,7 +78,7 @@ class RegisterCustomerNameScreen extends StatelessWidget {
                     text: 'Next'), //on pressed send reset email
                 FlatButton(
                   onPressed: () {
-                    viewModel.clearAll();
+                    viewModel.resetViewModel();
                     Navigator.pushNamedAndRemoveUntil(
                         context, HomeRoute, (route) => false);
                   },

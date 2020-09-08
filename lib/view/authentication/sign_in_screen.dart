@@ -30,7 +30,7 @@ class SignIn extends StatelessWidget {
             ),
             child: Column(
               children: <Widget>[
-                HeaderText('Universal Store'),
+                HeaderText('Universal\nStore'),
                 Spacer(),
                 Text(
                   'Member Login',
@@ -71,8 +71,8 @@ class SignIn extends StatelessWidget {
                 BottomButton(
                     text: 'Create Account',
                     onPressed: () {
-                      viewModel.clearErrors();
-                      Navigator.pushNamed(context, RegisterTypeRoute);
+                      viewModel.resetViewModel();
+                      Navigator.pushReplacementNamed(context, RegisterTypeRoute);
                     }),
               ],
             ),

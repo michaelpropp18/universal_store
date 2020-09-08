@@ -70,23 +70,17 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void clearErrors() {
+  void resetViewModel() {
+    _email = '';
+    _password = '';
+    _resetEmail = '';
     _emailError = '';
     _passwordError = '';
     _loginError = '';
     _resetEmailError = '';
     _resetRequestError = '';
+    _loading = false;
     notifyListeners();
-  }
-
-  void clearFields() {
-    _email = '';
-    _password = '';
-  }
-
-  void clearAll() {
-    clearErrors();
-    clearFields();
   }
 
   /////////////////////////////////////////////////
@@ -111,7 +105,7 @@ class LoginViewModel with ChangeNotifier {
         notifyListeners();
         return false;
       } else {
-        clearAll();
+        resetViewModel();
         notifyListeners();
         return true;
       }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/authentication/widgets/background_gradient.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_store/view/authentication/widgets/error_text.dart';
@@ -28,7 +29,10 @@ class ForgotPasswordScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           BackgroundGradient(),
-          BackArrow(),
+          BackArrow(onSubmitted: () {
+            viewModel.resetViewModel();
+            Navigator.pushReplacementNamed(context, HomeRoute);
+          }),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 20.0,
