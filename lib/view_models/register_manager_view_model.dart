@@ -43,7 +43,7 @@ class RegisterManagerViewModel with ChangeNotifier {
 
   void checkStoreNameError() {
     if (_storeName == '') {
-      _storeNameError = 'First Name cannot be empty';
+      _storeNameError = 'Store name cannot be empty';
     } else {
       _storeNameError = '';
     }
