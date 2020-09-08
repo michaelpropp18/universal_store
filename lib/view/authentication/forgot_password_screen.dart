@@ -3,6 +3,7 @@ import 'package:universal_store/view/authentication/widgets/background_gradient.
 import 'package:provider/provider.dart';
 import 'package:universal_store/view/authentication/widgets/error_text.dart';
 import 'package:universal_store/view/authentication/widgets/submit_button.dart';
+import 'package:universal_store/view/shared/loading.dart';
 import 'package:universal_store/view_models/login_view_model.dart';
 
 import 'widgets/back_arrow.dart';
@@ -57,8 +58,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                 SizedBox(height: 24),
                 SubmitButton(
                     onPressed: () async {
-                      if (await viewModel.resetPassword()) {
+                      if (viewModel.resetEmail != '' &&
+                          viewModel.resetEmailError == '') {
+                        await viewModel.resetPassword();
                         createAlertDialog(context);
+                      } else {
+                        viewModel.checkResetEmailError();
                       }
                     },
                     text: 'Send Reset Email'), //on pressed send reset email
@@ -66,6 +71,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               ],
             ),
           ),
+          if (viewModel.loading) Loading(),
         ],
       ),
     );

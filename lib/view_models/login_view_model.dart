@@ -21,7 +21,7 @@ class LoginViewModel with ChangeNotifier {
   String _resetRequestError; // error for password request itself
 
   final AuthService _auth = AuthService();
-  bool _loading; // true if loading icon should be shown on the screen
+  bool _loading; // true if loading icon should be shown on the login screen
 
   LoginViewModel() {
     _email = '';
@@ -51,6 +51,7 @@ class LoginViewModel with ChangeNotifier {
   }
 
   void checkResetEmailError() {
+    print(_resetEmail);
     if (_resetEmail == '') {
       _resetEmailError = 'Email field cannot be empty';
     } else if (!_resetEmail.contains('@')) {
@@ -79,10 +80,23 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void clearFields() {
+    _email = '';
+    _password = '';
+  }
+
+  void clearAll() {
+    clearErrors();
+    clearFields();
+  }
+
   /////////////////////////////////////////////////
   /// Sign in
   /////////////////////////////////////////////////
 
+  /*
+    Returns true if successful, false otherwise
+  */
   Future signIn() async {
     if (_email != '' &&
         _password != '' &&
@@ -95,11 +109,17 @@ class LoginViewModel with ChangeNotifier {
       _loading = false;
       if (status != AuthResultStatus.successful) {
         _loginError = AuthExceptionHandler.generateExceptionMessage(status);
+        notifyListeners();
+        return false;
+      } else {
+        clearAll();
+        notifyListeners();
+        return true;
       }
-      notifyListeners();
     } else {
       checkEmailError();
       checkPasswordError();
+      return false;
     }
   }
 
@@ -108,19 +128,23 @@ class LoginViewModel with ChangeNotifier {
   /////////////////////////////////////////////////
 
   /*
-  Returns true if successful, false otherwise
+    Returns true if successful, false otherwise
   */
   Future resetPassword() async {
     if (_resetEmail != '' && _resetEmailError == '') {
+      _loading = true;
+      notifyListeners();
       dynamic status = await _auth.resetPassword(_resetEmail);
       if (status != AuthResultStatus.successful) {
         _resetRequestError =
             AuthExceptionHandler.generateExceptionMessage(status);
+        _loading = false;
         notifyListeners();
-        return false;
-      } else {
         return true;
       }
+      _loading = false;
+      notifyListeners();
+      return false;
     } else {
       checkResetEmailError();
       notifyListeners();

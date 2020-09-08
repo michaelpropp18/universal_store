@@ -92,9 +92,14 @@ class AuthService {
     }
   }
 
-  // TODO: reset password
   Future resetPassword(String email) async {
-    AuthResultStatus _status = AuthResultStatus.successful;
+    AuthResultStatus _status;
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      _status = AuthResultStatus.successful;
+    } catch (e) {
+      _status = AuthExceptionHandler.getException(e);
+    }
     return _status;
   }
 
