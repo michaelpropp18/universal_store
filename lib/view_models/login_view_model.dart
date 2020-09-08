@@ -51,7 +51,6 @@ class LoginViewModel with ChangeNotifier {
   }
 
   void checkResetEmailError() {
-    print(_resetEmail);
     if (_resetEmail == '') {
       _resetEmailError = 'Email field cannot be empty';
     } else if (!_resetEmail.contains('@')) {
@@ -161,7 +160,7 @@ class LoginViewModel with ChangeNotifier {
   }
 
   String get resetEmail {
-    return _email;
+    return _resetEmail;
   }
 
   String get password {
