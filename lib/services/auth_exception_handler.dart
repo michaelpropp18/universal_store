@@ -57,7 +57,7 @@ class AuthExceptionHandler {
         errorMessage = "Username or password is incorrect";
         break;
       case AuthResultStatus.userNotFound:
-        errorMessage = "Username or password is incorrect";
+        errorMessage = "No registered account with that email";
         break;
       case AuthResultStatus.userDisabled:
         errorMessage = "User with this email has been disabled";

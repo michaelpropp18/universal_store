@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/routing/transition.dart';
 
 import 'package:universal_store/view/authentication/account_type_screen.dart';
 import 'package:universal_store/view/authentication/customer_email_screen.dart';
@@ -11,6 +12,7 @@ import 'package:universal_store/view/customer/drawer/payment_screen.dart';
 import 'package:universal_store/view/customer/drawer/privacy_screen.dart';
 import 'package:universal_store/view/customer/drawer/profile_screen.dart';
 import 'package:universal_store/view/customer/drawer/purchases_screen.dart';
+import 'package:universal_store/view/customer/home/home_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
 
@@ -32,11 +34,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (context) => RegisterCustomerEmailPasswordScreen());
     case RegisterManagerRoute:
-      return MaterialPageRoute(builder: (context) => ManagerFields());
-
+      return MaterialPageRoute(builder: (context) => ManagerFieldsScreen());
     case ForgotPasswordRoute:
       return MaterialPageRoute(builder: (context) => ForgotPasswordScreen());
-
 
     //drawer
     case ProfileRoute:
