@@ -71,17 +71,6 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       if (result.user != null) {
-        if (await DatabaseService(uuid: result.user.uid).isCustomer()) {
-          print('customer entry');
-          print(AuthService().user);
-        } else if (await DatabaseService(uuid: result.user.uid).isManager()) {
-          print('manager entry');
-          print(AuthService().user);
-        } else {
-          debugPrint(
-              'Valid user in firebase auth, but no manager or customer entry for that user.');
-          return AuthResultStatus.undefined;
-        }
         _status = AuthResultStatus.successful;
       } else {
         _status = AuthResultStatus.undefined;

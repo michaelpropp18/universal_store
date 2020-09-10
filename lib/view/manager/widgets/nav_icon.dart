@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/services/auth.dart';
 
 class NavIcon extends StatelessWidget {
   final IconData icon;
@@ -15,7 +16,9 @@ class NavIcon extends StatelessWidget {
           IconButton(
             iconSize: 70,
             icon: Icon(icon),
-            onPressed: () {},
+            onPressed: () async {
+              await AuthService().signOut();
+            },
           ),
           Text(text),
           SizedBox(height: 20),
