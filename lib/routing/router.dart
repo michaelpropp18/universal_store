@@ -11,6 +11,10 @@ import 'package:universal_store/view/customer/drawer/payment_screen.dart';
 import 'package:universal_store/view/customer/drawer/privacy_screen.dart';
 import 'package:universal_store/view/customer/drawer/profile_screen.dart';
 import 'package:universal_store/view/customer/drawer/purchases_screen.dart';
+import 'package:universal_store/view/manager/store_information_screen.dart';
+import 'package:universal_store/view/manager/store_inventory_screen.dart';
+import 'package:universal_store/view/manager/store_orders_screen.dart';
+import 'package:universal_store/view/manager/store_payment_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
 
@@ -36,7 +40,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ForgotPasswordRoute:
       return MaterialPageRoute(builder: (context) => ForgotPasswordScreen());
 
-    //drawer
+    //customer drawer
     case ProfileRoute:
       return MaterialPageRoute(builder: (context) => Profile());
     case PurchasesRoute:
@@ -49,6 +53,17 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => FeedbackInput());
     case HelpRoute:
       return MaterialPageRoute(builder: (context) => Help());
+    
+    //manager routes
+    case ManagerStoreRoute:
+      return MaterialPageRoute(builder: (context) => StoreInformationScreen());
+    case ManagerInventoryRoute:
+      return MaterialPageRoute(builder: (context) => StoreInventoryScreen());
+    case ManagerOrdersRoute:
+      return MaterialPageRoute(builder: (context) => StoreOrdersScreen());
+    case ManagerPaymentRoute:
+      return MaterialPageRoute(builder: (context) => StorePaymentScreen());
+
 
     // default. We should never get here, but if we do return home or login screen based on login status
     default:

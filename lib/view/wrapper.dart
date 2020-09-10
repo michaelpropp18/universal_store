@@ -13,7 +13,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User>(
-      stream: transform(FirebaseAuth.instance.onAuthStateChanged),
+      stream: convertToUser(FirebaseAuth.instance.onAuthStateChanged),
       builder: (BuildContext context, snapshot) {
         if (snapshot.data != null) {
           if (snapshot.data.isCustomer) {
@@ -31,7 +31,8 @@ class Wrapper extends StatelessWidget {
     );
   }
 
-  Stream<User> transform(Stream<FirebaseUser> source) async* {
+  //TODO move this somewhere better
+  Stream<User> convertToUser(Stream<FirebaseUser> source) async* {
     await for (var user in source) {
       if (user != null) {
         if (await DatabaseService(uuid: user.uid).isCustomer()) {
