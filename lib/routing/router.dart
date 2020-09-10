@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/routing/transition.dart';
 
 import 'package:universal_store/view/authentication/account_type_screen.dart';
 import 'package:universal_store/view/authentication/customer_email_screen.dart';
@@ -12,7 +11,6 @@ import 'package:universal_store/view/customer/drawer/payment_screen.dart';
 import 'package:universal_store/view/customer/drawer/privacy_screen.dart';
 import 'package:universal_store/view/customer/drawer/profile_screen.dart';
 import 'package:universal_store/view/customer/drawer/purchases_screen.dart';
-import 'package:universal_store/view/customer/home/home_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
 

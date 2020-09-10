@@ -43,17 +43,17 @@ class AuthService {
   }
 
   Future registerManager(
-    {@required String storeName,
-    @required String email,
-    @required String password}) async {
+      {@required String storeName,
+      @required String email,
+      @required String password}) async {
     AuthResultStatus _status;
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       if (result.user != null) {
         _status = AuthResultStatus.successful;
-        await DatabaseService(uuid: result.user.uid).createNewManager(
-            storeName: storeName, email: email);
+        await DatabaseService(uuid: result.user.uid)
+            .createNewManager(storeName: storeName, email: email);
       } else {
         _status = AuthResultStatus.undefined;
       }
@@ -67,9 +67,21 @@ class AuthService {
   Future signInWithEmailAndPassword(String email, String password) async {
     AuthResultStatus _status;
     try {
+      print('logging in');
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       if (result.user != null) {
+        if (await DatabaseService(uuid: result.user.uid).isCustomer()) {
+          print('customer entry');
+          print(AuthService().user);
+        } else if (await DatabaseService(uuid: result.user.uid).isManager()) {
+          print('manager entry');
+          print(AuthService().user);
+        } else {
+          debugPrint(
+              'Valid user in firebase auth, but no manager or customer entry for that user.');
+          return AuthResultStatus.undefined;
+        }
         _status = AuthResultStatus.successful;
       } else {
         _status = AuthResultStatus.undefined;

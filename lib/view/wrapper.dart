@@ -4,6 +4,7 @@ import 'package:universal_store/models/user.dart';
 
 import 'authentication/sign_in_screen.dart';
 import 'customer/home/home_screen.dart';
+import 'manager/home_screen.dart';
 
 class Wrapper extends StatelessWidget {
   @override
@@ -13,6 +14,7 @@ class Wrapper extends StatelessWidget {
       return SignIn();
     } else {
       return Home();
+      //return HomeScreen();
     }
   }
 }
