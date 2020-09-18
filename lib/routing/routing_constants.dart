@@ -23,3 +23,4 @@ const String ManagerStoreRoute = '/manager/store';
 const String ManagerInventoryRoute = '/manager/inventory';
 const String ManagerOrdersRoute = '/manager/orders';
 const String ManagerPaymentRoute = '/manager/payment';
+const String ManagerEditStoreFieldRoute = '/manager/store/edit_store_field';

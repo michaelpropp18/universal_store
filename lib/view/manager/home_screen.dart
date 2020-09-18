@@ -27,11 +27,6 @@ class HomeScreen extends StatelessWidget {
                     text: 'My Store',
                     onPressed: () =>
                         Navigator.pushNamed(context, ManagerStoreRoute),
-                    /*
-                    onPressed: () async {
-                      await AuthService().signOut();
-                    },
-                    */
                   ),
                   NavIcon(
                     icon: Icons.shopping_basket,

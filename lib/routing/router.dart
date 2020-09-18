@@ -15,6 +15,7 @@ import 'package:universal_store/view/manager/store_information_screen.dart';
 import 'package:universal_store/view/manager/store_inventory_screen.dart';
 import 'package:universal_store/view/manager/store_orders_screen.dart';
 import 'package:universal_store/view/manager/store_payment_screen.dart';
+import 'package:universal_store/view/manager/edit_store_fields_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
 
@@ -63,6 +64,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => StoreOrdersScreen());
     case ManagerPaymentRoute:
       return MaterialPageRoute(builder: (context) => StorePaymentScreen());
+    case ManagerEditStoreFieldRoute:
+      return MaterialPageRoute(builder: (context) => EditStoreFieldsScreen());
 
 
     // default. We should never get here, but if we do return home or login screen based on login status
