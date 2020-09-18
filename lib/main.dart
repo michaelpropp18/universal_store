@@ -8,6 +8,7 @@ import 'view/wrapper.dart';
 import 'services/auth.dart';
 import 'view_models/login_view_model.dart';
 import 'view_models/registration_view_model.dart';
+import 'view_models/past_purchases.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +25,10 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => RegistrationViewModel(),
           ),
           ChangeNotifierProvider<LoginViewModel>(
-              create: (BuildContext context) => LoginViewModel(),
+            create: (BuildContext context) => LoginViewModel(),
+          ),
+          ChangeNotifierProvider<PastPurchasesViewModel>(
+            create: (BuildContext context) => PastPurchasesViewModel(),
           ),
         ],
         child: MaterialApp(

@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/view_models/past_purchases.dart';
+import 'package:provider/provider.dart';
 
 class Purchases extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var purchases = <String>[];
-    purchases.add("Item1");
-    purchases.add("Item2");
-    purchases.add("Item3");
-    purchases.add("Price 1");
-    purchases.add("Price 2");
-    purchases.add("Price 3");
+    final viewModel = Provider.of<PastPurchasesViewModel>(context);
+    final purchases = viewModel.purchases;
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -24,9 +21,10 @@ class Purchases extends StatelessWidget {
           if (i.isOdd) {
             return Divider();
           }
+          final index = i ~/ 2;
           return ListTile(
-          title: Text(purchases[i ~/ 2]),
-            trailing: Text(purchases[i ~/ 2 + purchases.length ~/ 2])
+          title: Text(purchases[index].storeName),
+            trailing: Text('\$${purchases[index].price}')
           );
         }
       )
