@@ -7,7 +7,7 @@ import 'routing/routing_constants.dart';
 import 'view/wrapper.dart';
 import 'services/auth.dart';
 import 'view_models/login_view_model.dart';
-import 'view_models/register_customer_view_model.dart';
+import 'view_models/registration_view_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,11 +20,12 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider<RegisterCustomerViewModel>(
-            create: (BuildContext context) => RegisterCustomerViewModel(),
+          ChangeNotifierProvider<RegistrationViewModel>(
+            create: (BuildContext context) => RegistrationViewModel(),
           ),
           ChangeNotifierProvider<LoginViewModel>(
-              create: (BuildContext context) => LoginViewModel()),
+              create: (BuildContext context) => LoginViewModel(),
+          ),
         ],
         child: MaterialApp(
           home: Wrapper(),

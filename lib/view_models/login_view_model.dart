@@ -21,7 +21,7 @@ class LoginViewModel with ChangeNotifier {
   String _resetRequestError; // error for password request itself
 
   final AuthService _auth = AuthService();
-  bool _loading; // true if loading icon should be shown on the screen
+  bool _loading; // true if loading icon should be shown on the login screen
 
   LoginViewModel() {
     _email = '';
@@ -70,12 +70,16 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void clearErrors() {
+  void resetViewModel() {
+    _email = '';
+    _password = '';
+    _resetEmail = '';
     _emailError = '';
     _passwordError = '';
     _loginError = '';
     _resetEmailError = '';
     _resetRequestError = '';
+    _loading = false;
     notifyListeners();
   }
 
@@ -83,6 +87,9 @@ class LoginViewModel with ChangeNotifier {
   /// Sign in
   /////////////////////////////////////////////////
 
+  /*
+    Returns true if successful, false otherwise
+  */
   Future signIn() async {
     if (_email != '' &&
         _password != '' &&
@@ -95,11 +102,17 @@ class LoginViewModel with ChangeNotifier {
       _loading = false;
       if (status != AuthResultStatus.successful) {
         _loginError = AuthExceptionHandler.generateExceptionMessage(status);
+        notifyListeners();
+        return false;
+      } else {
+        resetViewModel();
+        notifyListeners();
+        return true;
       }
-      notifyListeners();
     } else {
       checkEmailError();
       checkPasswordError();
+      return false;
     }
   }
 
@@ -108,19 +121,23 @@ class LoginViewModel with ChangeNotifier {
   /////////////////////////////////////////////////
 
   /*
-  Returns true if successful, false otherwise
+    Returns true if successful, false otherwise
   */
   Future resetPassword() async {
     if (_resetEmail != '' && _resetEmailError == '') {
+      _loading = true;
+      notifyListeners();
       dynamic status = await _auth.resetPassword(_resetEmail);
       if (status != AuthResultStatus.successful) {
         _resetRequestError =
             AuthExceptionHandler.generateExceptionMessage(status);
+        _loading = false;
         notifyListeners();
-        return false;
-      } else {
         return true;
       }
+      _loading = false;
+      notifyListeners();
+      return false;
     } else {
       checkResetEmailError();
       notifyListeners();
@@ -137,7 +154,7 @@ class LoginViewModel with ChangeNotifier {
   }
 
   String get resetEmail {
-    return _email;
+    return _resetEmail;
   }
 
   String get password {

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/authentication/widgets/back_arrow.dart';
 import 'package:universal_store/view/shared/loading.dart';
-import 'package:universal_store/view_models/register_customer_view_model.dart';
+import 'package:universal_store/view_models/registration_view_model.dart';
 
 import 'widgets/background_gradient.dart';
 import 'widgets/error_text.dart';
@@ -13,12 +13,15 @@ import 'widgets/submit_button.dart';
 class RegisterCustomerEmailPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<RegisterCustomerViewModel>(context);
+    final viewModel = Provider.of<RegistrationViewModel>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(children: [
         BackgroundGradient(),
-        BackArrow(),
+        BackArrow(onSubmitted: () {
+          viewModel.resetCustomerEmailPassword();
+          Navigator.pop(context);
+        }),
         Container(
           padding: EdgeInsets.symmetric(
             horizontal: 20.0,
@@ -72,7 +75,7 @@ class RegisterCustomerEmailPasswordScreen extends StatelessWidget {
               SizedBox(height: 10),
               SubmitButton(
                   onPressed: () async {
-                    if (await viewModel.createAccount()) {
+                    if (await viewModel.createCustomerAccount()) {
                       Navigator.pushNamedAndRemoveUntil(
                           context, HomeRoute, (route) => false);
                     }
