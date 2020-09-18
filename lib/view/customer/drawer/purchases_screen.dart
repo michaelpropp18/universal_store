@@ -22,9 +22,11 @@ class Purchases extends StatelessWidget {
             return Divider();
           }
           final index = i ~/ 2;
+          final purchase = purchases[index];
           return ListTile(
-          title: Text(purchases[index].storeName),
-            trailing: Text('\$${purchases[index].price}')
+          title: Text(purchase.storeName),
+          subtitle: Text('${purchase.date.month}/${purchase.date.day}/${purchase.date.year}'),
+          trailing: Text('\$${purchases[index].price}'),
           );
         }
       )

@@ -9,7 +9,7 @@ class PastPurchasesViewModel with ChangeNotifier {
     // Dummy data for now
     _customerId = "Test Customer";
     for (int i = 0; i < 10; i++) {
-      purchases.add(Purchase('Store ${i}', i + .99, i ^ 2 + 1));
+      purchases.add(Purchase('Store $i', i + .99, DateTime.now().millisecondsSinceEpoch - (i * 3600 * 24000)));
     }
   }
 
@@ -27,9 +27,9 @@ class Purchase {
 
   String _storeName;
   double _price;
-  int _numItems;
+  int _date;
 
-  Purchase(this._storeName, this._price, this._numItems);
+  Purchase(this._storeName, this._price, this._date);
 
   String get storeName {
     return _storeName;
@@ -39,7 +39,7 @@ class Purchase {
     return _price;
   }
 
-  int get numItems {
-    return _numItems;
+  DateTime get date {
+    return DateTime.fromMillisecondsSinceEpoch(_date).toLocal();
   }
 }
