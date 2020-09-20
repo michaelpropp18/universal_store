@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/view/authentication/widgets/error_text.dart';
+import 'package:universal_store/view/manager/widgets/edit_field.dart';
+import 'package:universal_store/view/manager/widgets/save_changes_button.dart';
+
+import 'package:universal_store/utilities.dart' as utilities;
 
 class EditStorePhoneScreen extends StatefulWidget {
   final String originalPhone;
 
-  const EditStorePhoneScreen({this.originalPhone = '404-444-4444'});
+  const EditStorePhoneScreen({this.originalPhone = '(404) 444-4444'});
   @override
   _EditStorePhoneScreenState createState() => _EditStorePhoneScreenState();
 }
@@ -16,21 +20,8 @@ class _EditStorePhoneScreenState extends State<EditStorePhoneScreen> {
   @override
   void initState() {
     phone = widget.originalPhone;
-    errorText = generateError();
+    errorText = utilities.generatePhoneError(phone);
     super.initState();
-  }
-
-//TODO make this a utility method
-  String generateError() {
-    if (phone == '') {
-      return 'Phone field cannot be empty';
-    } else if (phone == widget.originalPhone) {
-     return 'New phone must be different from old';
-    } else if (!phone.contains('-')) {
-      return 'Please enter a valid phone';
-    } else {
-      return '';
-    }
   }
 
   @override
@@ -50,63 +41,19 @@ class _EditStorePhoneScreenState extends State<EditStorePhoneScreen> {
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
           child: Column(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0),
-                  border: Border.all(
-                    color: errorText != '' ? Colors.red : Colors.black38,
-                    width: 1,
-                  ),
-                ),
-                height: 50.0,
-                child: TextFormField(
-                  autofocus: true,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                  initialValue: widget.originalPhone,
-                  onChanged: (e) {
-                    setState(() {
-                      phone = e;
-                      errorText = generateError();
-                    });
-                  },
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(14.0),
-                    hintText: 'Phone',
-                  ),
-                ),
+              EditField(
+                error: errorText != '',
+                text: phone,
+                hintText: 'Phone number',
+                onChanged: (e) {
+                  setState(() {
+                    phone = e;
+                    errorText = utilities.generatePhoneError(phone);
+                  });
+                },
               ),
               ErrorText(errorText),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: FlatButton(
-                    child: Text(
-                      'Save',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        side: BorderSide(color: Colors.white70)),
-                    color: Colors.blue,
-                    disabledColor: Colors.grey,
-                    onPressed: errorText != '' || phone == widget.originalPhone
-                        ? null
-                        : () {
-                          Navigator.pop(context);
-                          //TODO update backend
-                        },
-                  ),
-                ),
-              ),
+              SaveChangesButton(enabled: errorText == '' && phone != widget.originalPhone),
             ],
           ),
         ));

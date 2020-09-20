@@ -63,7 +63,7 @@ class StoreInformationScreen extends StatelessWidget {
               storeAttributes: [
                 StoreAttribute(
                   header: 'Email',
-                  text: 'outdoormart@outdoormart.com',
+                  text: 'outdoormart@outdoormart.com asdjfioajsdiofjasiod fjoiasjdfoiajsdfoijas',
                   route: ManagerEditStoreEmailRoute,
                 ),
                 StoreAttribute(

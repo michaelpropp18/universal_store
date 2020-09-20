@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/view/authentication/widgets/error_text.dart';
+import 'package:universal_store/view/manager/widgets/edit_field.dart';
+import 'package:universal_store/view/manager/widgets/save_changes_button.dart';
+import 'package:universal_store/utilities.dart' as utilities;
 
 class EditStoreWebsiteScreen extends StatefulWidget {
   final String originalWebsite;
@@ -16,21 +19,8 @@ class _EditStoreWebsiteScreenState extends State<EditStoreWebsiteScreen> {
   @override
   void initState() {
     website = widget.originalWebsite;
-    errorText = generateError();
+    errorText = utilities.generateWebsiteError(website);
     super.initState();
-  }
-
-//TODO make this a utility method
-  String generateError() {
-    if (website == '') {
-      return 'Website field cannot be empty';
-    } else if (website == widget.originalWebsite) {
-     return 'New website must be different from old';
-    } else if (!website.contains('www.')) {
-      return 'Please enter a valid website';
-    } else {
-      return '';
-    }
   }
 
   @override
@@ -50,63 +40,21 @@ class _EditStoreWebsiteScreenState extends State<EditStoreWebsiteScreen> {
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
           child: Column(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0),
-                  border: Border.all(
-                    color: errorText != '' ? Colors.red : Colors.black38,
-                    width: 1,
-                  ),
-                ),
-                height: 50.0,
-                child: TextFormField(
-                  autofocus: true,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                  initialValue: widget.originalWebsite,
-                  onChanged: (e) {
-                    setState(() {
-                      website = e;
-                      errorText = generateError();
-                    });
-                  },
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(14.0),
-                    hintText: 'Website',
-                  ),
-                ),
+              EditField(
+                error: errorText != '',
+                text: website,
+                hintText: 'Website',
+                onChanged: (e) {
+                  setState(() {
+                    website = e;
+                    errorText = utilities.generateWebsiteError(website);
+                  });
+                },
               ),
               ErrorText(errorText),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: FlatButton(
-                    child: Text(
-                      'Save',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        side: BorderSide(color: Colors.white70)),
-                    color: Colors.blue,
-                    disabledColor: Colors.grey,
-                    onPressed: errorText != '' || website == widget.originalWebsite
-                        ? null
-                        : () {
-                          Navigator.pop(context);
-                          //TODO update backend
-                        },
-                  ),
-                ),
-              ),
+              SaveChangesButton(
+                  enabled:
+                      errorText == '' && website != widget.originalWebsite),
             ],
           ),
         ));

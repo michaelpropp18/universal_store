@@ -16,7 +16,7 @@ class StoreAttribute extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: 300, // TODO make this guy dynamic based on phone size
+            width: MediaQuery.of(context).size.width - 75, // TODO fix this
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
