@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/routing/routing_constants.dart';
 
 class StoreAttribute extends StatelessWidget {
   final String header;
   final String text;
+  final String route;
 
-  const StoreAttribute({@required this.text, @required this.header});
+  const StoreAttribute(
+      {@required this.text, @required this.header, @required this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class StoreAttribute extends StatelessWidget {
           GestureDetector(
             child: Icon(Icons.chevron_right),
             onTap: () {
-              Navigator.pushNamed(context, ManagerEditStoreFieldRoute);
+              Navigator.pushNamed(context, route);
             },
           )
         ],

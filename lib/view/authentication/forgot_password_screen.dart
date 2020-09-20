@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:universal_store/view/authentication/widgets/error_text.dart';
 import 'package:universal_store/view/authentication/widgets/submit_button.dart';
 import 'package:universal_store/view/shared/loading.dart';
-import 'package:universal_store/view_models/login_view_model.dart';
+import 'package:universal_store/view_models/authentication/login_view_model.dart';
 
 import 'widgets/back_arrow.dart';
 import 'widgets/background_gradient.dart';

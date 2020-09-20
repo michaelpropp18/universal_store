@@ -12,7 +12,7 @@ class StoreAttributeBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //padding: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(vertical: 5),
       decoration: new BoxDecoration(
         color: Colors.white,
         borderRadius: new BorderRadius.all(const Radius.circular(10.0)),

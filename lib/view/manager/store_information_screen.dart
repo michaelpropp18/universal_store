@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/manager/widgets/store_attribute_box.dart';
 
 import 'widgets/store_attribute.dart';
@@ -16,17 +17,15 @@ class StoreInformationScreen extends StatelessWidget {
       ),
       body: Container(
         color: Colors.black12,
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        padding: const EdgeInsets.all(10.0),
         child: ListView(
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 10,
-            ),
             Stack(
               alignment: Alignment.bottomCenter,
               children: [
                 Container(
+                  margin: EdgeInsets.only(bottom: 5),
                   height: 110,
                   decoration: new BoxDecoration(
                     color: Colors.white,
@@ -40,9 +39,14 @@ class StoreInformationScreen extends StatelessWidget {
                       radius: 55,
                       backgroundColor: Colors.white,
                       child: CircleAvatar(
-                          radius: 50,
-                          //backgroundImage: AssetImage(''),
-                          ),
+                        backgroundColor: Colors.blue,
+                        radius: 50,
+                        child: Icon(
+                          Icons.store,
+                          size: 60,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                     Text(
                       'OutdoorMart',
@@ -54,24 +58,32 @@ class StoreInformationScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
             StoreAttributeBox(
               header: 'General Information',
               storeAttributes: [
                 StoreAttribute(
-                    header: 'Email', text: 'outdoormart@outdoormart.com'),
-                StoreAttribute(header: 'Website', text: 'www.outdoormart.com'),
-                StoreAttribute(header: 'Phone', text: '(404)-444-4444'),
+                  header: 'Email',
+                  text: 'outdoormart@outdoormart.com',
+                  route: ManagerEditStoreEmailRoute,
+                ),
                 StoreAttribute(
-                    header: 'Address',
-                    text: '123 Northside Dr, \nAtlanta, GA 30313'),
+                  header: 'Website',
+                  text: 'www.outdoormart.com',
+                  route: ManagerEditStoreWebsiteRoute,
+                ),
+                StoreAttribute(
+                  header: 'Phone',
+                  text: '(404)-444-4444',
+                  route: ManagerEditStorePhoneRoute,
+                ),
+                StoreAttribute(
+                  header: 'Address',
+                  text: '123 Northside Dr, \nAtlanta, GA 30313',
+                  route: ManagerEditStoreAddressRoute,
+                ),
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
+            /*
             StoreAttributeBox(
               header: 'Description',
               storeAttributes: [
@@ -95,16 +107,27 @@ class StoreInformationScreen extends StatelessWidget {
                 StoreAttribute(header: 'Sunday', text: 'Closed'),
               ],
             ),
-            SizedBox(height: 10),
+            */
             StoreAttributeBox(
               header: 'Features',
               storeAttributes: [
-                StoreAttribute(header: 'Home Delivery', text: 'No'),
-                StoreAttribute(header: 'In-Store Pickup', text: 'No'),
-                StoreAttribute(header: 'Membership', text: 'No'),
+                StoreAttribute(
+                  header: 'Home Delivery',
+                  text: 'No',
+                  route: ManagerEditStorePhoneRoute,
+                ),
+                StoreAttribute(
+                  header: 'In-Store Pickup',
+                  text: 'No',
+                  route: ManagerEditStorePhoneRoute,
+                ),
+                StoreAttribute(
+                  header: 'Membership',
+                  text: 'No',
+                  route: ManagerEditStorePhoneRoute,
+                ),
               ],
             ),
-            SizedBox(height: 10)
           ],
         ),
       ),

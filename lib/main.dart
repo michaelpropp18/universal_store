@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'routing/router.dart' as router;
 import 'routing/routing_constants.dart';
 import 'view/wrapper.dart';
-import 'view_models/login_view_model.dart';
-import 'view_models/registration_view_model.dart';
+import 'view_models/authentication/login_view_model.dart';
+import 'view_models/authentication/registration_view_model.dart';
 
 void main() {
   runApp(MyApp());

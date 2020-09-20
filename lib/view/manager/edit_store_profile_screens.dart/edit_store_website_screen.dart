@@ -1,13 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/view/authentication/widgets/error_text.dart';
 
-class EditStoreFieldsScreen extends StatelessWidget {
-  final bool error;
-  final bool changed;
+class EditStoreWebsiteScreen extends StatefulWidget {
+  final String originalWebsite;
 
-  const EditStoreFieldsScreen({this.error = false, this.changed = false});
+  const EditStoreWebsiteScreen({this.originalWebsite = 'www.outdoormart.com'});
+  @override
+  _EditStoreWebsiteScreenState createState() => _EditStoreWebsiteScreenState();
+}
+
+class _EditStoreWebsiteScreenState extends State<EditStoreWebsiteScreen> {
+  String website;
+  String errorText;
+
+  @override
+  void initState() {
+    website = widget.originalWebsite;
+    errorText = generateError();
+    super.initState();
+  }
+
+//TODO make this a utility method
+  String generateError() {
+    if (website == '') {
+      return 'Website field cannot be empty';
+    } else if (website == widget.originalWebsite) {
+     return 'New website must be different from old';
+    } else if (!website.contains('www.')) {
+      return 'Please enter a valid website';
+    } else {
+      return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    //final viewModel = Provider.of<StoreProfileViewModel>(context);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -15,7 +43,7 @@ class EditStoreFieldsScreen extends StatelessWidget {
           iconTheme: new IconThemeData(
               color: Colors.black), // this changes color of hamburger icon
           backgroundColor: Colors.white,
-          title: Text('Edit Email', style: TextStyle(color: Colors.black)),
+          title: Text('Edit Website', style: TextStyle(color: Colors.black)),
         ),
         body: Container(
           color: Colors.black12,
@@ -27,7 +55,7 @@ class EditStoreFieldsScreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12.0),
                   border: Border.all(
-                    color: error ? Colors.red : Colors.black38,
+                    color: errorText != '' ? Colors.red : Colors.black38,
                     width: 1,
                   ),
                 ),
@@ -37,16 +65,21 @@ class EditStoreFieldsScreen extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.black,
                   ),
-                  initialValue: 'outdoormart@outdoormart.com',
-                  onChanged: (e) {},
+                  initialValue: widget.originalWebsite,
+                  onChanged: (e) {
+                    setState(() {
+                      website = e;
+                      errorText = generateError();
+                    });
+                  },
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.all(14.0),
-                    hintText: 'test',
+                    hintText: 'Website',
                   ),
                 ),
               ),
-              ErrorText('error would go here'),
+              ErrorText(errorText),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: SizedBox(
@@ -65,7 +98,12 @@ class EditStoreFieldsScreen extends StatelessWidget {
                         side: BorderSide(color: Colors.white70)),
                     color: Colors.blue,
                     disabledColor: Colors.grey,
-                    onPressed: error || !changed ? null : () {},
+                    onPressed: errorText != '' || website == widget.originalWebsite
+                        ? null
+                        : () {
+                          Navigator.pop(context);
+                          //TODO update backend
+                        },
                   ),
                 ),
               ),

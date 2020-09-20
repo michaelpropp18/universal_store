@@ -11,11 +11,14 @@ import 'package:universal_store/view/customer/drawer/payment_screen.dart';
 import 'package:universal_store/view/customer/drawer/privacy_screen.dart';
 import 'package:universal_store/view/customer/drawer/profile_screen.dart';
 import 'package:universal_store/view/customer/drawer/purchases_screen.dart';
+import 'package:universal_store/view/manager/edit_store_profile_screens.dart/edit_store_address_screen.dart';
+import 'package:universal_store/view/manager/edit_store_profile_screens.dart/edit_store_phone_screen.dart';
+import 'package:universal_store/view/manager/edit_store_profile_screens.dart/edit_store_website_screen.dart';
 import 'package:universal_store/view/manager/store_information_screen.dart';
 import 'package:universal_store/view/manager/store_inventory_screen.dart';
 import 'package:universal_store/view/manager/store_orders_screen.dart';
 import 'package:universal_store/view/manager/store_payment_screen.dart';
-import 'package:universal_store/view/manager/edit_store_fields_screen.dart';
+import 'package:universal_store/view/manager/edit_store_profile_screens.dart/edit_store_email_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
 
@@ -54,7 +57,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => FeedbackInput());
     case HelpRoute:
       return MaterialPageRoute(builder: (context) => Help());
-    
+
     //manager routes
     case ManagerStoreRoute:
       return MaterialPageRoute(builder: (context) => StoreInformationScreen());
@@ -64,9 +67,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => StoreOrdersScreen());
     case ManagerPaymentRoute:
       return MaterialPageRoute(builder: (context) => StorePaymentScreen());
-    case ManagerEditStoreFieldRoute:
-      return MaterialPageRoute(builder: (context) => EditStoreFieldsScreen());
-
+    case ManagerEditStoreEmailRoute:
+      return MaterialPageRoute(builder: (context) => EditStoreEmailScreen());
+    case ManagerEditStoreWebsiteRoute:
+      return MaterialPageRoute(builder: (context) => EditStoreWebsiteScreen());
+    case ManagerEditStorePhoneRoute:
+      return MaterialPageRoute(builder: (context) => EditStorePhoneScreen());
+    case ManagerEditStoreAddressRoute:
+      return MaterialPageRoute(builder: (context) => EditStoreAddressScreen());
 
     // default. We should never get here, but if we do return home or login screen based on login status
     default:
