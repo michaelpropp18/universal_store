@@ -27,7 +27,6 @@ class _EditStoreAddressScreenState extends State<EditStoreAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final viewModel = Provider.of<StoreProfileViewModel>(context);
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(

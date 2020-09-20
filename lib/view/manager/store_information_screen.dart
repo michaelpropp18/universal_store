@@ -63,7 +63,7 @@ class StoreInformationScreen extends StatelessWidget {
               storeAttributes: [
                 StoreAttribute(
                   header: 'Email',
-                  text: 'outdoormart@outdoormart.com asdjfioajsdiofjasiod fjoiasjdfoiajsdfoijas',
+                  text: 'outdoormart@outdoormart.com',
                   route: ManagerEditStoreEmailRoute,
                 ),
                 StoreAttribute(
@@ -107,7 +107,6 @@ class StoreInformationScreen extends StatelessWidget {
                 StoreAttribute(header: 'Sunday', text: 'Closed'),
               ],
             ),
-            */
             StoreAttributeBox(
               header: 'Features',
               storeAttributes: [
@@ -128,6 +127,7 @@ class StoreInformationScreen extends StatelessWidget {
                 ),
               ],
             ),
+                        */
           ],
         ),
       ),
