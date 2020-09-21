@@ -1,6 +1,7 @@
 import 'item.dart';
 
 class Store {
+  String name;
   static final List<Item> items = [ //TODO actually implement this
     Item(uid: '1001', name: 'Hiking Boots', price: 39.99, quantity: 10),
     Item(uid: '1002', name: 'Camping Tent', price: 109.99, quantity: 8),
@@ -10,5 +11,5 @@ class Store {
     Item(uid: '1006', name: 'Jacket', price: 79.99, quantity: 3),
     Item(uid: '1007', name: 'Rain boots', price: 39.99, quantity: 2),
   ];
-  Store();
+  Store({this.name});
 }

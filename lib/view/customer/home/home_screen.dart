@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/view/customer/home/home_items_screen.dart';
+import 'package:universal_store/view/customer/home/home_stores_screen.dart';
 
 //import '../../../services/auth.dart';
+import 'home_carts_screen.dart';
 import 'widgets/drawer.dart';
 import 'widgets/search.dart';
 import 'widgets/tabs.dart';
@@ -29,21 +32,17 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(items: [
-          BottomNavigationBarItem(
-            title: Text('Home'),
-            icon: Icon(Icons.home),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Shop'),
-            icon: Icon(Icons.shopping_cart),
-          ),
-          BottomNavigationBarItem(
-            title: Text('Scan Item'),
-            icon: Icon(Icons.photo_camera),
-          )
-        ]),
+        body: TabBarView(
+          children: [HomeItemsScreen(), HomeStoresScreen(), HomeCartsScreen()],
+        ),
         drawer: CustomerDrawer(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Add your onPressed code here!
+          },
+          child:Icon(Icons.add),
+          backgroundColor: Colors.blue,
+        ),
       ),
     );
   }

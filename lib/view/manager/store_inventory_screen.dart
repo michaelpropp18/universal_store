@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/models/item.dart';
 import 'package:universal_store/models/store.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/manager/widgets/store_item.dart';
