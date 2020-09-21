@@ -47,3 +47,25 @@ String generateAddressError(address) {
     return '';
   }
 }
+
+String generatePriceError(price) {
+  if (price == '') {
+    return 'Price cannot be empty';
+  } else if (!RegExp(r'^\$?[0-9]+\.?[0-9]?[0-9]?$').hasMatch(price)) {
+    return 'Please enter a valid price';
+  } else {
+    return '';
+  }
+}
+
+String generateQuantityError(quantity) {
+  if (quantity == '') {
+    return 'Quantity cannot be empty';
+  } else if (double.tryParse(quantity) == null) {
+    return 'Please enter a number';
+  } else if (!RegExp(r'^\d+$').hasMatch(quantity)) {
+    return 'Please enter a number';
+  } else {
+    return '';
+  }
+}

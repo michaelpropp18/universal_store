@@ -39,7 +39,8 @@ class StoreAttribute extends StatelessWidget {
           ),
           //IconButton(icon: Icon(Icons.chevron_right), onPressed: () {  },)
           GestureDetector(
-            child: Icon(Icons.chevron_right),
+            //child: Icon(Icons.chevron_right),
+            child: Icon(Icons.edit),
             onTap: () {
               Navigator.pushNamed(context, route);
             },

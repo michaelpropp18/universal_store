@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 
 class StoreItem extends StatelessWidget {
+  final String uid;
   final String name;
   final double price;
   final int quantity;
-  final String route;
 
   const StoreItem(
-      {@required this.price, @required this.name, this.route, this.quantity});
+      {@required this.price,
+      @required this.name,
+      @required this.quantity,
+      this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,11 @@ class StoreItem extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 SelectableText(
-                  '\$' + price.toStringAsFixed(2) + ' (x' + quantity.toString() + ')',
+                  '\$' +
+                      price.toStringAsFixed(2) +
+                      ' (x' +
+                      quantity.toString() +
+                      ')',
                   style: TextStyle(
                     color: Colors.black54,
                     fontSize: 16,
@@ -41,8 +49,11 @@ class StoreItem extends StatelessWidget {
           GestureDetector(
             child: Icon(Icons.chevron_right),
             onTap: () {
-              print('got here');
-              //Navigator.pushNamed(context, route);
+              Navigator.pushNamed(
+                context,
+                ManagerInventoryItemRoute,
+                arguments: uid,
+              );
             },
           )
         ],
