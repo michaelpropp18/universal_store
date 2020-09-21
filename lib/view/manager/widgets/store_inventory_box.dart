@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'store_item.dart';
-
 class StoreInventoryBox extends StatelessWidget {
   final String header;
   final ListView inventoryItems;

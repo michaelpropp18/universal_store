@@ -11,6 +11,7 @@ import 'package:universal_store/view/customer/drawer/payment_screen.dart';
 import 'package:universal_store/view/customer/drawer/privacy_screen.dart';
 import 'package:universal_store/view/customer/drawer/profile_screen.dart';
 import 'package:universal_store/view/customer/drawer/purchases_screen.dart';
+import 'package:universal_store/view/customer/home/search_screen.dart';
 import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_item_price_screen.dart';
 import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_item_quantity_screen.dart';
 import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_store_address_screen.dart';
@@ -61,6 +62,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => FeedbackInput());
     case HelpRoute:
       return MaterialPageRoute(builder: (context) => Help());
+
+    //user home
+    case SearchRoute:
+      return MaterialPageRoute(builder: (context) => SearchScreen());
 
     //manager routes
     case ManagerStoreRoute:

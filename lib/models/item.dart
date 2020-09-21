@@ -5,8 +5,4 @@ class Item {
   int quantity;
 
   Item({this.uid, this.name, this.price, this.quantity});
-
-  String getManagerTitle() {
-    return quantity.toString() + ' X ' + name + ' \$' + price.toStringAsFixed(2);
-  }
 }

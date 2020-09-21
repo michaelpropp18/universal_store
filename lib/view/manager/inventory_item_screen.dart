@@ -2,22 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:universal_store/models/item.dart';
 import 'package:universal_store/models/store.dart';
 import 'package:universal_store/routing/routing_constants.dart';
-import 'package:universal_store/view/authentication/widgets/error_text.dart';
-import 'package:universal_store/view/manager/widgets/edit_field.dart';
-import 'package:universal_store/view/manager/widgets/save_changes_button.dart';
-import 'package:universal_store/utilities.dart' as utilities;
 import 'package:universal_store/view/manager/widgets/store_attribute_box.dart';
 
 import 'widgets/header_tab.dart';
 import 'widgets/store_attribute.dart';
-
-/*
-Name
-Price
-Quantity
-Date added?
-Category (drop-down)
-*/
 
 class InventoryItemScreen extends StatefulWidget {
   final String uid;
