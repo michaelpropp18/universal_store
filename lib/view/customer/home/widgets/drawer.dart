@@ -26,7 +26,13 @@ class CustomerDrawer extends StatelessWidget {
           itemBuilder: (context, index) {
             if (index == 0) {
               return DrawerHeader(
-                child: Text('User name and stuff go here'),
+                child: Column(
+                  children: [
+                    Icon(Icons.account_circle, size: 90.0, color: Colors.blue),
+                    SizedBox(height: 6),
+                    Text('John Doe', textScaleFactor: 1.8,),
+                  ]
+                )
               );
             } else {
               index = index - 1;
