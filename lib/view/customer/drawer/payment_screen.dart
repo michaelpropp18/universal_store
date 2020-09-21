@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/view/authentication/widgets/input_field.dart';
 import 'package:universal_store/view/authentication/widgets/submit_button.dart';
+import 'package:universal_store/view/manager/widgets/edit_field.dart';
 
 class Payment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        brightness: Brightness.light, // this makes the status bar black
+        iconTheme: new IconThemeData(
+            color: Colors.black), // this changes color of hamburger icon
+        backgroundColor: Colors.white,
+        title: Text('My Payment', style: TextStyle(color: Colors.black)),
+      ),
       body: Column(
         children: <Widget>[
-          Text('Payment'),
-          RaisedButton(
-            child: Text('Back'),
-            onPressed: () => Navigator.pop(context),
-          ),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: 20.0,
-              vertical: 85.0,
+              vertical: 25.0,
             ),
             child: Column(
               children: <Widget>[
@@ -29,39 +31,16 @@ class Payment extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
-                InputField(
-                  error: false,
-                  icon: Icons.credit_card,
-                  autofocus: true,
-                  textInputAction: TextInputAction.done,
-                  textInputType: TextInputType.text,
+                EditField(
                   hintText: 'Credit Card Number',
-                  onChanged: (t) {
-                    //viewModel.firstName = t;
-                  },
                 ),
                 SizedBox(height: 10),
-                InputField(
-                  error: false,
-                  icon: Icons.date_range,
-                  textInputType: TextInputType.text,
-                  textInputAction: TextInputAction.done,
+                EditField(
                   hintText: 'Exp. Date',
-                  onChanged: (t) {
-                    //viewModel.lastName = t;
-                  },
                 ),
                 SizedBox(height: 10),
-                InputField(
-                  error: false,
-                  icon: Icons.enhanced_encryption,
-                  autofocus: true,
-                  textInputAction: TextInputAction.done,
-                  textInputType: TextInputType.text,
+                EditField(
                   hintText: 'CCV',
-                  onChanged: (t) {
-                    //viewModel.firstName = t;
-                  },
                 ),
                 SizedBox(height: 20),
                 SubmitButton(
