@@ -11,14 +11,18 @@ import 'package:universal_store/view/customer/drawer/payment_screen.dart';
 import 'package:universal_store/view/customer/drawer/privacy_screen.dart';
 import 'package:universal_store/view/customer/drawer/profile_screen.dart';
 import 'package:universal_store/view/customer/drawer/purchases_screen.dart';
-import 'package:universal_store/view/manager/edit_store_profile_screens.dart/edit_store_address_screen.dart';
-import 'package:universal_store/view/manager/edit_store_profile_screens.dart/edit_store_phone_screen.dart';
-import 'package:universal_store/view/manager/edit_store_profile_screens.dart/edit_store_website_screen.dart';
+import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_item_price_screen.dart';
+import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_item_quantity_screen.dart';
+import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_store_address_screen.dart';
+import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_store_email_screen.dart';
+import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_store_phone_screen.dart';
+import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_store_website_screen.dart';
+import 'package:universal_store/view/manager/inventory_item_screen.dart';
 import 'package:universal_store/view/manager/store_information_screen.dart';
 import 'package:universal_store/view/manager/store_inventory_screen.dart';
 import 'package:universal_store/view/manager/store_orders_screen.dart';
 import 'package:universal_store/view/manager/store_payment_screen.dart';
-import 'package:universal_store/view/manager/edit_store_profile_screens.dart/edit_store_email_screen.dart';
+import 'package:universal_store/view/manager/widgets/add_item_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
 
@@ -75,6 +79,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => EditStorePhoneScreen());
     case ManagerEditStoreAddressRoute:
       return MaterialPageRoute(builder: (context) => EditStoreAddressScreen());
+    case ManagerInventoryItemRoute:
+      return MaterialPageRoute(
+          builder: (context) => InventoryItemScreen(uid: settings.arguments));
+    case ManagerInventoryEditPrice:
+      return MaterialPageRoute(builder: (context) => EditItemPriceScreen());
+    case ManagerInventoryEditQuantity:
+      return MaterialPageRoute(builder: (context) => EditItemQuantityScreen());
+    case ManagerInventoryAddItem:
+      return MaterialPageRoute(builder: (context) => AddItemScreen());
 
     // default. We should never get here, but if we do return home or login screen based on login status
     default:

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 
-class StoreAttribute extends StatelessWidget {
-  final String header;
-  final String text;
-  final String route;
+class StoreItem extends StatelessWidget {
+  final String uid;
+  final String name;
+  final double price;
+  final int quantity;
 
-  const StoreAttribute(
-      {@required this.text, @required this.header, @required this.route});
+  const StoreItem(
+      {@required this.price,
+      @required this.name,
+      @required this.quantity,
+      this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +26,18 @@ class StoreAttribute extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  header,
+                  name,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
                 SelectableText(
-                  text,
+                  '\$' +
+                      price.toStringAsFixed(2) +
+                      ' (x' +
+                      quantity.toString() +
+                      ')',
                   style: TextStyle(
                     color: Colors.black54,
                     fontSize: 16,
@@ -37,12 +46,14 @@ class StoreAttribute extends StatelessWidget {
               ],
             ),
           ),
-          //IconButton(icon: Icon(Icons.chevron_right), onPressed: () {  },)
           GestureDetector(
-            //child: Icon(Icons.chevron_right),
-            child: Icon(Icons.edit),
+            child: Icon(Icons.chevron_right),
             onTap: () {
-              Navigator.pushNamed(context, route);
+              Navigator.pushNamed(
+                context,
+                ManagerInventoryItemRoute,
+                arguments: uid,
+              );
             },
           )
         ],

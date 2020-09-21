@@ -18,7 +18,7 @@ const String PrivacyRoute = '/drawer/privacy';
 const String FeedbackRoute = '/drawer/feedback';
 const String HelpRoute = '/drawer/help';
 
-//manager routes
+//primary manager routes
 const String ManagerStoreRoute = '/manager/store';
 const String ManagerInventoryRoute = '/manager/inventory';
 const String ManagerOrdersRoute = '/manager/orders';
@@ -29,3 +29,9 @@ const String ManagerEditStoreEmailRoute = '/manager/store/edit/store_email_field
 const String ManagerEditStoreWebsiteRoute = '/manager/store/edit/store_website_field';
 const String ManagerEditStorePhoneRoute = '/manager/store/edit/store_phone_field';
 const String ManagerEditStoreAddressRoute = '/manager/store/edit/store_address_field';
+
+//inventory
+const String ManagerInventoryItemRoute = '/manager/inventory/item';
+const String ManagerInventoryEditPrice = '/manager/inventory/edit/price';
+const String ManagerInventoryEditQuantity = '/manager/inventory/edit/quantity';
+const String ManagerInventoryAddItem = '/manager/inventory/add_item';

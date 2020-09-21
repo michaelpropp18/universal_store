@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/manager/widgets/store_attribute_box.dart';
 
+import 'widgets/header_tab.dart';
 import 'widgets/store_attribute.dart';
 
 class StoreInformationScreen extends StatelessWidget {
@@ -19,44 +20,10 @@ class StoreInformationScreen extends StatelessWidget {
         color: Colors.black12,
         padding: const EdgeInsets.all(10.0),
         child: ListView(
-          //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 5),
-                  height: 110,
-                  decoration: new BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        new BorderRadius.all(const Radius.circular(10.0)),
-                  ),
-                ),
-                Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 55,
-                      backgroundColor: Colors.white,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        radius: 50,
-                        child: Icon(
-                          Icons.store,
-                          size: 60,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'OutdoorMart',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 20),
-                  ],
-                ),
-              ],
+            HeaderTab(
+              icon: Icons.store,
+              title: 'OutdoorMart',
             ),
             StoreAttributeBox(
               header: 'General Information',

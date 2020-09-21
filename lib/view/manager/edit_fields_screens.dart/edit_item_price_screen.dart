@@ -5,23 +5,22 @@ import 'package:universal_store/view/manager/widgets/save_changes_button.dart';
 
 import 'package:universal_store/utilities.dart' as utilities;
 
-class EditStoreAddressScreen extends StatefulWidget {
-  final String originalAddress;
+class EditItemPriceScreen extends StatefulWidget {
+  final double originalPrice;
 
-  const EditStoreAddressScreen(
-      {this.originalAddress = '123 Northside Dr, \nAtlanta, GA 30313'});
+  const EditItemPriceScreen({this.originalPrice = 39.99});
   @override
-  _EditStoreAddressScreenState createState() => _EditStoreAddressScreenState();
+  _EditItemPriceScreenState createState() => _EditItemPriceScreenState();
 }
 
-class _EditStoreAddressScreenState extends State<EditStoreAddressScreen> {
-  String address;
+class _EditItemPriceScreenState extends State<EditItemPriceScreen> {
+  String price;
   String errorText;
 
   @override
   void initState() {
-    address = widget.originalAddress;
-    errorText = utilities.generateAddressError(address);
+    price = widget.originalPrice.toString();
+    errorText = utilities.generatePriceError(price);
     super.initState();
   }
 
@@ -34,7 +33,7 @@ class _EditStoreAddressScreenState extends State<EditStoreAddressScreen> {
           iconTheme: new IconThemeData(
               color: Colors.black), // this changes color of hamburger icon
           backgroundColor: Colors.white,
-          title: Text('Edit Address', style: TextStyle(color: Colors.black)),
+          title: Text('Edit Price', style: TextStyle(color: Colors.black)),
         ),
         body: Container(
           color: Colors.black12,
@@ -43,18 +42,19 @@ class _EditStoreAddressScreenState extends State<EditStoreAddressScreen> {
             children: [
               EditField(
                 error: errorText != '',
-                text: address,
-                hintText: 'Address',
-                maxLines: 5,
+                text: price,
+                hintText: 'Price',
                 onChanged: (e) {
                   setState(() {
-                    address = e;
-                    errorText = utilities.generateAddressError(address);
+                    price = e;
+                    errorText = utilities.generatePriceError(price);
                   });
                 },
               ),
               ErrorText(errorText),
-              SaveChangesButton(enabled: errorText == '' && address != widget.originalAddress),
+              SaveChangesButton(
+                  enabled: errorText == '' &&
+                      price != widget.originalPrice.toString()),
             ],
           ),
         ));

@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/item.dart';
+import 'package:universal_store/models/store.dart';
+import 'package:universal_store/routing/routing_constants.dart';
+import 'package:universal_store/view/manager/widgets/store_item.dart';
+
+import 'widgets/store_inventory_box.dart';
 
 class StoreInventoryScreen extends StatelessWidget {
   @override
@@ -11,24 +17,43 @@ class StoreInventoryScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text('My Inventory', style: TextStyle(color: Colors.black)),
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
           /*
           IconButton(
-            //icon: const Icon(Icons.list),
-            icon: const Icon(Icons.reorder),
+            icon: const Icon(Icons.search),
             onPressed: () {},
           ),
           */
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, ManagerInventoryAddItem);
+            },
           ),
         ],
       ),
-      body: Container(),
+      body: Container(
+        color: Colors.black12,
+        padding: const EdgeInsets.all(10.0),
+        child: ListView(
+          children: [
+            StoreInventoryBox(
+              header: 'Clothing',
+              inventoryItems: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: Store.items.length,
+                itemBuilder: (context, index) {
+                  return StoreItem(
+                      quantity: Store.items[index].quantity,
+                      price: Store.items[index].price,
+                      name: Store.items[index].name,
+                      uid: Store.items[index].uid);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
