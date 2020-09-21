@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ProductCard extends StatelessWidget {
+class SearchCard extends StatelessWidget {
   final int number;
 
-  const ProductCard({this.number = 9});
+  const SearchCard({this.number = 9});
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.all(10),
-        padding: EdgeInsets.only(bottom: 10),
+        //padding: EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -28,8 +28,6 @@ class ProductCard extends StatelessWidget {
                   topRight: Radius.circular(10), topLeft: Radius.circular(10)),
               child: Image.network(
                 'https://picsum.photos/250?image=' + number.toString(),
-                height: 200,
-                width: 200,
               ),
             ),
             ClipRRect(
@@ -38,9 +36,21 @@ class ProductCard extends StatelessWidget {
                     bottomLeft: Radius.circular(10)),
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: Text('Product ' + number.toString(),
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Item  ' + number.toString(),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Category',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
                 )),
           ],
         ));

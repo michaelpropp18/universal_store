@@ -18,6 +18,9 @@ const String PrivacyRoute = '/drawer/privacy';
 const String FeedbackRoute = '/drawer/feedback';
 const String HelpRoute = '/drawer/help';
 
+//customer
+const String SearchRoute = '/search';
+
 //primary manager routes
 const String ManagerStoreRoute = '/manager/store';
 const String ManagerInventoryRoute = '/manager/inventory';

@@ -1,23 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/models/carts.dart';
 
-import 'widgets/cart_tab.dart';
+import 'widgets/continue_shopping_header.dart';
+import 'widgets/header.dart';
+import 'widgets/product_card.dart';
 
 class HomeCartsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(5.0),
-      child: ListView.separated(padding: EdgeInsets.symmetric(vertical: 5),
-        separatorBuilder: (context, index) => Divider(color: Colors.grey),
-        shrinkWrap: true,
-        itemCount: Carts.stores.length,
-        itemBuilder: (context, index) {
-          return CartTab(
-            icon: Icons.shopping_cart,
-            storeName: Carts.stores[index].storeName,
-          );
-        },
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ContinueShoppingHeader(text: 'OutdoorMart'),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ProductCard(number: 7),
+                  ProductCard(number: 143),
+                ],
+              ),
+            ),
+            ContinueShoppingHeader(text: 'Target'),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ProductCard(number: 20),
+                  ProductCard(number: 60),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }

@@ -23,7 +23,7 @@ class CartTab extends StatelessWidget {
                     width: 1,
                     color: Colors.grey,
                   ),
-                  color: Colors.blue,
+                  color: Colors.grey,
                   borderRadius: BorderRadius.all(Radius.circular(5))),
               child: Icon(
                 icon,
