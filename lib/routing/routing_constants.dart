@@ -34,3 +34,4 @@ const String ManagerEditStoreAddressRoute = '/manager/store/edit/store_address_f
 const String ManagerInventoryItemRoute = '/manager/inventory/item';
 const String ManagerInventoryEditPrice = '/manager/inventory/edit/price';
 const String ManagerInventoryEditQuantity = '/manager/inventory/edit/quantity';
+const String ManagerInventoryAddItem = '/manager/inventory/add_item';

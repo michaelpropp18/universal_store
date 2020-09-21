@@ -22,6 +22,7 @@ import 'package:universal_store/view/manager/store_information_screen.dart';
 import 'package:universal_store/view/manager/store_inventory_screen.dart';
 import 'package:universal_store/view/manager/store_orders_screen.dart';
 import 'package:universal_store/view/manager/store_payment_screen.dart';
+import 'package:universal_store/view/manager/widgets/add_item_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
 
@@ -85,6 +86,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => EditItemPriceScreen());
     case ManagerInventoryEditQuantity:
       return MaterialPageRoute(builder: (context) => EditItemQuantityScreen());
+    case ManagerInventoryAddItem:
+      return MaterialPageRoute(builder: (context) => AddItemScreen());
 
     // default. We should never get here, but if we do return home or login screen based on login status
     default:

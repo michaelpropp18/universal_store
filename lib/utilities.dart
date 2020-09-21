@@ -4,6 +4,15 @@ library utilities;
 /// User Input Error Generation
 ///////////////////////////////////////////////////
 
+String generateItemNameError(name) {
+  if (name == '') {
+    return 'Name cannot be empty';
+  } else {
+    return '';
+  }
+}
+
+
 String generateEmailError(email) {
   if (email == '') {
     return 'Email field cannot be empty';
@@ -64,7 +73,7 @@ String generateQuantityError(quantity) {
   } else if (double.tryParse(quantity) == null) {
     return 'Please enter a number';
   } else if (!RegExp(r'^\d+$').hasMatch(quantity)) {
-    return 'Please enter a number';
+    return 'Please enter a valid integer';
   } else {
     return '';
   }
