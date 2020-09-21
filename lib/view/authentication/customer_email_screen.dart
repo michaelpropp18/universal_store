@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/authentication/widgets/back_arrow.dart';
 import 'package:universal_store/view/shared/loading.dart';
-import 'package:universal_store/view_models/registration_view_model.dart';
+import 'package:universal_store/view_models/authentication/registration_view_model.dart';
 
 import 'widgets/background_gradient.dart';
 import 'widgets/error_text.dart';
