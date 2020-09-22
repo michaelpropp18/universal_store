@@ -15,6 +15,9 @@ import 'package:universal_store/view/customer/drawer/privacy_screen.dart';
 import 'package:universal_store/view/customer/drawer/profile_screen.dart';
 import 'package:universal_store/view/customer/drawer/purchases_screen.dart';
 import 'package:universal_store/view/customer/home/search_screen.dart';
+import 'package:universal_store/view/customer/home/shopping_cart_screen.dart';
+import 'package:universal_store/view/customer/home/view_product_screen.dart';
+import 'package:universal_store/view/customer/home/view_store_screen.dart';
 import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_item_price_screen.dart';
 import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_item_quantity_screen.dart';
 import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_store_address_screen.dart';
@@ -74,9 +77,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case EditCustomerEmailRoute:
       return MaterialPageRoute(builder: (context) => EditCustomerEmailScreen());
 
-    //user home
+    //customer
     case SearchRoute:
       return MaterialPageRoute(builder: (context) => SearchScreen());
+    case ShoppingCartRoute:
+      return MaterialPageRoute(builder: (context) => ShoppingCartScreen());
+    case ViewProductRoute:
+      return MaterialPageRoute(builder: (context) => ViewProductScreen());
+    case ViewStoreRoute:
+      return MaterialPageRoute(builder: (context) => ViewStoreScreen());
 
     //manager routes
     case ManagerStoreRoute:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 
 class BrowseHeader extends StatelessWidget {
   final String text;
@@ -12,18 +13,21 @@ class BrowseHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                text,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, ViewStoreRoute),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  text,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
-              ),
-              Text('Category: Retail'),
-            ],
+                Text('Category: Retail'),
+              ],
+            ),
           ),
           SizedBox(
             width: 70,
@@ -40,7 +44,7 @@ class BrowseHeader extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18.0),
               ),
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, ShoppingCartRoute),
             ),
           ),
         ],

@@ -25,6 +25,9 @@ const String EditCustomerEmailRoute = '/drawer/profile/edit_email';
 
 //customer
 const String SearchRoute = '/search';
+const String ShoppingCartRoute = '/shopping_cart';
+const String ViewProductRoute = '/view_product';
+const String ViewStoreRoute = '/view_store';
 
 //primary manager routes
 const String ManagerStoreRoute = '/manager/store';
