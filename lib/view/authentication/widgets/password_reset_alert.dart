@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:universal_store/view_models/login_view_model.dart';
+import 'package:universal_store/view_models/authentication/login_view_model.dart';
 
 class PasswordResetAlert extends StatelessWidget {
   @override

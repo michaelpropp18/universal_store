@@ -43,17 +43,17 @@ class AuthService {
   }
 
   Future registerManager(
-    {@required String storeName,
-    @required String email,
-    @required String password}) async {
+      {@required String storeName,
+      @required String email,
+      @required String password}) async {
     AuthResultStatus _status;
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       if (result.user != null) {
         _status = AuthResultStatus.successful;
-        await DatabaseService(uuid: result.user.uid).createNewManager(
-            storeName: storeName, email: email);
+        await DatabaseService(uuid: result.user.uid)
+            .createNewManager(storeName: storeName, email: email);
       } else {
         _status = AuthResultStatus.undefined;
       }
@@ -67,6 +67,7 @@ class AuthService {
   Future signInWithEmailAndPassword(String email, String password) async {
     AuthResultStatus _status;
     try {
+      print('logging in');
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       if (result.user != null) {

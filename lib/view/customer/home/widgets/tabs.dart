@@ -7,19 +7,13 @@ class Tabs extends StatelessWidget {
       tabs: [
         Tab(
           child: Text(
-            'Promotions',
+            'Browse',
             style: TextStyle(color: Colors.black),
           ),
         ),
         Tab(
           child: Text(
-            'Items',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-        Tab(
-          child: Text(
-            'Stores',
+            'Carts',
             style: TextStyle(color: Colors.black),
           ),
         ),
