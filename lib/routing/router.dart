@@ -29,7 +29,7 @@ import 'package:universal_store/view/manager/store_information_screen.dart';
 import 'package:universal_store/view/manager/store_inventory_screen.dart';
 import 'package:universal_store/view/manager/store_orders_screen.dart';
 import 'package:universal_store/view/manager/store_payment_screen.dart';
-import 'package:universal_store/view/manager/widgets/add_item_screen.dart';
+import 'package:universal_store/view/manager/add_item_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
 
