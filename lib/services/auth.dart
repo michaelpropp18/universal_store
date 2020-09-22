@@ -104,6 +104,94 @@ class AuthService {
     return _status;
   }
 
+  Future updateEmail(String newEmail) async {
+    AuthResultStatus _status;
+
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      if (user != null) {
+        _status = AuthResultStatus.successful;
+        await DatabaseService(uuid: user.uid).updateEmail(newEmail);
+        await user.updateEmail(newEmail);
+      } else {
+        _status = AuthResultStatus.undefined;
+      }
+    } catch (e) {
+      _status = AuthExceptionHandler.getException(e);
+    }
+    return _status;
+  }
+
+  Future updateFirstName(String newFirstName) async {
+    AuthResultStatus _status;
+
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      if (user != null) {
+        _status = AuthResultStatus.successful;
+        await DatabaseService(uuid: user.uid).updateFirstName(newFirstName);
+      } else {
+        _status = AuthResultStatus.undefined;
+      }
+    } catch (e) {
+      _status = AuthExceptionHandler.getException(e);
+    }
+    return _status;
+  }
+
+  Future updateLastName(String newLastName) async {
+    AuthResultStatus _status;
+
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      if (user != null) {
+        _status = AuthResultStatus.successful;
+        await DatabaseService(uuid: user.uid).updateLastName(newLastName);
+      } else {
+        _status = AuthResultStatus.undefined;
+      }
+    } catch (e) {
+      _status = AuthExceptionHandler.getException(e);
+    }
+    return _status;
+  }
+
+  Future updateCustomerProfile(String newFirstName, String newLastName, String newEmail) async {
+    AuthResultStatus _status;
+
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      if (user != null) {
+        _status = AuthResultStatus.successful;
+        await DatabaseService(uuid: user.uid).updateFirstName(newFirstName);
+        await DatabaseService(uuid: user.uid).updateLastName(newLastName);
+        await DatabaseService(uuid: user.uid).updateEmail(newEmail);
+        await user.updateEmail(newEmail);
+      } else {
+        _status = AuthResultStatus.undefined;
+      }
+    } catch (e) {
+      _status = AuthExceptionHandler.getException(e);
+    }
+    return _status;
+  }
+
+  Future getCustomerData() async {
+    AuthResultStatus _status;
+
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      if (user != null) {
+        _status = AuthResultStatus.successful;
+        return await DatabaseService(uuid: user.uid).getCustomerData();
+      } else {
+        _status = AuthResultStatus.undefined;
+      }
+    } catch (e) {
+      _status = AuthExceptionHandler.getException(e);
+    }
+  }
+
   // sign out
   Future signOut() async {
     try {

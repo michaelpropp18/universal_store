@@ -44,51 +44,6 @@ class Profile extends StatelessWidget {
                 ),
               ],
             ),
-            /*
-            StoreAttributeBox(
-              header: 'Description',
-              storeAttributes: [
-                StoreAttribute(
-                    header: 'Description',
-                    text:
-                        'From backpacking to cycling to staying in shape and more, outfit your outdoor activities with the latest gear, clothing, and footwear at OutdoorMart.'),
-                StoreAttribute(header: 'Type', text: 'Outdoor Clothing'),
-                StoreAttribute(header: 'Price', text: 'Affordable'),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            StoreAttributeBox(
-              header: 'Hours',
-              storeAttributes: [
-                StoreAttribute(
-                    header: 'Monday-Friday', text: '10:00 AM - 9:00 PM'),
-                StoreAttribute(header: 'Saturday', text: '12:00 PM - 6:00 PM'),
-                StoreAttribute(header: 'Sunday', text: 'Closed'),
-              ],
-            ),
-            StoreAttributeBox(
-              header: 'Features',
-              storeAttributes: [
-                StoreAttribute(
-                  header: 'Home Delivery',
-                  text: 'No',
-                  route: ManagerEditStorePhoneRoute,
-                ),
-                StoreAttribute(
-                  header: 'In-Store Pickup',
-                  text: 'No',
-                  route: ManagerEditStorePhoneRoute,
-                ),
-                StoreAttribute(
-                  header: 'Membership',
-                  text: 'No',
-                  route: ManagerEditStorePhoneRoute,
-                ),
-              ],
-            ),
-                        */
           ],
         ),
       ),
