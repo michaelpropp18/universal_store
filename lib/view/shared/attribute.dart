@@ -4,9 +4,10 @@ class Attribute extends StatelessWidget {
   final String header;
   final String text;
   final String route;
+  final bool showEditIcon;
 
   const Attribute(
-      {@required this.text, @required this.header, @required this.route});
+      {@required this.text, @required this.header, @required this.route, this.showEditIcon = true});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class Attribute extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: MediaQuery.of(context).size.width - 75, // TODO fix this
+            width: (showEditIcon) ? MediaQuery.of(context).size.width - 75 : MediaQuery.of(context).size.width - 50, // TODO fix this
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -37,6 +38,7 @@ class Attribute extends StatelessWidget {
               ],
             ),
           ),
+          if (showEditIcon)
           GestureDetector(
             child: Icon(Icons.edit),
             onTap: () {
