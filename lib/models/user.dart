@@ -5,6 +5,7 @@ class User {
 
   User({this.uid});
 
+  // TODO: Implement backend functionality
   List<ShoppingTrip> getShoppingTrips() {
     // Return dummy data for now
     final shoppingTrips = <ShoppingTrip>[];

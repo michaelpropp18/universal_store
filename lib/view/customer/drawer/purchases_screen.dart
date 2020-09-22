@@ -24,9 +24,10 @@ class Purchases extends StatelessWidget {
           final index = i ~/ 2;
           final purchase = purchases[index];
           return ListTile(
+          leading: Icon(Icons.home),
           title: Text(purchase.storeName),
-          subtitle: Text('${purchase.date.month}/${purchase.date.day}/${purchase.date.year}'),
-          trailing: Text('\$${purchases[index].price}'),
+          subtitle: Text('\$${purchases[index].price}'),
+          trailing: Icon(Icons.arrow_right)
           );
         }
       )
