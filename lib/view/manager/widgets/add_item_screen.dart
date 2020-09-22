@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/view/authentication/widgets/error_text.dart';
-import 'package:universal_store/view/manager/widgets/edit_field.dart';
-import 'package:universal_store/view/manager/widgets/save_changes_button.dart';
+import 'package:universal_store/view/shared/error_text.dart';
+import 'package:universal_store/view/shared/edit_field.dart';
+import 'package:universal_store/view/shared/save_changes_button.dart';
 import 'package:universal_store/utilities.dart' as utilities;
 
 class AddItemScreen extends StatefulWidget {
@@ -20,7 +20,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
   @override
   void initState() {
     name = '';
-    nameError = utilities.generateItemNameError(name);
+    nameError = utilities.generateNameError(name);
     quantity = '';
     quantityError = utilities.generateQuantityError(quantity);
     super.initState();
@@ -49,7 +49,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 onChanged: (e) {
                   setState(() {
                     name = e;
-                    nameError = utilities.generateItemNameError(name);
+                    nameError = utilities.generateNameError(name);
                   });
                 },
               ),

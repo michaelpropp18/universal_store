@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:universal_store/models/item.dart';
 import 'package:universal_store/models/store.dart';
 import 'package:universal_store/routing/routing_constants.dart';
-import 'package:universal_store/view/manager/widgets/store_attribute_box.dart';
+import 'package:universal_store/view/shared/attribute_box.dart';
 
 import 'widgets/header_tab.dart';
-import 'widgets/store_attribute.dart';
+import '../shared/attribute.dart';
 
 class InventoryItemScreen extends StatefulWidget {
   final String uid;
@@ -44,15 +44,15 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
               icon: Icons.add_a_photo, //TODO replace this with a scanner icon
               title: item.name,
             ),
-            StoreAttributeBox(
+            AttributeBox(
               header: 'Information',
-              storeAttributes: [
-                StoreAttribute(
+              attributes: [
+                Attribute(
                   header: 'Price',
                   text: '\$' + item.price.toStringAsFixed(2),
                   route: ManagerInventoryEditPrice,
                 ),
-                StoreAttribute(
+                Attribute(
                   header: 'Quantity',
                   text: item.quantity.toString(),
                   route: ManagerInventoryEditQuantity,

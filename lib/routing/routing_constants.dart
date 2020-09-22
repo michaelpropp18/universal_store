@@ -18,6 +18,11 @@ const String PrivacyRoute = '/drawer/privacy';
 const String FeedbackRoute = '/drawer/feedback';
 const String HelpRoute = '/drawer/help';
 
+//edit customer drawer fields
+const String EditCustomerFirstRoute = '/drawer/profile/edit_first';
+const String EditCustomerLastRoute = '/drawer/profile/edit_last';
+const String EditCustomerEmailRoute = '/drawer/profile/edit_email';
+
 //customer
 const String SearchRoute = '/search';
 

@@ -8,7 +8,7 @@ import 'package:universal_store/view/shared/loading.dart';
 import 'package:universal_store/view_models/authentication/login_view_model.dart';
 
 import 'widgets/bottom_button.dart';
-import 'widgets/error_text.dart';
+import '../shared/error_text.dart';
 import 'widgets/header_text.dart';
 import 'widgets/input_field.dart';
 import 'widgets/forgot_password_button.dart';

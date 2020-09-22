@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'store_attribute.dart';
+import 'attribute.dart';
 
-class StoreAttributeBox extends StatelessWidget {
+class AttributeBox extends StatelessWidget {
 
   final String header;
-  final List<StoreAttribute> storeAttributes;
+  final List<Attribute> attributes;
 
-  const StoreAttributeBox({@required this.storeAttributes, @required this.header});
+  const AttributeBox({@required this.attributes, @required this.header});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class StoreAttributeBox extends StatelessWidget {
             height: 5,
             thickness: 2,
           ),
-          ... storeAttributes,
+          ... attributes,
         ],
       ),
     );

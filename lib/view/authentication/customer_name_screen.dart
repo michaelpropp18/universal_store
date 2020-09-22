@@ -5,7 +5,7 @@ import 'package:universal_store/view_models/authentication/registration_view_mod
 
 import 'widgets/back_arrow.dart';
 import 'widgets/background_gradient.dart';
-import 'widgets/error_text.dart';
+import '../shared/error_text.dart';
 import 'widgets/input_field.dart';
 import 'widgets/submit_button.dart';
 

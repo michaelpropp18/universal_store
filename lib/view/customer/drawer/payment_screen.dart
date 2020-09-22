@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/view/authentication/widgets/submit_button.dart';
-import 'package:universal_store/view/manager/widgets/edit_field.dart';
+import 'package:universal_store/view/shared/edit_field.dart';
 
 class Payment extends StatelessWidget {
   @override
