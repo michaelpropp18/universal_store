@@ -104,11 +104,11 @@ class LoginViewModel with ChangeNotifier {
         _loginError = AuthExceptionHandler.generateExceptionMessage(status);
         notifyListeners();
         return false;
-      } else {
-        resetViewModel();
-        notifyListeners();
-        return true;
-      }
+      } 
+      resetViewModel();
+      notifyListeners();
+      return true;
+
     } else {
       checkEmailError();
       checkPasswordError();

@@ -1,4 +1,6 @@
 class User {
   final String uid;
-  User({this.uid});
+  bool isCustomer = false;
+  bool isManager = false;
+  User({this.uid, this.isCustomer, this.isManager});
 }
