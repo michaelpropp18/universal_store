@@ -4,7 +4,7 @@ library utilities;
 /// User Input Error Generation
 ///////////////////////////////////////////////////
 
-String generateItemNameError(name) {
+String generateNameError(name) {
   if (name == '') {
     return 'Name cannot be empty';
   } else {

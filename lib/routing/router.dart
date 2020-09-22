@@ -5,6 +5,9 @@ import 'package:universal_store/view/authentication/customer_email_screen.dart';
 import 'package:universal_store/view/authentication/customer_name_screen.dart';
 import 'package:universal_store/view/authentication/forgot_password_screen.dart';
 import 'package:universal_store/view/authentication/manager_fields_screen.dart';
+import 'package:universal_store/view/customer/drawer/edit_fields_screens.dart/edit_customer_email_screen.dart';
+import 'package:universal_store/view/customer/drawer/edit_fields_screens.dart/edit_customer_first_screen.dart';
+import 'package:universal_store/view/customer/drawer/edit_fields_screens.dart/edit_customer_last_screen.dart';
 import 'package:universal_store/view/customer/drawer/feedback_screen.dart';
 import 'package:universal_store/view/customer/drawer/help_screen.dart';
 import 'package:universal_store/view/customer/drawer/payment_screen.dart';
@@ -62,6 +65,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => FeedbackInput());
     case HelpRoute:
       return MaterialPageRoute(builder: (context) => Help());
+
+    //edit customer fields
+    case EditCustomerFirstRoute:
+      return MaterialPageRoute(builder: (context) => EditCustomerFirstScreen());
+    case EditCustomerLastRoute:
+      return MaterialPageRoute(builder: (context) => EditCustomerLastScreen());
+    case EditCustomerEmailRoute:
+      return MaterialPageRoute(builder: (context) => EditCustomerEmailScreen());
 
     //user home
     case SearchRoute:

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/routing/routing_constants.dart';
-import 'package:universal_store/view/manager/widgets/store_attribute_box.dart';
+import 'package:universal_store/view/shared/attribute_box.dart';
 
 import 'widgets/header_tab.dart';
-import 'widgets/store_attribute.dart';
+import '../shared/attribute.dart';
 
 class StoreInformationScreen extends StatelessWidget {
   @override
@@ -25,25 +25,25 @@ class StoreInformationScreen extends StatelessWidget {
               icon: Icons.store,
               title: 'OutdoorMart',
             ),
-            StoreAttributeBox(
+            AttributeBox(
               header: 'General Information',
-              storeAttributes: [
-                StoreAttribute(
+              attributes: [
+                Attribute(
                   header: 'Email',
                   text: 'outdoormart@outdoormart.com',
                   route: ManagerEditStoreEmailRoute,
                 ),
-                StoreAttribute(
+                Attribute(
                   header: 'Website',
                   text: 'www.outdoormart.com',
                   route: ManagerEditStoreWebsiteRoute,
                 ),
-                StoreAttribute(
+                Attribute(
                   header: 'Phone',
                   text: '(404)-444-4444',
                   route: ManagerEditStorePhoneRoute,
                 ),
-                StoreAttribute(
+                Attribute(
                   header: 'Address',
                   text: '123 Northside Dr, \nAtlanta, GA 30313',
                   route: ManagerEditStoreAddressRoute,

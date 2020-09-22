@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/view/authentication/widgets/error_text.dart';
-import 'package:universal_store/view/manager/widgets/edit_field.dart';
-import 'package:universal_store/view/manager/widgets/save_changes_button.dart';
+import 'package:universal_store/view/shared/error_text.dart';
+import 'package:universal_store/view/shared/edit_field.dart';
+import 'package:universal_store/view/shared/save_changes_button.dart';
 import 'package:universal_store/utilities.dart' as utilities;
 
 class EditStoreWebsiteScreen extends StatefulWidget {

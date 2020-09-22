@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class StoreAttribute extends StatelessWidget {
+class Attribute extends StatelessWidget {
   final String header;
   final String text;
   final String route;
 
-  const StoreAttribute(
+  const Attribute(
       {@required this.text, @required this.header, @required this.route});
 
   @override
@@ -37,9 +37,7 @@ class StoreAttribute extends StatelessWidget {
               ],
             ),
           ),
-          //IconButton(icon: Icon(Icons.chevron_right), onPressed: () {  },)
           GestureDetector(
-            //child: Icon(Icons.chevron_right),
             child: Icon(Icons.edit),
             onTap: () {
               Navigator.pushNamed(context, route);
