@@ -104,13 +104,16 @@ class AuthService {
   }
 
   // Send reset email
-  var auth = firebase.auth();
-
-  auth.sendPasswordResetEmail(emailAddress).then(function() {
-    // Email sent.
-  }).catch(function(error) {
-    // An error happened.
-  });
+  Future resetPasswordEmail(String email) async {
+    AuthResultStatus _status;
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      _status = AuthResultStatus.successful;
+    } catch (e) {
+      _status = AuthExceptionHandler.getException(e);
+    }
+    return _status;
+  }
 
   // sign out
   Future signOut() async {
