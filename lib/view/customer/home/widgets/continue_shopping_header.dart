@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 
 class ContinueShoppingHeader extends StatelessWidget {
   final String text;
@@ -40,7 +41,9 @@ class ContinueShoppingHeader extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18.0),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, ShoppingCartRoute);
+              },
             ),
           ),
         ],

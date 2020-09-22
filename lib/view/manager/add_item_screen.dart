@@ -16,6 +16,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
   String nameError;
   String quantity;
   String quantityError;
+  String price;
+  String priceError;
 
   @override
   void initState() {
@@ -23,6 +25,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
     nameError = utilities.generateNameError(name);
     quantity = '';
     quantityError = utilities.generateQuantityError(quantity);
+    price = '';
+    priceError = utilities.generatePriceError(price);
     super.initState();
   }
 
@@ -67,7 +71,23 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 },
               ),
               ErrorText(quantityError),
-              SaveChangesButton(enabled: nameError == '' && quantityError == ''),
+              SizedBox(height: 10),
+              EditField(
+                error: priceError != '',
+                text: price,
+                hintText: 'Item Price',
+                onChanged: (e) {
+                  setState(() {
+                    price = e;
+                    priceError = utilities.generatePriceError(price);
+                  });
+                },
+              ),
+              ErrorText(priceError),
+              SaveChangesButton(
+                  enabled: nameError == '' &&
+                      quantityError == '' &&
+                      priceError == ''),
             ],
           ),
         ));
