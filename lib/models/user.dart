@@ -3,8 +3,6 @@ import 'package:universal_store/models/shopping_trip.dart';
 class User {
   final String uid;
 
-  User({this.uid});
-
   // TODO: Implement backend functionality
   List<ShoppingTrip> getShoppingTrips() {
     // Return dummy data for now
@@ -15,4 +13,7 @@ class User {
     return shoppingTrips;
   }
 
+  bool isCustomer = false;
+  bool isManager = false;
+  User({this.uid, this.isCustomer, this.isManager});
 }

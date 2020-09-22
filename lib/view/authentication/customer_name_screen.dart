@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_store/routing/routing_constants.dart';
-import 'package:universal_store/view_models/registration_view_model.dart';
+import 'package:universal_store/view_models/authentication/registration_view_model.dart';
 
 import 'widgets/back_arrow.dart';
 import 'widgets/background_gradient.dart';
-import 'widgets/error_text.dart';
+import '../shared/error_text.dart';
 import 'widgets/input_field.dart';
 import 'widgets/submit_button.dart';
 
