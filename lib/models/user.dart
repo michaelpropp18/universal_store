@@ -1,6 +1,6 @@
-class User {
+abstract class User {
   final String uid;
-  bool isCustomer = false;
-  bool isManager = false;
-  User({this.uid, this.isCustomer, this.isManager});
+  String userType;
+  String email;
+  User(this.uid, this.email, this.userType);
 }

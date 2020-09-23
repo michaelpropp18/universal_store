@@ -28,6 +28,18 @@ class DatabaseService {
     return manager.exists;
   }
 
+  Future userType() async {
+    dynamic customer = await customers.document(uuid).get();
+    if(customer.exists) {
+      return "customer";    // make enum
+    }
+    dynamic manager = await managers.document(uuid).get();
+    if(manager.exists) {
+      return "manager";    // make enum
+    }
+    return "ERROR_USER_NOT_FOUND";
+  }
+
   Future createNewCustomer(
       {@required String firstName,
         @required String lastName,
@@ -52,23 +64,15 @@ class DatabaseService {
   }
 
   Future updateFirstName(String newFirstName) async {
-    Map customerData = await getCustomerData();
-    String oldFirstName = customerData['firstName'];
-    if (newFirstName != null && newFirstName != oldFirstName) {
-      return await customers.document(uuid).updateData({'firstName': newFirstName});
-    }
+    return await customers.document(uuid).updateData({'firstName': newFirstName});
   }
 
   Future updateLastName(String newLastName) async {
-    Map customerData = await getCustomerData();
-    String oldLastName = customerData['lastName'];
-    if (newLastName != null && newLastName != oldLastName) {
-      return await customers.document(uuid).updateData({'lastName': newLastName});
-    }
+    return await customers.document(uuid).updateData({'lastName': newLastName});
   }
 
   Future updateStoreName(String newStoreName) async {
-    return await managers.document(uuid).setData({'storeName': newStoreName});
+    return await managers.document(uuid).updateData({'storeName': newStoreName});
   }
 
   Future getCustomerData() async {
