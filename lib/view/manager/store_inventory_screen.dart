@@ -43,7 +43,7 @@ class StoreInventoryScreen extends StatelessWidget {
                 itemCount: Store.items.length,
                 itemBuilder: (context, index) {
                   return StoreItem(
-                      quantity: Store.items[index].quantity,
+                      quantity: Store.items[index].stock,
                       price: Store.items[index].price,
                       name: Store.items[index].name,
                       uid: Store.items[index].uid);

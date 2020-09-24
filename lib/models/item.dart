@@ -2,7 +2,7 @@ class Item {
   String uid;
   String name;
   double price;
-  int quantity;
+  int stock;
 
-  Item({this.uid, this.name, this.price, this.quantity});
+  Item({this.uid, this.name, this.price, this.stock});
 }

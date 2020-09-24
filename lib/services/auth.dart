@@ -22,7 +22,7 @@ class AuthService {
       return Customer(customerData["firstName"], customerData["lastname"], user.uid, customerData["email"]);
     } else if (userType == "manager"){
       Map managerData = await DatabaseService(uuid: user.uid).getCustomerData();
-      return Manager(managerData["storeName"], user.uid, managerData["email"]);
+      return Manager(managerData["storeName"], managerData['storeWebsite'], managerData['storePhone'], managerData["storeAddress"], user.uid, managerData["email"]);
     } else {
       return null;
     }
@@ -66,9 +66,12 @@ class AuthService {
   }
 
   Future registerManager(
-      {@required String storeName,
-      @required String email,
-      @required String password}) async {
+      { @required String storeName,
+        @required String email,
+        @required String storeWebsite,
+        @required String storePhone,
+        @required String storeAddress,
+        @required String password}) async {
     AuthResultStatus _status;
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
@@ -76,7 +79,7 @@ class AuthService {
       if (result.user != null) {
         _status = AuthResultStatus.successful;
         await DatabaseService(uuid: result.user.uid)
-            .createNewManager(storeName: storeName, email: email);
+            .createNewManager(storeName: storeName, email: email, storeWebsite: storeWebsite, storePhone: storePhone, storeAddress: storeAddress);
         CurrentUser.signIn();
       } else {
         _status = AuthResultStatus.undefined;
@@ -145,77 +148,6 @@ class AuthService {
       _status = AuthExceptionHandler.getException(e);
     }
     return _status;
-  }
-
-  Future updateFirstName(String newFirstName) async {
-    AuthResultStatus _status;
-
-    try {
-      FirebaseUser user = await _auth.currentUser();
-      if (user != null) {
-        _status = AuthResultStatus.successful;
-        await DatabaseService(uuid: user.uid).updateFirstName(newFirstName);
-      } else {
-        _status = AuthResultStatus.undefined;
-      }
-    } catch (e) {
-      _status = AuthExceptionHandler.getException(e);
-    }
-    return _status;
-  }
-
-  Future updateLastName(String newLastName) async {
-    AuthResultStatus _status;
-
-    try {
-      FirebaseUser user = await _auth.currentUser();
-      if (user != null) {
-        _status = AuthResultStatus.successful;
-        await DatabaseService(uuid: user.uid).updateLastName(newLastName);
-      } else {
-        _status = AuthResultStatus.undefined;
-      }
-    } catch (e) {
-      _status = AuthExceptionHandler.getException(e);
-    }
-    return _status;
-  }
-
-  Future updateCustomerProfile(
-      String newFirstName, String newLastName, String newEmail) async {
-    AuthResultStatus _status;
-
-    try {
-      FirebaseUser user = await _auth.currentUser();
-      if (user != null) {
-        _status = AuthResultStatus.successful;
-        await DatabaseService(uuid: user.uid).updateFirstName(newFirstName);
-        await DatabaseService(uuid: user.uid).updateLastName(newLastName);
-        await DatabaseService(uuid: user.uid).updateEmail(newEmail);
-        await user.updateEmail(newEmail);
-      } else {
-        _status = AuthResultStatus.undefined;
-      }
-    } catch (e) {
-      _status = AuthExceptionHandler.getException(e);
-    }
-    return _status;
-  }
-
-  Future getCustomerData() async {
-    AuthResultStatus _status;
-
-    try {
-      FirebaseUser user = await _auth.currentUser();
-      if (user != null) {
-        _status = AuthResultStatus.successful;
-        return await DatabaseService(uuid: user.uid).getCustomerData();
-      } else {
-        _status = AuthResultStatus.undefined;
-      }
-    } catch (e) {
-      _status = AuthExceptionHandler.getException(e);
-    }
   }
 
   // sign out

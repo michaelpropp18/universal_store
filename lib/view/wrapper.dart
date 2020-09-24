@@ -39,8 +39,8 @@ class Wrapper extends StatelessWidget {
           Map customerData = await DatabaseService(uuid: user.uid).getCustomerData();
           yield Customer(customerData["firstName"], customerData["lastname"], user.uid, customerData["email"]);
         } else if (await DatabaseService(uuid: user.uid).isManager()) {
-          Map managerData = await DatabaseService(uuid: user.uid).getCustomerData();
-          yield Manager(managerData["storeName"], user.uid, managerData["email"]);
+          Map managerData = await DatabaseService(uuid: user.uid).getManagerData();
+          yield Manager(managerData["storeName"], managerData['storeWebsite'], managerData['storePhone'], managerData['storeAddress'], user.uid, managerData["email"]);
         } else {
           Map customerData = await DatabaseService(uuid: user.uid).getCustomerData();
           yield Customer(customerData["firstName"], customerData["lastname"], user.uid, customerData["email"]);
