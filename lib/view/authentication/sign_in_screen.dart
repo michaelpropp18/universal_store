@@ -5,7 +5,7 @@ import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/authentication/widgets/background_gradient.dart';
 import 'package:universal_store/view/authentication/widgets/submit_button.dart';
 import 'package:universal_store/view/shared/loading.dart';
-import 'package:universal_store/view_models/authentication/login_view_model.dart';
+import 'package:universal_store/view_models/login_view_model.dart';
 
 import 'widgets/bottom_button.dart';
 import '../shared/error_text.dart';
