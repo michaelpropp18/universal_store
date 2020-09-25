@@ -115,12 +115,11 @@ class DatabaseService {
   }
   
   addItemToInventory(String itemName, double price, int stock) async {
-    Map item = {
+    await managers.document(uuid).collection("items").document().setData({
       "itemName": itemName,
       "price": price,
       "stock": stock
-    };
-    await managers.document(uuid).collection("items").document().setData(item);
+    });
   }
 
   updateItemPrice(String itemUid, double price) async {
@@ -137,7 +136,7 @@ class DatabaseService {
     List<Item> items = new List();
     for (DocumentSnapshot document in documents) {
       Map itemData = document.data;
-      Item item = new Item(uid: document.documentID, name: itemData["name"], price: itemData["price"], stock: itemData["stock"]);
+      Item item = new Item(uid: document.documentID, name: itemData["itemName"], price: itemData["price"], stock: itemData["stock"]);
       items.add(item);
     }
     return items;
@@ -152,7 +151,7 @@ class DatabaseService {
       Manager manager = await getManager(uuid);
       Customer customer = await getCustomer(orderData['customer']);
       List<CartItem> items = await getCartItems(manager, customer, orderData);
-      Order order = new Order(orderDocument.documentID, manager, customer, orderData['date'], items);
+      Order order = new Order(orderDocument.documentID, manager, customer, (orderData['date'] as Timestamp).toDate(), items);
       orders.add(order);
     }
     return orders;
@@ -169,7 +168,7 @@ class DatabaseService {
       DocumentSnapshot orderDocument = await managers.document(orderCustomerData['store']).collection("orders").document(orderCustomerData['order']).get();
       Map orderData = orderDocument.data;
       List<CartItem> items = await getCartItems(manager, customer, orderData);
-      Order order = new Order(orderDocument.documentID, manager, customer, orderData['date'], items);
+      Order order = new Order(orderDocument.documentID, manager, customer, (orderData['date'] as Timestamp).toDate(), items);
       orders.add(order);
     }
     return orders;
