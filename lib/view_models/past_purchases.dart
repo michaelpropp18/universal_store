@@ -7,7 +7,7 @@ class PastPurchasesViewModel with ChangeNotifier {
   List<ShoppingTrip> _purchases = <ShoppingTrip>[];
 
   PastPurchasesViewModel() {
-    this._purchases = new User().getShoppingTrips();
+    //this._purchases = new User().getShoppingTrips();
   }
 
   List<ShoppingTrip> get purchases {

@@ -26,8 +26,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
   void initState() {
     name = '';
     nameError = utilities.generateNameError(name);
-    name = '';
-    nameError = utilities.generatePriceError(price);
+    price = '';
+    priceError = utilities.generatePriceError(price);
     quantity = '';
     quantityError = utilities.generateQuantityError(quantity);
     super.initState();

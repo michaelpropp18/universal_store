@@ -21,7 +21,7 @@ class AuthService {
       Map customerData = await DatabaseService(uuid: user.uid).getCustomerData();
       return Customer(customerData["firstName"], customerData["lastname"], user.uid, customerData["email"]);
     } else if (userType == "manager"){
-      Map managerData = await DatabaseService(uuid: user.uid).getCustomerData();
+      Map managerData = await DatabaseService(uuid: user.uid).getManagerData(); //
       return Manager(managerData["storeName"], managerData['storeWebsite'], managerData['storePhone'], managerData["storeAddress"], user.uid, managerData["email"]);
     } else {
       return null;
@@ -55,7 +55,7 @@ class AuthService {
         _status = AuthResultStatus.successful;
         await DatabaseService(uuid: result.user.uid).createNewCustomer(
             firstName: firstName, lastName: lastName, email: email);
-        CurrentUser.signIn();
+        await CurrentUser.signIn();
       } else {
         _status = AuthResultStatus.undefined;
       }
@@ -80,7 +80,7 @@ class AuthService {
         _status = AuthResultStatus.successful;
         await DatabaseService(uuid: result.user.uid)
             .createNewManager(storeName: storeName, email: email, storeWebsite: storeWebsite, storePhone: storePhone, storeAddress: storeAddress);
-        CurrentUser.signIn();
+        await CurrentUser.signIn();
       } else {
         _status = AuthResultStatus.undefined;
       }
@@ -98,7 +98,7 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       if (result.user != null) {
-        //CurrentUser.signIn();
+        await CurrentUser.signIn();
         _status = AuthResultStatus.successful;
       } else {
         _status = AuthResultStatus.undefined;

@@ -12,7 +12,7 @@ class EditItemQuantityScreen extends StatefulWidget {
   final double originalQuantity;
   final String uid;
 
-  const EditItemQuantityScreen({this.uid, this.originalQuantity});
+  const EditItemQuantityScreen({this.uid, this.originalQuantity = 3});
   @override
   _EditItemQuantityScreenState createState() => _EditItemQuantityScreenState();
 }
