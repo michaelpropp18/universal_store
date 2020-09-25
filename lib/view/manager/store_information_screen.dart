@@ -12,6 +12,7 @@ import 'package:universal_store/models/current_user.dart';
 class StoreInformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Manager manager = CurrentUser.user;
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light, // this makes the status bar black
@@ -27,29 +28,29 @@ class StoreInformationScreen extends StatelessWidget {
           children: [
             HeaderTab(
               icon: Icons.store,
-              title: 'OutdoorMart',
+              title: manager.storeName,
             ),
             AttributeBox(
               header: 'General Information',
               attributes: [
                 Attribute(
                   header: 'Email',
-                  text: 'outdoormart@outdoormart.com',
+                  text: manager.email,
                   route: ManagerEditStoreEmailRoute,
                 ),
                 Attribute(
                   header: 'Website',
-                  text: 'www.outdoormart.com',
+                  text: manager.storeWebsite,
                   route: ManagerEditStoreWebsiteRoute,
                 ),
                 Attribute(
                   header: 'Phone',
-                  text: '(404)-444-4444',
+                  text: manager.storePhone,
                   route: ManagerEditStorePhoneRoute,
                 ),
                 Attribute(
                   header: 'Address',
-                  text: '123 Northside Dr, \nAtlanta, GA 30313',
+                  text: manager.storeAddress,
                   route: ManagerEditStoreAddressRoute,
                 ),
               ],

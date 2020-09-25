@@ -7,7 +7,7 @@ class Attribute extends StatelessWidget {
   final String uid;
 
   const Attribute(
-      {@required this.text, @required this.header, @required this.route, @required this.uid});
+      {@required this.text, @required this.header, @required this.route, this.uid});
 
   @override
   Widget build(BuildContext context) {
