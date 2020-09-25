@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/view_models/past_purchases.dart';
-import 'package:provider/provider.dart';
+// import 'package:universal_store/view_models/past_purchases.dart';
+// import 'package:provider/provider.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/customer.dart';
 
 class Purchases extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<PastPurchasesViewModel>(context);
-    final purchases = viewModel.purchases;
+    // final viewModel = Provider.of<PastPurchasesViewModel>(context);
+    final Customer user = CurrentUser.user;
+    final purchases = user.getOrders();
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
