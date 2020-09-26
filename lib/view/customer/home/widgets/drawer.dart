@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 
 import '../../../../services/auth.dart';
 
 class CustomerDrawer extends StatelessWidget {
+  final Customer user = CurrentUser.user;
+
   final tiles = [
     {'icon': Icons.account_circle, 'text': 'Profile', 'route': ProfileRoute},
     {'icon': Icons.shopping_cart, 'text': 'Purchases', 'route': PurchasesRoute},
@@ -30,7 +34,7 @@ class CustomerDrawer extends StatelessWidget {
                   children: [
                     Icon(Icons.account_circle, size: 90.0, color: Colors.blue),
                     SizedBox(height: 6),
-                    Text('John Doe', textScaleFactor: 1.8,),
+                    Text(user.firstName + " " + user.lastName, textScaleFactor: 1.8,),
                   ]
                 )
               );
