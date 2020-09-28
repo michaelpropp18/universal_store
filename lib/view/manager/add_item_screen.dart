@@ -21,6 +21,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
   String priceError;
   String quantity;
   String quantityError;
+  Manager manager = CurrentUser.user;
 
   @override
   void initState() {
@@ -87,14 +88,16 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 },
               ),
               ErrorText(quantityError),
-              SaveChangesButton(onPress: addItem, enabled: nameError == '' && quantityError == ''),
+              SaveChangesButton(
+                  onPress: addItem,
+                  enabled: nameError == '' && quantityError == '' && priceError == ''),
             ],
           ),
         ));
   }
 
   addItem() {
-    Manager manager = CurrentUser.user;
+    print('got here');
     manager.addItemToInventory(name, double.parse(price), int.parse(quantity));
   }
 }
