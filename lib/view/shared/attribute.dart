@@ -5,9 +5,10 @@ class Attribute extends StatelessWidget {
   final String text;
   final String route;
   final bool showEditIcon;
+  final String uid;
 
   const Attribute(
-      {@required this.text, @required this.header, @required this.route, this.showEditIcon = true});
+      {@required this.text, @required this.header, @required this.route, this.showEditIcon = true, this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class Attribute extends StatelessWidget {
           GestureDetector(
             child: Icon(Icons.edit),
             onTap: () {
-              Navigator.pushNamed(context, route);
+              Navigator.pushNamed(context, route, arguments: <String, double> {'originalPrice': 444});
             },
           )
         ],

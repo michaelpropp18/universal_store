@@ -251,7 +251,7 @@ class RegistrationViewModel with ChangeNotifier {
 
     //register with firebase
     dynamic status = await _auth.registerManager(
-        storeName: _storeName, email: _email, password: _password);
+        storeName: _storeName, storeAddress: "", email: _email, password: _password);   //TODO make storeAddress an input
     _loading = false;
 
     //registration successful

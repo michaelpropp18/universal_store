@@ -1,11 +1,20 @@
+import 'customer.dart';
+import 'manager.dart';
+import 'item.dart';
+import 'cart_item.dart';
+
 class Cart {
-  String storeName; // TODO replace this with UID when we implement backend
-  static final List<String> items = [
-    //TODO actually implement this
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-  ];
-  Cart({this.storeName});
+  String uid;
+  Customer customer;
+  Manager store;
+  List<CartItem> items;
+  double total;
+
+  Cart(this.uid, this.store, this.customer, this.items) {
+    double subtotal = 0;
+    for (CartItem item in items) {
+      subtotal += item.item.price * item.quantity;
+    }
+    total = subtotal;
+  }
 }

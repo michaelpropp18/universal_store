@@ -3,12 +3,16 @@ import 'package:universal_store/view/shared/error_text.dart';
 import 'package:universal_store/view/shared/edit_field.dart';
 import 'package:universal_store/view/shared/save_changes_button.dart';
 
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/manager.dart';
+
 import 'package:universal_store/utilities.dart' as utilities;
 
 class EditItemPriceScreen extends StatefulWidget {
   final double originalPrice;
+  final String uid;
 
-  const EditItemPriceScreen({this.originalPrice = 39.99});
+  const EditItemPriceScreen({this.uid, this.originalPrice});
   @override
   _EditItemPriceScreenState createState() => _EditItemPriceScreenState();
 }
@@ -16,11 +20,13 @@ class EditItemPriceScreen extends StatefulWidget {
 class _EditItemPriceScreenState extends State<EditItemPriceScreen> {
   String price;
   String errorText;
+  String uid;
 
   @override
   void initState() {
     price = widget.originalPrice.toString();
     errorText = utilities.generatePriceError(price);
+    uid = widget.uid;
     super.initState();
   }
 
@@ -53,10 +59,16 @@ class _EditItemPriceScreenState extends State<EditItemPriceScreen> {
               ),
               ErrorText(errorText),
               SaveChangesButton(
+                  onPress: updatePrice,
                   enabled: errorText == '' &&
                       price != widget.originalPrice.toString()),
             ],
           ),
         ));
+  }
+
+  updatePrice() {
+    Manager manager = CurrentUser.user;
+    manager.updateItemPrice(uid, double.parse(price));
   }
 }

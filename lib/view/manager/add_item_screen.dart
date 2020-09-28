@@ -4,6 +4,9 @@ import 'package:universal_store/view/shared/edit_field.dart';
 import 'package:universal_store/view/shared/save_changes_button.dart';
 import 'package:universal_store/utilities.dart' as utilities;
 
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/manager.dart';
+
 class AddItemScreen extends StatefulWidget {
   const AddItemScreen();
 
@@ -14,13 +17,18 @@ class AddItemScreen extends StatefulWidget {
 class _AddItemScreenState extends State<AddItemScreen> {
   String name;
   String nameError;
+  String price;
+  String priceError;
   String quantity;
   String quantityError;
+  Manager manager = CurrentUser.user;
 
   @override
   void initState() {
     name = '';
     nameError = utilities.generateNameError(name);
+    price = '';
+    priceError = utilities.generatePriceError(price);
     quantity = '';
     quantityError = utilities.generateQuantityError(quantity);
     super.initState();
@@ -56,6 +64,19 @@ class _AddItemScreenState extends State<AddItemScreen> {
               ErrorText(nameError),
               SizedBox(height: 10),
               EditField(
+                error: priceError != '',
+                text: price,
+                hintText: 'Item price',
+                onChanged: (e) {
+                  setState(() {
+                    price = e;
+                    priceError = utilities.generatePriceError(price);
+                  });
+                },
+              ),
+              ErrorText(priceError),
+              SizedBox(height: 10),
+              EditField(
                 error: quantityError != '',
                 text: quantity,
                 hintText: 'Item Quantity',
@@ -67,9 +88,16 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 },
               ),
               ErrorText(quantityError),
-              SaveChangesButton(enabled: nameError == '' && quantityError == ''),
+              SaveChangesButton(
+                  onPress: addItem,
+                  enabled: nameError == '' && quantityError == '' && priceError == ''),
             ],
           ),
         ));
+  }
+
+  addItem() {
+    print('got here');
+    manager.addItemToInventory(name, double.parse(price), int.parse(quantity));
   }
 }
