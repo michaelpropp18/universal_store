@@ -13,7 +13,6 @@ class CustomerDrawer extends StatelessWidget {
     {'icon': Icons.shopping_cart, 'text': 'Purchases', 'route': PurchasesRoute},
     {'icon': Icons.payment, 'text': 'Payment', 'route': PaymentRoute},
     {'icon': Icons.lock, 'text': 'Privacy', 'route': PrivacyRoute},
-    {'icon': Icons.comment, 'text': 'Feedback', 'route': FeedbackRoute},
     {'icon': Icons.help, 'text': 'Help', 'route': HelpRoute},
     {
       'icon': Icons.exit_to_app,

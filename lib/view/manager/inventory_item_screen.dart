@@ -51,13 +51,13 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
                   header: 'Price',
                   text: '\$' + item.price.toStringAsFixed(2),
                   route: ManagerInventoryEditPrice,
-                  uid: item.uid,
+                  //uid: item.uid,
                 ),
                 Attribute(
                   header: 'Quantity',
                   text: item.stock.toString(),
                   route: ManagerInventoryEditQuantity,
-                  uid: item.uid,
+                  //uid: item.uid,
                 ),
                 /*
                 StoreAttribute(
