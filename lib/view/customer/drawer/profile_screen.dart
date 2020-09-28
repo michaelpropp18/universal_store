@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/manager/widgets/header_tab.dart';
 import 'package:universal_store/view/shared/attribute.dart';
 import 'package:universal_store/view/shared/attribute_box.dart';
+import 'package:universal_store/models/current_user.dart';
 
 class Profile extends StatelessWidget {
+  final Customer user = CurrentUser.user;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,24 +26,24 @@ class Profile extends StatelessWidget {
           children: [
             HeaderTab(
               icon: Icons.person,
-              title: 'John Doe',
+              title: user.firstName + " " + user.lastName,
             ),
             AttributeBox(
               header: 'Profile Information',
               attributes: [
                 Attribute(
                   header: 'First Name',
-                  text: 'John',
+                  text: user.firstName,
                   route: EditCustomerFirstRoute,
                 ),
                 Attribute(
-                  header: 'First Name',
-                  text: 'John',
+                  header: 'Last Name',
+                  text: user.lastName,
                   route: EditCustomerLastRoute,
                 ),
                 Attribute(
                   header: 'Email',
-                  text: 'customer@customer.com',
+                  text: user.email,
                   route: EditCustomerEmailRoute,
                 ),
               ],

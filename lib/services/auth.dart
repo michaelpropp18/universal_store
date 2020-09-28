@@ -19,7 +19,7 @@ class AuthService {
     String userType = await DatabaseService(uuid: user.uid).userType();
     if (userType == "customer") {
       Map customerData = await DatabaseService(uuid: user.uid).getCustomerData();
-      return Customer(customerData["firstName"], customerData["lastname"], user.uid, customerData["email"]);
+      return Customer(customerData["firstName"], customerData["lastName"], user.uid, customerData["email"]);
     } else if (userType == "manager"){
       Map managerData = await DatabaseService(uuid: user.uid).getManagerData(); //
       return Manager(managerData["storeName"], managerData['storeWebsite'], managerData['storePhone'], managerData["storeAddress"], user.uid, managerData["email"]);

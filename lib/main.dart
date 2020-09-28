@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:universal_store/view_models/past_purchases.dart';
 
 import 'routing/router.dart' as router;
 import 'routing/routing_constants.dart';
@@ -22,9 +21,6 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<LoginViewModel>(
           create: (BuildContext context) => LoginViewModel(),
-        ),
-        ChangeNotifierProvider<PastPurchasesViewModel>(
-          create: (BuildContext context) => PastPurchasesViewModel(),
         ),
       ],
       child: MaterialApp(
