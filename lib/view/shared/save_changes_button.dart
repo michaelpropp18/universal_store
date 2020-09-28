@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class SaveChangesButton extends StatelessWidget {
   final bool enabled;
+  final Function onPress;
 
-  const SaveChangesButton({this.enabled});
+  const SaveChangesButton({this.enabled, this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,8 @@ class SaveChangesButton extends StatelessWidget {
           onPressed: !enabled
               ? null
               : () {
+                  onPress();
                   Navigator.pop(context);
-                  //TODO update backend
                 },
         ),
       ),

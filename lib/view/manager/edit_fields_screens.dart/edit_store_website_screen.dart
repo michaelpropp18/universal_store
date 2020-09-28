@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/view/shared/error_text.dart';
 import 'package:universal_store/view/shared/edit_field.dart';
 import 'package:universal_store/view/shared/save_changes_button.dart';
 import 'package:universal_store/utilities.dart' as utilities;
 
 class EditStoreWebsiteScreen extends StatefulWidget {
-  final String originalWebsite;
-
-  const EditStoreWebsiteScreen({this.originalWebsite = 'www.outdoormart.com'});
   @override
   _EditStoreWebsiteScreenState createState() => _EditStoreWebsiteScreenState();
 }
 
 class _EditStoreWebsiteScreenState extends State<EditStoreWebsiteScreen> {
+  Manager manager = CurrentUser.user;
   String website;
   String errorText;
 
   @override
   void initState() {
-    website = widget.originalWebsite;
+    website = manager.storeWebsite;
     errorText = utilities.generateWebsiteError(website);
     super.initState();
   }
@@ -52,8 +52,8 @@ class _EditStoreWebsiteScreenState extends State<EditStoreWebsiteScreen> {
               ),
               ErrorText(errorText),
               SaveChangesButton(
-                  enabled:
-                      errorText == '' && website != widget.originalWebsite),
+                  onPress: () => manager.updateStoreWebsite(website),
+                  enabled: errorText == '' && website != manager.storeWebsite),
             ],
           ),
         ));

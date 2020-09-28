@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/view/shared/error_text.dart';
 import 'package:universal_store/view/shared/edit_field.dart';
 import 'package:universal_store/view/shared/save_changes_button.dart';
 import 'package:universal_store/utilities.dart' as utilities;
 
-
 class EditStoreEmailScreen extends StatefulWidget {
-  final String originalEmail;
-
-  const EditStoreEmailScreen({this.originalEmail = 'outdoormart@gmail.com'});
   @override
   _EditStoreEmailScreenState createState() => _EditStoreEmailScreenState();
 }
 
 class _EditStoreEmailScreenState extends State<EditStoreEmailScreen> {
+  Manager manager = CurrentUser.user;
   String email;
   String errorText;
 
   @override
   void initState() {
-    email = widget.originalEmail;
+    email = manager.email;
     errorText = utilities.generateEmailError(email);
     super.initState();
   }
@@ -54,7 +53,8 @@ class _EditStoreEmailScreenState extends State<EditStoreEmailScreen> {
               ),
               ErrorText(errorText),
               SaveChangesButton(
-                  enabled: errorText == '' && email != widget.originalEmail),
+                  onPress: () => manager.updateEmail(email),
+                  enabled: errorText == '' && email != manager.email),
             ],
           ),
         ));

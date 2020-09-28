@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/view/shared/error_text.dart';
 import 'package:universal_store/view/shared/edit_field.dart';
 import 'package:universal_store/view/shared/save_changes_button.dart';
@@ -6,20 +8,18 @@ import 'package:universal_store/view/shared/save_changes_button.dart';
 import 'package:universal_store/utilities.dart' as utilities;
 
 class EditStorePhoneScreen extends StatefulWidget {
-  final String originalPhone;
-
-  const EditStorePhoneScreen({this.originalPhone = '(404) 444-4444'});
   @override
   _EditStorePhoneScreenState createState() => _EditStorePhoneScreenState();
 }
 
 class _EditStorePhoneScreenState extends State<EditStorePhoneScreen> {
+  Manager manager = CurrentUser.user;
   String phone;
   String errorText;
 
   @override
   void initState() {
-    phone = widget.originalPhone;
+    phone = manager.storePhone;
     errorText = utilities.generatePhoneError(phone);
     super.initState();
   }
@@ -53,7 +53,9 @@ class _EditStorePhoneScreenState extends State<EditStorePhoneScreen> {
                 },
               ),
               ErrorText(errorText),
-              SaveChangesButton(enabled: errorText == '' && phone != widget.originalPhone),
+              SaveChangesButton(
+                  onPress: () => manager.updateStorePhone(phone),
+                  enabled: errorText == '' && phone != manager.storePhone),
             ],
           ),
         ));

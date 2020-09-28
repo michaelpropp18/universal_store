@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/view/shared/error_text.dart';
 import 'package:universal_store/view/shared/edit_field.dart';
 import 'package:universal_store/view/shared/save_changes_button.dart';
+import 'package:universal_store/models/current_user.dart';
 
 import 'package:universal_store/utilities.dart' as utilities;
 
 class EditStoreAddressScreen extends StatefulWidget {
-  final String originalAddress;
-
-  const EditStoreAddressScreen(
-      {this.originalAddress = '123 Northside Dr, \nAtlanta, GA 30313'});
   @override
   _EditStoreAddressScreenState createState() => _EditStoreAddressScreenState();
 }
 
 class _EditStoreAddressScreenState extends State<EditStoreAddressScreen> {
+  Manager manager = CurrentUser.user;
   String address;
   String errorText;
 
   @override
   void initState() {
-    address = widget.originalAddress;
+    address = manager.storeAddress;
     errorText = utilities.generateAddressError(address);
     super.initState();
   }
@@ -55,8 +54,8 @@ class _EditStoreAddressScreenState extends State<EditStoreAddressScreen> {
               ),
               ErrorText(errorText),
               SaveChangesButton(
-                  enabled:
-                      errorText == '' && address != widget.originalAddress),
+                  onPress: () => manager.updateStoreAddress(address),
+                  enabled: errorText == '' && address != manager.storeAddress),
             ],
           ),
         ));

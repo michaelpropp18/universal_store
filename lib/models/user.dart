@@ -1,19 +1,20 @@
-import 'package:universal_store/models/shopping_trip.dart';
+import 'package:universal_store/services/database.dart';
+import 'package:universal_store/services/auth.dart';
 
-class User {
+abstract class User {
   final String uid;
-
-  // TODO: Implement backend functionality
-  List<ShoppingTrip> getShoppingTrips() {
-    // Return dummy data for now
-    final shoppingTrips = <ShoppingTrip>[];
-    for (int i = 0; i < 10; i++) {
-      shoppingTrips.add(ShoppingTrip('Store $i', i + .99, DateTime.now().millisecondsSinceEpoch - (i * 3600 * 24000)));
-    }
-    return shoppingTrips;
+  DatabaseService firestore;
+  AuthService auth;
+  String userType;
+  String email;
+  User(this.uid, this.email, this.userType) {
+    firestore = DatabaseService(uuid: uid);
+    auth = AuthService();
   }
 
-  bool isCustomer = false;
-  bool isManager = false;
-  User({this.uid, this.isCustomer, this.isManager});
+  updateEmail(String newEmail) async {
+    this.email = newEmail;
+    auth.updateEmail(newEmail);
+  }
+
 }

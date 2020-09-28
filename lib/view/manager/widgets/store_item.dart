@@ -11,7 +11,7 @@ class StoreItem extends StatelessWidget {
       {@required this.price,
       @required this.name,
       @required this.quantity,
-      this.uid});
+      @required this.uid});
 
   @override
   Widget build(BuildContext context) {

@@ -5,10 +5,14 @@ import 'package:universal_store/view/shared/save_changes_button.dart';
 
 import 'package:universal_store/utilities.dart' as utilities;
 
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/manager.dart';
+
 class EditItemQuantityScreen extends StatefulWidget {
   final double originalQuantity;
+  final String uid;
 
-  const EditItemQuantityScreen({this.originalQuantity = 10});
+  const EditItemQuantityScreen({this.uid, this.originalQuantity = 3});
   @override
   _EditItemQuantityScreenState createState() => _EditItemQuantityScreenState();
 }
@@ -16,11 +20,13 @@ class EditItemQuantityScreen extends StatefulWidget {
 class _EditItemQuantityScreenState extends State<EditItemQuantityScreen> {
   String quantity;
   String errorText;
+  String uid;
 
   @override
   void initState() {
     quantity = widget.originalQuantity.toStringAsFixed(0);
     errorText = utilities.generateQuantityError(quantity);
+    uid = widget.uid;
     super.initState();
   }
 
@@ -53,10 +59,16 @@ class _EditItemQuantityScreenState extends State<EditItemQuantityScreen> {
               ),
               ErrorText(errorText),
               SaveChangesButton(
+                  onPress: updateStock,
                   enabled: errorText == '' &&
                       quantity != widget.originalQuantity.toString()),
             ],
           ),
         ));
+  }
+
+  updateStock() {
+    Manager manager = CurrentUser.user;
+    manager.updateItemStock(uid, int.parse(quantity));
   }
 }
