@@ -1,6 +1,5 @@
 import 'customer.dart';
 import 'manager.dart';
-import 'item.dart';
 import 'cart_item.dart';
 
 class Cart {

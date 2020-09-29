@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../models/user.dart';
 import 'auth_exception_handler.dart';
 import 'database.dart';
 import 'package:universal_store/models/current_user.dart';
@@ -113,7 +112,7 @@ class AuthService {
   Future signInAnon() async {
     try {
       AuthResult result = await _auth.signInAnonymously();
-      FirebaseUser user = result.user;
+      //FirebaseUser user = result.user;
       return Customer("guest", "", result.user.uid, "");
     } catch (e) {
       print(e.toString());

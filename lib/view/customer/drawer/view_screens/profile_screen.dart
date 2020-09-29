@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/routing/routing_constants.dart';
-import 'package:universal_store/view/manager/widgets/header_tab.dart';
+import 'package:universal_store/view/manager/store_profile/header_tab.dart';
 import 'package:universal_store/view/shared/attribute.dart';
 import 'package:universal_store/view/shared/attribute_box.dart';
 import 'package:universal_store/models/current_user.dart';

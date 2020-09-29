@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/services/auth.dart';
-import 'package:universal_store/view/manager/widgets/nav_icon.dart';
+import 'package:universal_store/view/manager/nav_icon.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -57,7 +57,8 @@ class HomeScreen extends StatelessWidget {
                   NavIcon(
                     icon: Icons.insert_chart,
                     text: 'Analytics',
-                    onPressed: () {},
+                    onPressed: () =>
+                        Navigator.pushNamed(context, ManagerAnalyticsRoute),
                   ),
                   NavIcon(
                     icon: Icons.exit_to_app,

@@ -5,31 +5,34 @@ import 'package:universal_store/view/authentication/customer_email_screen.dart';
 import 'package:universal_store/view/authentication/customer_name_screen.dart';
 import 'package:universal_store/view/authentication/forgot_password_screen.dart';
 import 'package:universal_store/view/authentication/manager_fields_screen.dart';
-import 'package:universal_store/view/customer/drawer/edit_fields_screens.dart/edit_customer_email_screen.dart';
-import 'package:universal_store/view/customer/drawer/edit_fields_screens.dart/edit_customer_first_screen.dart';
-import 'package:universal_store/view/customer/drawer/edit_fields_screens.dart/edit_customer_last_screen.dart';
-import 'package:universal_store/view/customer/drawer/feedback_screen.dart';
-import 'package:universal_store/view/customer/drawer/help_screen.dart';
-import 'package:universal_store/view/customer/drawer/payment_screen.dart';
-import 'package:universal_store/view/customer/drawer/privacy_screen.dart';
-import 'package:universal_store/view/customer/drawer/profile_screen.dart';
-import 'package:universal_store/view/customer/drawer/purchases_screen.dart';
-import 'package:universal_store/view/customer/home/search_screen.dart';
-import 'package:universal_store/view/customer/home/shopping_cart_screen.dart';
-import 'package:universal_store/view/customer/home/view_product_screen.dart';
-import 'package:universal_store/view/customer/home/view_store_screen.dart';
-import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_item_price_screen.dart';
-import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_item_quantity_screen.dart';
-import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_store_address_screen.dart';
-import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_store_email_screen.dart';
-import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_store_phone_screen.dart';
-import 'package:universal_store/view/manager/edit_fields_screens.dart/edit_store_website_screen.dart';
-import 'package:universal_store/view/manager/inventory_item_screen.dart';
-import 'package:universal_store/view/manager/store_information_screen.dart';
-import 'package:universal_store/view/manager/store_inventory_screen.dart';
-import 'package:universal_store/view/manager/store_orders_screen.dart';
-import 'package:universal_store/view/manager/store_payment_screen.dart';
-import 'package:universal_store/view/manager/add_item_screen.dart';
+import 'package:universal_store/view/customer/drawer/edit_screens.dart/edit_customer_email_screen.dart';
+import 'package:universal_store/view/customer/drawer/edit_screens.dart/edit_customer_first_screen.dart';
+import 'package:universal_store/view/customer/drawer/edit_screens.dart/edit_customer_last_screen.dart';
+import 'package:universal_store/view/customer/drawer/view_screens/purchases_screen.dart';
+import 'package:universal_store/view/customer/drawer/view_screens/feedback_screen.dart';
+import 'package:universal_store/view/customer/drawer/view_screens/help_screen.dart';
+import 'package:universal_store/view/customer/drawer/view_screens/payment_screen.dart';
+import 'package:universal_store/view/customer/drawer/view_screens/privacy_screen.dart';
+import 'package:universal_store/view/customer/drawer/view_screens/profile_screen.dart';
+import 'package:universal_store/view/customer/shop/screens/add_item_code_screen.dart';
+import 'package:universal_store/view/customer/shop/screens/search_screen.dart';
+import 'package:universal_store/view/customer/shop/screens/select_store_screen.dart';
+import 'package:universal_store/view/customer/shop/screens/shopping_cart_screen.dart';
+import 'package:universal_store/view/customer/shop/screens/view_product_screen.dart';
+import 'package:universal_store/view/customer/shop/screens/view_store_screen.dart';
+import 'package:universal_store/view/manager/analytics/analytics_screen.dart';
+import 'package:universal_store/view/manager/inventory/edit_item_price_screen.dart';
+import 'package:universal_store/view/manager/inventory/edit_item_quantity_screen.dart';
+import 'package:universal_store/view/manager/store_profile/edit_store_address_screen.dart';
+import 'package:universal_store/view/manager/store_profile/edit_store_email_screen.dart';
+import 'package:universal_store/view/manager/store_profile/edit_store_phone_screen.dart';
+import 'package:universal_store/view/manager/store_profile/edit_store_website_screen.dart';
+import 'package:universal_store/view/manager/inventory/inventory_item_screen.dart';
+import 'package:universal_store/view/manager/store_profile/store_information_screen.dart';
+import 'package:universal_store/view/manager/inventory/store_inventory_screen.dart';
+import 'package:universal_store/view/manager/orders/store_orders_screen.dart';
+import 'package:universal_store/view/manager/payment/store_payment_screen.dart';
+import 'package:universal_store/view/manager/inventory/add_item_screen.dart';
 
 import 'package:universal_store/view/wrapper.dart';
 
@@ -86,8 +89,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ViewProductScreen());
     case ViewStoreRoute:
       return MaterialPageRoute(builder: (context) => ViewStoreScreen());
+    case AddItemCodeRoute:
+      return MaterialPageRoute(builder: (context) => AddItemCodeScreen());
+    case SelectStoreRoute:
+      return MaterialPageRoute(builder: (context) => SelectStoreScreen());
 
-    //manager routes
+    //primary manager routes
     case ManagerStoreRoute:
       return MaterialPageRoute(builder: (context) => StoreInformationScreen());
     case ManagerInventoryRoute:
@@ -96,6 +103,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => StoreOrdersScreen());
     case ManagerPaymentRoute:
       return MaterialPageRoute(builder: (context) => StorePaymentScreen());
+    case ManagerAnalyticsRoute:
+      return MaterialPageRoute(builder: (context) => AnalyticsScreen());
+
+    //store profile
     case ManagerEditStoreEmailRoute:
       return MaterialPageRoute(builder: (context) => EditStoreEmailScreen());
     case ManagerEditStoreWebsiteRoute:
@@ -104,6 +115,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => EditStorePhoneScreen());
     case ManagerEditStoreAddressRoute:
       return MaterialPageRoute(builder: (context) => EditStoreAddressScreen());
+
+    //store inventory
     case ManagerInventoryItemRoute:
       return MaterialPageRoute(
           builder: (context) => InventoryItemScreen(uid: settings.arguments));

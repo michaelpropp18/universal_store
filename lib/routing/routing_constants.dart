@@ -28,12 +28,15 @@ const String SearchRoute = '/search';
 const String ShoppingCartRoute = '/shopping_cart';
 const String ViewProductRoute = '/view_product';
 const String ViewStoreRoute = '/view_store';
+const String AddItemCodeRoute = '/item_code';
+const String SelectStoreRoute = '/select_storer';
 
 //primary manager routes
 const String ManagerStoreRoute = '/manager/store';
 const String ManagerInventoryRoute = '/manager/inventory';
 const String ManagerOrdersRoute = '/manager/orders';
 const String ManagerPaymentRoute = '/manager/payment';
+const String ManagerAnalyticsRoute = '/manager/analytics';
 
 //manager edit store fields
 const String ManagerEditStoreEmailRoute = '/manager/store/edit/store_email_field';

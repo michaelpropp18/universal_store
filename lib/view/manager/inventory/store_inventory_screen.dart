@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/models/current_user.dart';
 import 'package:universal_store/models/manager.dart';
-import 'package:universal_store/models/store.dart';
 import 'package:universal_store/routing/routing_constants.dart';
-import 'package:universal_store/view/manager/widgets/store_item.dart';
+import 'package:universal_store/view/manager/inventory/store_item.dart';
 
-import 'widgets/store_inventory_box.dart';
-import 'package:universal_store/models/manager.dart';
-import 'package:universal_store/models/current_user.dart';
+import 'store_inventory_box.dart';
 
 
 class StoreInventoryScreen extends StatelessWidget {

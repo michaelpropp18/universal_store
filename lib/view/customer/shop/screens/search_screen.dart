@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/view/customer/home/widgets/search_category_button.dart';
+import 'package:universal_store/view/customer/shop/widgets/search_category_button.dart';
 
-import 'widgets/store_card.dart';
+import '../../home/widgets/store_card.dart';
 
 class SearchScreen extends StatelessWidget {
   @override

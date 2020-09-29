@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/models/current_user.dart';
-import 'package:universal_store/view/customer/home/home_browse.dart';
+import 'package:universal_store/view/customer/home/browse/home_browse.dart';
+import 'package:universal_store/view/customer/home/widgets/select_add_type.dart';
 
 //import '../../../services/auth.dart';
-import 'home_carts_screen.dart';
-import 'widgets/drawer.dart';
+import 'carts/home_carts_screen.dart';
+import '../drawer/drawer.dart';
 import 'widgets/search.dart';
 import 'widgets/tabs.dart';
 
@@ -38,9 +38,12 @@ class Home extends StatelessWidget {
         drawer: CustomerDrawer(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // Add your onPressed code here!
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => SelectAddType(),
+            );
           },
-          child:Icon(Icons.add),
+          child: Icon(Icons.add),
           backgroundColor: Colors.blue,
         ),
       ),
