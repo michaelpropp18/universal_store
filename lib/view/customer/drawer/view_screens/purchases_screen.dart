@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/view/customer/drawer/view_screens/purchases_list.dart';
+import 'package:universal_store/view/customer/drawer/widgets/purchases_list.dart';
 
 class Purchases extends StatelessWidget {
 

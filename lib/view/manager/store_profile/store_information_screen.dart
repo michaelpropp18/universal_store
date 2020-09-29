@@ -3,8 +3,8 @@ import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/shared/attribute_box.dart';
 
-import 'widgets/header_tab.dart';
-import '../shared/attribute.dart';
+import 'header_tab.dart';
+import '../../shared/attribute.dart';
 
 import 'package:universal_store/models/current_user.dart';
 

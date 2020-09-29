@@ -34,6 +34,7 @@ const String ManagerStoreRoute = '/manager/store';
 const String ManagerInventoryRoute = '/manager/inventory';
 const String ManagerOrdersRoute = '/manager/orders';
 const String ManagerPaymentRoute = '/manager/payment';
+const String ManagerAnalyticsRoute = '/manager/analytics';
 
 //manager edit store fields
 const String ManagerEditStoreEmailRoute = '/manager/store/edit/store_email_field';

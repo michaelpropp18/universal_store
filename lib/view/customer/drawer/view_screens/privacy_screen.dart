@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/view/manager/widgets/header_tab.dart';
+import 'package:universal_store/view/manager/store_profile/header_tab.dart';
 
 class Privacy extends StatelessWidget {
   @override
