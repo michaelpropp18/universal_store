@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/models/current_user.dart';
-import 'package:universal_store/view/customer/home/home_browse.dart';
+import 'package:universal_store/view/customer/home/browse/home_browse.dart';
 
 //import '../../../services/auth.dart';
-import 'home_carts_screen.dart';
-import 'widgets/drawer.dart';
+import 'carts/home_carts_screen.dart';
+import '../drawer/drawer.dart';
 import 'widgets/search.dart';
 import 'widgets/tabs.dart';
 

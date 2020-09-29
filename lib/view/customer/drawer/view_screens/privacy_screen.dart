@@ -13,24 +13,18 @@ class Privacy extends StatelessWidget {
         title: Text('Privacy', style: TextStyle(color: Colors.black)),
       ),
       body: Container(
-        color: Colors.black12,
-        padding: const EdgeInsets.all(10.0),
-        child: ListView(
-          children: [
-            HeaderTab(
-              title: 'Universal Store',
-            ),
+          color: Colors.black12,
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
               Text(
-                'Universal Store collects a variety of information that you provide to us directly. We process your information when necessary to provide you with the Services that you have requested when accepting our Terms of Service.',
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18
-                ),
+                'The Universal Store collects a variety of information that you provide to us directly. We process your information when necessary to provide you with the Services that you have requested when accepting our Terms of Service.',
+                //textAlign: TextAlign.justify,
+                maxLines: 50,
+                style: TextStyle(color: Colors.black, fontSize: 18),
               ),
             ],
-          ),
-        ),
+          )),
     );
   }
 }

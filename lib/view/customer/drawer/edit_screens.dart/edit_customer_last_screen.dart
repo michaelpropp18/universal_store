@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/view/shared/error_text.dart';
 import 'package:universal_store/view/shared/edit_field.dart';
 import 'package:universal_store/view/shared/save_changes_button.dart';
 import 'package:universal_store/utilities.dart' as utilities;
 
 class EditCustomerLastScreen extends StatefulWidget {
-  final String originalLastName;
-
-  const EditCustomerLastScreen({this.originalLastName = 'Doe'});
   @override
-  _EditCustomerLastScreenState createState() =>
-      _EditCustomerLastScreenState();
+  _EditCustomerLastScreenState createState() => _EditCustomerLastScreenState();
 }
 
 class _EditCustomerLastScreenState extends State<EditCustomerLastScreen> {
+  final Customer user = CurrentUser.user;
+
   String lastName;
   String errorText;
 
   @override
   void initState() {
-    lastName = widget.originalLastName;
+    lastName = user.lastName;
     errorText = utilities.generateNameError(lastName);
     super.initState();
   }
@@ -53,7 +53,8 @@ class _EditCustomerLastScreenState extends State<EditCustomerLastScreen> {
             ),
             ErrorText(errorText),
             SaveChangesButton(
-                enabled: errorText == '' && lastName != widget.originalLastName),
+                onPress: () => user.updateLastName(lastName),
+                enabled: errorText == '' && lastName != user.lastName),
           ],
         ),
       ),

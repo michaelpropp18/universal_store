@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/view/shared/error_text.dart';
 import 'package:universal_store/view/shared/edit_field.dart';
 import 'package:universal_store/view/shared/save_changes_button.dart';
 import 'package:universal_store/utilities.dart' as utilities;
 
-class EditCustomerFirstScreen extends StatefulWidget {
-  final String originalFirstName;
-
-  const EditCustomerFirstScreen({this.originalFirstName = 'John'});
+class EditCustomerEmailScreen extends StatefulWidget {
   @override
-  _EditCustomerFirstScreenState createState() =>
-      _EditCustomerFirstScreenState();
+  _EditCustomerEmailScreenState createState() =>
+      _EditCustomerEmailScreenState();
 }
 
-class _EditCustomerFirstScreenState extends State<EditCustomerFirstScreen> {
-  String firstName;
+class _EditCustomerEmailScreenState extends State<EditCustomerEmailScreen> {
+  final Customer user = CurrentUser.user;
+
+  String email;
   String errorText;
 
   @override
   void initState() {
-    firstName = widget.originalFirstName;
-    errorText = utilities.generateNameError(firstName);
+    email = user.email;
+    errorText = utilities.generateEmailError(email);
     super.initState();
   }
 
@@ -33,7 +34,7 @@ class _EditCustomerFirstScreenState extends State<EditCustomerFirstScreen> {
         iconTheme: new IconThemeData(
             color: Colors.black), // this changes color of hamburger icon
         backgroundColor: Colors.white,
-        title: Text('Edit First Name', style: TextStyle(color: Colors.black)),
+        title: Text('Edit Email', style: TextStyle(color: Colors.black)),
       ),
       body: Container(
         color: Colors.black12,
@@ -42,18 +43,19 @@ class _EditCustomerFirstScreenState extends State<EditCustomerFirstScreen> {
           children: [
             EditField(
               error: errorText != '',
-              text: firstName,
-              hintText: 'First Name',
+              text: email,
+              hintText: 'Email',
               onChanged: (e) {
                 setState(() {
-                  firstName = e;
-                  errorText = utilities.generateNameError(firstName);
+                  email = e;
+                  errorText = utilities.generateEmailError(email);
                 });
               },
             ),
             ErrorText(errorText),
             SaveChangesButton(
-                enabled: errorText == '' && firstName != widget.originalFirstName),
+                onPress: () => user.updateEmail(email),
+                enabled: errorText == '' && email != user.email),
           ],
         ),
       ),

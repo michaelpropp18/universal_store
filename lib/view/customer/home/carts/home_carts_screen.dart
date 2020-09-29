@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/continue_shopping_header.dart';
-import 'widgets/header.dart';
-import 'widgets/product_card.dart';
+import 'continue_shopping_header.dart';
+import '../widgets/product_card.dart';
 
 class HomeCartsScreen extends StatelessWidget {
   @override

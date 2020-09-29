@@ -3,7 +3,7 @@ import 'package:universal_store/models/current_user.dart';
 import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 
-import '../../../../services/auth.dart';
+import '../../../services/auth.dart';
 
 class CustomerDrawer extends StatelessWidget {
   final Customer user = CurrentUser.user;

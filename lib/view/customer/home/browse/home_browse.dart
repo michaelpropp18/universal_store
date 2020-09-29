@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:universal_store/view/customer/home/widgets/browse_header.dart';
+import 'package:universal_store/view/customer/home/browse/browse_header.dart';
 
-import 'widgets/header.dart';
-import 'widgets/product_card.dart';
+import 'header.dart';
+import '../widgets/product_card.dart';
 
 class HomeStoresScreen extends StatelessWidget {
   @override
