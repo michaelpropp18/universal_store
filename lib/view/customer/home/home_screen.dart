@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/view/customer/home/browse/home_browse.dart';
+import 'package:universal_store/view/customer/home/widgets/select_add_type.dart';
 
 //import '../../../services/auth.dart';
 import 'carts/home_carts_screen.dart';
@@ -37,9 +38,12 @@ class Home extends StatelessWidget {
         drawer: CustomerDrawer(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // Add your onPressed code here!
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => SelectAddType(),
+            );
           },
-          child:Icon(Icons.add),
+          child: Icon(Icons.add),
           backgroundColor: Colors.blue,
         ),
       ),

@@ -28,6 +28,8 @@ const String SearchRoute = '/search';
 const String ShoppingCartRoute = '/shopping_cart';
 const String ViewProductRoute = '/view_product';
 const String ViewStoreRoute = '/view_store';
+const String AddItemCodeRoute = '/item_code';
+const String SelectStoreRoute = '/select_storer';
 
 //primary manager routes
 const String ManagerStoreRoute = '/manager/store';
