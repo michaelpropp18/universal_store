@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:universal_store/models/current_user.dart';
 import 'package:universal_store/models/item.dart';
 import 'package:universal_store/models/manager.dart';
@@ -34,7 +35,6 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('rebuilt');
     return FutureBuilder(
       future: getItem(),
       builder: (context, snapshot) {
@@ -70,19 +70,46 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
                             context,
                             ManagerInventoryEditPrice,
                             arguments: snapshot.data.price,
-                          )
-                              .then((price) => manager.updateItemPrice(
-                                  snapshot.data.uid, price));
-                          },
+                          ).then((price) {
+                            if (price != null) {
+                              manager.updateItemPrice(snapshot.data.uid, price);
+                            }
+                          }).then((_) =>
+                              setState(() => manager = CurrentUser.user));
+                        },
                       ),
                       Attribute(
                         header: 'Quantity',
                         text: snapshot.data.stock.toString(),
                         uid: snapshot.data.uid,
-                        onPressed: () =>
-                            navigateToItem(ManagerInventoryEditQuantity),
+                        onPressed: () async {
+                          Navigator.pushNamed(
+                            context,
+                            ManagerInventoryEditQuantity,
+                            arguments: snapshot.data.stock,
+                          ).then((quantity) {
+                            if (quantity != null) {
+                              manager.updateItemStock(
+                                  snapshot.data.uid, quantity);
+                            }
+                          }).then((_) =>
+                              setState(() => manager = CurrentUser.user));
+                        },
                       ),
                     ],
+                  ),
+                  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: BorderSide(color: Colors.red)),
+                    onPressed: () {
+                      manager.deleteItemFromInventory(snapshot.data.uid);
+                      Navigator.pop(context);
+                    },
+                    color: Colors.red,
+                    textColor: Colors.white,
+                    child: Text('Delete'.toUpperCase(),
+                        style: TextStyle(fontSize: 18)),
                   ),
                 ],
               ),
@@ -101,6 +128,10 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
             ),
             body: Container(
               color: Colors.black12,
+              child: SpinKitFadingCircle(
+                color: Colors.black,
+                size: 50.0,
+              ),
             ),
           );
         }

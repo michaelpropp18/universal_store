@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:universal_store/models/current_user.dart';
 import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
@@ -13,6 +14,10 @@ class StoreInventoryScreen extends StatefulWidget {
 
 class _StoreInventoryScreenState extends State<StoreInventoryScreen> {
   Manager manager = CurrentUser.user;
+
+  Future forceUpdate() async {
+    setState(() => manager = CurrentUser.user);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +36,8 @@ class _StoreInventoryScreenState extends State<StoreInventoryScreen> {
                   IconButton(
                     icon: const Icon(Icons.add),
                     onPressed: () async {
-                      Navigator.pushNamed(
-                              context, ManagerInventoryAddItem)
-                          .then((_) => setState(() => manager = CurrentUser.user));
+                      Navigator.pushNamed(context, ManagerInventoryAddItem)
+                          .then((_) => forceUpdate());
                     },
                   ),
                 ],
@@ -54,6 +58,7 @@ class _StoreInventoryScreenState extends State<StoreInventoryScreen> {
                               quantity: snapshot.data[index].stock,
                               price: snapshot.data[index].price,
                               name: snapshot.data[index].name,
+                              onUpdate: forceUpdate,
                               uid: snapshot.data[index].uid);
                         },
                       ),
@@ -64,7 +69,6 @@ class _StoreInventoryScreenState extends State<StoreInventoryScreen> {
             );
           } else {
             return Scaffold(
-              // TODO Replace this with a loading screen
               appBar: AppBar(
                 brightness: Brightness.light,
                 iconTheme: new IconThemeData(color: Colors.black),
@@ -83,6 +87,10 @@ class _StoreInventoryScreenState extends State<StoreInventoryScreen> {
               ),
               body: Container(
                 color: Colors.black12,
+                child: SpinKitFadingCircle(
+                  color: Colors.black,
+                  size: 50.0,
+                ),
               ),
             );
           }

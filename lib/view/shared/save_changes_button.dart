@@ -30,7 +30,6 @@ class SaveChangesButton extends StatelessWidget {
               ? null
               : () {
                   onPress();
-                  Navigator.pop(context);
                 },
         ),
       ),

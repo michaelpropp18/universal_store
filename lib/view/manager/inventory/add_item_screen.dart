@@ -97,7 +97,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
   }
 
   addItem() {
-    print('got here');
     manager.addItemToInventory(name, double.parse(price), int.parse(quantity));
+    Navigator.pop(context);
   }
 }
