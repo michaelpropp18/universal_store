@@ -38,6 +38,10 @@ class Manager extends User {
     firestore.addItemToInventory(itemName, price, stock);
   }
 
+  deleteItemFromInventory(String itemUid) {
+    // TODO: Implement this
+  }
+
   updateItemPrice(String itemUid, double price) {
     firestore.updateItemPrice(itemUid, price);
   }

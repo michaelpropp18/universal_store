@@ -54,7 +54,10 @@ class _EditCustomerFirstScreenState extends State<EditCustomerFirstScreen> {
             ),
             ErrorText(errorText),
             SaveChangesButton(
-                onPress: () => user.updateFirstName(firstName),
+                onPress: () {
+                  user.updateFirstName(firstName);
+                  Navigator.pop(context);
+                },
                 enabled: errorText == '' && firstName != user.firstName),
           ],
         ),

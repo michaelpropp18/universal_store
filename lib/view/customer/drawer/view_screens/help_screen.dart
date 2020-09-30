@@ -24,19 +24,16 @@ class Help extends StatelessWidget {
                 Attribute(
                   header: 'My stummy hurts',
                   text: 'John from Legal says we are not allowed to tell you to take some tums but...',
-                  route: null,
                   showEditIcon: false,
                 ),
                 Attribute(
                   header: 'My refrigerator is broken',
                   text: 'Oh we know :)',
-                  route: null,
                   showEditIcon: false,
                 ),
                 Attribute(
                   header: 'How do I use the internet?',
                   text: 'Please delete our app',
-                  route: null,
                   showEditIcon: false,
                 ),
               ],

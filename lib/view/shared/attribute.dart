@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class Attribute extends StatelessWidget {
   final String header;
   final String text;
-  final String route;
   final bool showEditIcon;
   final String uid;
+  final Function onPressed;
 
   const Attribute(
-      {@required this.text, @required this.header, @required this.route, this.showEditIcon = true, this.uid});
+      {@required this.text, @required this.header, this.showEditIcon = true, this.uid, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,10 @@ class Attribute extends StatelessWidget {
           GestureDetector(
             child: Icon(Icons.edit),
             onTap: () {
-              Navigator.pushNamed(context, route, arguments: <String, double> {'originalPrice': 444});
+              if (onPressed != null) {
+                onPressed();
+              }
+              //Navigator.pushNamed(context, route, arguments: <String, double> {'originalPrice': 444});
             },
           )
         ],

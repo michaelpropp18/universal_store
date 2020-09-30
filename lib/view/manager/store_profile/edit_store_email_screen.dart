@@ -53,7 +53,10 @@ class _EditStoreEmailScreenState extends State<EditStoreEmailScreen> {
               ),
               ErrorText(errorText),
               SaveChangesButton(
-                  onPress: () => manager.updateEmail(email),
+                  onPress: () {
+                    manager.updateEmail(email);
+                    Navigator.pop(context);
+                  },
                   enabled: errorText == '' && email != manager.email),
             ],
           ),

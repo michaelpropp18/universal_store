@@ -6,12 +6,14 @@ class StoreItem extends StatelessWidget {
   final String name;
   final double price;
   final int quantity;
+  final Function onUpdate;
 
   const StoreItem(
       {@required this.price,
       @required this.name,
       @required this.quantity,
-      @required this.uid});
+      @required this.uid,
+      this.onUpdate});
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +50,12 @@ class StoreItem extends StatelessWidget {
           ),
           GestureDetector(
             child: Icon(Icons.chevron_right),
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                ManagerInventoryItemRoute,
-                arguments: uid,
-              );
+            onTap: () async {
+              Navigator.pushNamed(context, ManagerInventoryItemRoute,
+                      arguments: uid)
+                  .then((_) {
+                onUpdate();
+              });
             },
           )
         ],

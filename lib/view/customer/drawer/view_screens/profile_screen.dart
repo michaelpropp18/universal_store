@@ -6,8 +6,17 @@ import 'package:universal_store/view/shared/attribute.dart';
 import 'package:universal_store/view/shared/attribute_box.dart';
 import 'package:universal_store/models/current_user.dart';
 
-class Profile extends StatelessWidget {
-  final Customer user = CurrentUser.user;
+class Profile extends StatefulWidget {
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  Customer user = CurrentUser.user;
+
+  Future forceUpdate() async {
+    setState(() => user = CurrentUser.user);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +43,26 @@ class Profile extends StatelessWidget {
                 Attribute(
                   header: 'First Name',
                   text: user.firstName,
-                  route: EditCustomerFirstRoute,
+                  onPressed: () async {
+                    Navigator.pushNamed(context, EditCustomerFirstRoute)
+                        .then((_) => forceUpdate());
+                  },
                 ),
                 Attribute(
                   header: 'Last Name',
                   text: user.lastName,
-                  route: EditCustomerLastRoute,
+                  onPressed: () async {
+                    Navigator.pushNamed(context, EditCustomerLastRoute)
+                        .then((_) => forceUpdate());
+                  },
                 ),
                 Attribute(
                   header: 'Email',
                   text: user.email,
-                  route: EditCustomerEmailRoute,
+                  onPressed: () async {
+                    Navigator.pushNamed(context, EditCustomerEmailRoute)
+                        .then((_) => forceUpdate());
+                  },
                 ),
               ],
             ),
