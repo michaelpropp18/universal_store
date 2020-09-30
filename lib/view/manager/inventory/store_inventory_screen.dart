@@ -13,16 +13,23 @@ class StoreInventoryScreen extends StatefulWidget {
 }
 
 class _StoreInventoryScreenState extends State<StoreInventoryScreen> {
-  Manager manager = CurrentUser.user;
+  Manager manager;
 
   Future forceUpdate() async {
-    setState(() => manager = CurrentUser.user);
+    Manager asyncManager = await CurrentUser.asyncUser;
+    setState(() => manager = asyncManager);
+  }
+
+  Future getInventory() async {
+    Manager asyncManager = await CurrentUser.asyncUser;
+    manager = asyncManager;
+    return manager.getInventory();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: manager.getInventory(),
+        future: getInventory(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
