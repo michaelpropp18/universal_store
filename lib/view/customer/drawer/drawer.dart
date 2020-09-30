@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:universal_store/models/current_user.dart';
 import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/routing/routing_constants.dart';
+import 'package:universal_store/view/shared/loading.dart';
 
 import '../../../services/auth.dart';
 
@@ -11,10 +12,11 @@ class CustomerDrawer extends StatefulWidget {
 }
 
 class _CustomerDrawerState extends State<CustomerDrawer> {
-  Customer user = CurrentUser.user;
+  Customer user;
 
   Future forceUpdate() async {
-    setState(() => user = CurrentUser.user);
+    Customer asyncCustomer = await CurrentUser.asyncUser;
+    setState(() => user = asyncCustomer);
   }
 
   final tiles = [
@@ -32,43 +34,53 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: Container(
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            if (index == 0) {
-              return DrawerHeader(
-                  child: Column(children: [
-                Icon(Icons.account_circle, size: 90.0, color: Colors.blue),
-                SizedBox(height: 6),
-                Text(
-                  user.firstName == null
-                      ? " "
-                      : user.firstName + " " + user.lastName,
-                  textScaleFactor: 1.8,
+    return FutureBuilder(
+        future: CurrentUser.asyncUser,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            user = snapshot.data;
+            return Drawer(
+              child: Container(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return DrawerHeader(
+                          child: Column(children: [
+                        Icon(Icons.account_circle,
+                            size: 90.0, color: Colors.blue),
+                        SizedBox(height: 6),
+                        Text(
+                          user == null
+                              ? " "
+                              : user.firstName + " " + user.lastName,
+                          textScaleFactor: 1.8,
+                        ),
+                      ]));
+                    } else {
+                      index = index - 1;
+                      return Container(
+                        child: ListTile(
+                          onTap: tiles[index].containsKey('onTap')
+                              ? tiles[index][
+                                  'onTap'] // signOut isn't a route so we handle it differently
+                              : () => Navigator.pushNamed(
+                                      context, tiles[index]['route'])
+                                  .then((_) => forceUpdate()),
+                          leading: Icon(
+                            tiles[index]['icon'],
+                          ),
+                          trailing: Text(tiles[index]['text']),
+                        ),
+                      );
+                    }
+                  },
+                  itemCount: tiles.length + 1,
                 ),
-              ]));
-            } else {
-              index = index - 1;
-              return Container(
-                child: ListTile(
-                  onTap: tiles[index].containsKey('onTap')
-                      ? tiles[index][
-                          'onTap'] // signOut isn't a route so we handle it differently
-                      : () =>
-                          Navigator.pushNamed(context, tiles[index]['route'])
-                              .then((_) => forceUpdate()),
-                  leading: Icon(
-                    tiles[index]['icon'],
-                  ),
-                  trailing: Text(tiles[index]['text']),
-                ),
-              );
-            }
-          },
-          itemCount: tiles.length + 1,
-        ),
-      ),
-    );
+              ),
+            );
+          } else {
+            return Loading();
+          }
+        });
   }
 }
