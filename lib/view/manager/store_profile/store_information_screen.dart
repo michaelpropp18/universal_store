@@ -8,10 +8,20 @@ import '../../shared/attribute.dart';
 
 import 'package:universal_store/models/current_user.dart';
 
-class StoreInformationScreen extends StatelessWidget {
+class StoreInformationScreen extends StatefulWidget {
+  @override
+  _StoreInformationScreenState createState() => _StoreInformationScreenState();
+}
+
+class _StoreInformationScreenState extends State<StoreInformationScreen> {
+  Manager manager = CurrentUser.user;
+
+  Future forceUpdate() async {
+    setState(() => manager = CurrentUser.user);
+  }
+
   @override
   Widget build(BuildContext context) {
-    Manager manager = CurrentUser.user;
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light, // this makes the status bar black
@@ -36,69 +46,40 @@ class StoreInformationScreen extends StatelessWidget {
                   header: 'Email',
                   text: manager.email,
                   route: ManagerEditStoreEmailRoute,
+                  onPressed: () async {
+                    Navigator.pushNamed(context, ManagerEditStoreEmailRoute)
+                        .then((_) => forceUpdate());
+                  },
                 ),
                 Attribute(
                   header: 'Website',
                   text: manager.storeWebsite,
                   route: ManagerEditStoreWebsiteRoute,
+                  onPressed: () async {
+                    Navigator.pushNamed(context, ManagerEditStoreWebsiteRoute)
+                        .then((_) => forceUpdate());
+                  },
                 ),
                 Attribute(
                   header: 'Phone',
                   text: manager.storePhone,
                   route: ManagerEditStorePhoneRoute,
+                  onPressed: () async {
+                    Navigator.pushNamed(context, ManagerEditStorePhoneRoute)
+                        .then((_) => forceUpdate());
+                  },
                 ),
                 Attribute(
                   header: 'Address',
                   text: manager.storeAddress,
                   route: ManagerEditStoreAddressRoute,
+                  onPressed: () async {
+                    Navigator.pushNamed(context, ManagerEditStoreAddressRoute)
+                        .then((_) => forceUpdate());
+                  },
                 ),
               ],
             ),
-            /*
-            StoreAttributeBox(
-              header: 'Description',
-              storeAttributes: [
-                StoreAttribute(
-                    header: 'Description',
-                    text:
-                        'From backpacking to cycling to staying in shape and more, outfit your outdoor activities with the latest gear, clothing, and footwear at OutdoorMart.'),
-                StoreAttribute(header: 'Type', text: 'Outdoor Clothing'),
-                StoreAttribute(header: 'Price', text: 'Affordable'),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            StoreAttributeBox(
-              header: 'Hours',
-              storeAttributes: [
-                StoreAttribute(
-                    header: 'Monday-Friday', text: '10:00 AM - 9:00 PM'),
-                StoreAttribute(header: 'Saturday', text: '12:00 PM - 6:00 PM'),
-                StoreAttribute(header: 'Sunday', text: 'Closed'),
-              ],
-            ),
-            StoreAttributeBox(
-              header: 'Features',
-              storeAttributes: [
-                StoreAttribute(
-                  header: 'Home Delivery',
-                  text: 'No',
-                  route: ManagerEditStorePhoneRoute,
-                ),
-                StoreAttribute(
-                  header: 'In-Store Pickup',
-                  text: 'No',
-                  route: ManagerEditStorePhoneRoute,
-                ),
-                StoreAttribute(
-                  header: 'Membership',
-                  text: 'No',
-                  route: ManagerEditStorePhoneRoute,
-                ),
-              ],
-            ),
-                        */
           ],
         ),
       ),

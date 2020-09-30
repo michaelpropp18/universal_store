@@ -52,7 +52,10 @@ class _EditStoreWebsiteScreenState extends State<EditStoreWebsiteScreen> {
               ),
               ErrorText(errorText),
               SaveChangesButton(
-                  onPress: () => manager.updateStoreWebsite(website),
+                  onPress: () {
+                    manager.updateStoreWebsite(website);
+                    Navigator.pop(context);
+                  },
                   enabled: errorText == '' && website != manager.storeWebsite),
             ],
           ),

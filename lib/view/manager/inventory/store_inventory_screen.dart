@@ -78,10 +78,7 @@ class _StoreInventoryScreenState extends State<StoreInventoryScreen> {
                 actions: <Widget>[
                   IconButton(
                     icon: const Icon(Icons.add),
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, ManagerInventoryAddItem);
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),

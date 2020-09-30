@@ -54,7 +54,10 @@ class _EditStorePhoneScreenState extends State<EditStorePhoneScreen> {
               ),
               ErrorText(errorText),
               SaveChangesButton(
-                  onPress: () => manager.updateStorePhone(phone),
+                  onPress: () {
+                    manager.updateStorePhone(phone);
+                    Navigator.pop(context);
+                  },
                   enabled: errorText == '' && phone != manager.storePhone),
             ],
           ),

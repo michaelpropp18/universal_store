@@ -54,7 +54,10 @@ class _EditStoreAddressScreenState extends State<EditStoreAddressScreen> {
               ),
               ErrorText(errorText),
               SaveChangesButton(
-                  onPress: () => manager.updateStoreAddress(address),
+                  onPress: () {
+                    manager.updateStoreAddress(address);
+                    Navigator.pop(context);
+                  },
                   enabled: errorText == '' && address != manager.storeAddress),
             ],
           ),
