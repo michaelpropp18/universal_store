@@ -53,7 +53,10 @@ class _EditCustomerLastScreenState extends State<EditCustomerLastScreen> {
             ),
             ErrorText(errorText),
             SaveChangesButton(
-                onPress: () => user.updateLastName(lastName),
+                onPress: () {
+                  user.updateLastName(lastName);
+                  Navigator.pop(context);
+                },
                 enabled: errorText == '' && lastName != user.lastName),
           ],
         ),

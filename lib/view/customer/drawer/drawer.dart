@@ -5,8 +5,17 @@ import 'package:universal_store/routing/routing_constants.dart';
 
 import '../../../services/auth.dart';
 
-class CustomerDrawer extends StatelessWidget {
-  final Customer user = CurrentUser.user;
+class CustomerDrawer extends StatefulWidget {
+  @override
+  _CustomerDrawerState createState() => _CustomerDrawerState();
+}
+
+class _CustomerDrawerState extends State<CustomerDrawer> {
+  Customer user = CurrentUser.user;
+
+  Future forceUpdate() async {
+    setState(() => user = CurrentUser.user);
+  }
 
   final tiles = [
     {'icon': Icons.account_circle, 'text': 'Profile', 'route': ProfileRoute},
@@ -29,22 +38,26 @@ class CustomerDrawer extends StatelessWidget {
           itemBuilder: (context, index) {
             if (index == 0) {
               return DrawerHeader(
-                child: Column(
-                  children: [
-                    Icon(Icons.account_circle, size: 90.0, color: Colors.blue),
-                    SizedBox(height: 6),
-                    Text(user.firstName == null ? " "  : user.firstName + user.lastName, textScaleFactor: 1.8,),
-                  ]
-                )
-              );
+                  child: Column(children: [
+                Icon(Icons.account_circle, size: 90.0, color: Colors.blue),
+                SizedBox(height: 6),
+                Text(
+                  user.firstName == null
+                      ? " "
+                      : user.firstName + " " + user.lastName,
+                  textScaleFactor: 1.8,
+                ),
+              ]));
             } else {
               index = index - 1;
               return Container(
                 child: ListTile(
                   onTap: tiles[index].containsKey('onTap')
-                      ? tiles[index]['onTap'] // signOut isn't a route so we handle it differently
+                      ? tiles[index][
+                          'onTap'] // signOut isn't a route so we handle it differently
                       : () =>
-                          Navigator.pushNamed(context, tiles[index]['route']),
+                          Navigator.pushNamed(context, tiles[index]['route'])
+                              .then((_) => forceUpdate()),
                   leading: Icon(
                     tiles[index]['icon'],
                   ),

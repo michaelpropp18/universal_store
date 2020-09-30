@@ -45,7 +45,6 @@ class _StoreInformationScreenState extends State<StoreInformationScreen> {
                 Attribute(
                   header: 'Email',
                   text: manager.email,
-                  route: ManagerEditStoreEmailRoute,
                   onPressed: () async {
                     Navigator.pushNamed(context, ManagerEditStoreEmailRoute)
                         .then((_) => forceUpdate());
@@ -54,7 +53,6 @@ class _StoreInformationScreenState extends State<StoreInformationScreen> {
                 Attribute(
                   header: 'Website',
                   text: manager.storeWebsite,
-                  route: ManagerEditStoreWebsiteRoute,
                   onPressed: () async {
                     Navigator.pushNamed(context, ManagerEditStoreWebsiteRoute)
                         .then((_) => forceUpdate());
@@ -63,7 +61,6 @@ class _StoreInformationScreenState extends State<StoreInformationScreen> {
                 Attribute(
                   header: 'Phone',
                   text: manager.storePhone,
-                  route: ManagerEditStorePhoneRoute,
                   onPressed: () async {
                     Navigator.pushNamed(context, ManagerEditStorePhoneRoute)
                         .then((_) => forceUpdate());
@@ -72,7 +69,6 @@ class _StoreInformationScreenState extends State<StoreInformationScreen> {
                 Attribute(
                   header: 'Address',
                   text: manager.storeAddress,
-                  route: ManagerEditStoreAddressRoute,
                   onPressed: () async {
                     Navigator.pushNamed(context, ManagerEditStoreAddressRoute)
                         .then((_) => forceUpdate());

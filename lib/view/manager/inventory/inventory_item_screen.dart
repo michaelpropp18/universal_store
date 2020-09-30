@@ -28,11 +28,6 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
     });
   }
 
-  Future navigateToItem(route) async {
-    Navigator.pushNamed(context, route,
-        arguments: <String, double>{'originalPrice': 444});
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
