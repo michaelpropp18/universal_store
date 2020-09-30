@@ -33,7 +33,7 @@ class CustomerDrawer extends StatelessWidget {
                   children: [
                     Icon(Icons.account_circle, size: 90.0, color: Colors.blue),
                     SizedBox(height: 6),
-                    Text(user.firstName + " " + user.lastName, textScaleFactor: 1.8,),
+                    Text(user.firstName == null ? " "  : user.firstName + user.lastName, textScaleFactor: 1.8,),
                   ]
                 )
               );

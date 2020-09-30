@@ -121,9 +121,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (context) => InventoryItemScreen(uid: settings.arguments));
     case ManagerInventoryEditPrice:
-      return MaterialPageRoute(builder: (context) => EditItemPriceScreen());
+      return MaterialPageRoute(
+          builder: (context) => EditItemPriceScreen(price: settings.arguments));
     case ManagerInventoryEditQuantity:
-      return MaterialPageRoute(builder: (context) => EditItemQuantityScreen());
+      return MaterialPageRoute(
+          builder: (context) =>
+              EditItemQuantityScreen(uid: settings.arguments));
     case ManagerInventoryAddItem:
       return MaterialPageRoute(builder: (context) => AddItemScreen());
 

@@ -49,11 +49,7 @@ class StoreItem extends StatelessWidget {
           GestureDetector(
             child: Icon(Icons.chevron_right),
             onTap: () {
-              Navigator.pushNamed(
-                context,
-                ManagerInventoryItemRoute,
-                arguments: uid,
-              );
+              Navigator.pushNamed(context, ManagerInventoryItemRoute, arguments: uid);
             },
           )
         ],
