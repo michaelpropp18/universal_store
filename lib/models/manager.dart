@@ -38,16 +38,16 @@ class Manager extends User {
     firestore.addItemToInventory(itemName, price, stock);
   }
 
-  deleteItemFromInventory(String itemUid) {
+  deleteItemFromInventory(Item item) {
     // TODO: Implement this
   }
 
-  updateItemPrice(String itemUid, double price) {
-    firestore.updateItemPrice(itemUid, price);
+  updateItemPrice(Item item, double price) {
+    firestore.updateItemPrice(item.uid, price);
   }
 
-  updateItemStock(String itemUid, int stock) {
-    firestore.updateItemStock(itemUid, stock);
+  updateItemStock(Item item, int stock) {
+    firestore.updateItemStock(item.uid, stock);
   }
 
   Future getInventory() async {

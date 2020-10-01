@@ -66,7 +66,7 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
                             arguments: snapshot.data.price,
                           ).then((price) {
                             if (price != null) {
-                              manager.updateItemPrice(snapshot.data.uid, price);
+                              manager.updateItemPrice(snapshot.data, price);
                             }
                           }).then((_) =>
                               setState(() => manager = CurrentUser.user));
@@ -84,7 +84,7 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
                           ).then((quantity) {
                             if (quantity != null) {
                               manager.updateItemStock(
-                                  snapshot.data.uid, quantity);
+                                  snapshot.data, quantity);
                             }
                           }).then((_) =>
                               setState(() => manager = CurrentUser.user));
@@ -97,7 +97,7 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
                         borderRadius: BorderRadius.circular(10.0),
                         side: BorderSide(color: Colors.red)),
                     onPressed: () {
-                      manager.deleteItemFromInventory(snapshot.data.uid);
+                      manager.deleteItemFromInventory(snapshot.data);
                       Navigator.pop(context);
                     },
                     color: Colors.red,
