@@ -12,6 +12,16 @@ String generateNameError(name) {
   }
 }
 
+String generateBarcodeError(barcode) {
+  if (barcode == '') {
+    return 'Barcode cannot be empty';
+  } else if (!RegExp(r'[\d]{5,}').hasMatch(barcode) ||
+      double.parse(barcode, (e) => null) == null) {
+    return 'Please enter a valid barcode';
+  } else {
+    return '';
+  }
+}
 
 String generateEmailError(email) {
   if (email == '') {
