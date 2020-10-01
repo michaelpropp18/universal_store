@@ -1,3 +1,5 @@
+import 'package:universal_store/models/item.dart';
+
 import 'customer.dart';
 import 'manager.dart';
 import 'cart_item.dart';
@@ -16,4 +18,17 @@ class Cart {
     }
     total = subtotal;
   }
+
+  addItem(Item item, int quantity) async {
+    // TODO
+  }
+
+  removeItem(Item item) {
+    // TODO
+  }
+
+  updateItemQuantity(Item item, int quantity) {
+    // TODO
+  }
+
 }

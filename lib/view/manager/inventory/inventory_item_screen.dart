@@ -3,7 +3,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:universal_store/models/current_user.dart';
 import 'package:universal_store/models/item.dart';
 import 'package:universal_store/models/manager.dart';
-import 'package:universal_store/models/store.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/shared/attribute_box.dart';
 import 'package:universal_store/view/shared/loading.dart';

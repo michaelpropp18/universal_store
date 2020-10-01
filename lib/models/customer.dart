@@ -1,6 +1,7 @@
 import 'user.dart';
 import 'manager.dart';
 import 'order.dart';
+import 'cart.dart';
 
 class Customer extends User {
   String firstName;
@@ -33,8 +34,16 @@ class Customer extends User {
     // TODO return custom list of items to display for user. Doesn't really have to be custom, just make sure its not the same as featured products.
   }
 
+  Future createCart(Manager store) async {
+    // TODO
+  }
+
   Future getCarts() async {
     return await firestore.getCustomerCarts();
+  }
+
+  Future deleteCart(Cart cart) async {
+    // TODO
   }
 
   Future getOrders() async {
