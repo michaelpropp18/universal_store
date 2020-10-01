@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ViewStoreScreen extends StatelessWidget {
+  final String name;
+  final String email;
+  final String phone;
+  final String website;
+
+  const ViewStoreScreen(
+      {@required this.name = '',
+      @required this.email = '',
+      @required this.phone = '',
+      @required this.website = ''});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +22,15 @@ class ViewStoreScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text('View Store', style: TextStyle(color: Colors.black)),
       ),
-      body: Container(),
+      body: Container(
+          child: Column(
+        children: [
+          Text(name),
+          Text(email),
+          Text(phone),
+          Text(website),
+        ],
+      )),
     );
   }
 }

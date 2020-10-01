@@ -14,15 +14,23 @@ class Customer extends User {
   }
 
   Future getItemWithBarcode(barcode) {
-    // TODO return item uid with barcode, null if none exists
+    // TODO return item with barcode, null if none exists
   }
 
   Future getStoreWithBarcode(barcode) {
-    // TODO return store uid that has the item with this barcode
+    // TODO return store that has the item with this barcode
   }
 
   Future getNearbyStores() async {
     return await firestore.getNearbyStores();
+  }
+
+  Future getFeaturedProdcuts(store_uid) {
+    // TODO return list of items to display to all users.
+  }
+
+  Future getSuggestedProducts() async {
+    // TODO return custom list of items to display for user. Doesn't really have to be custom, just make sure its not the same as featured products.
   }
 
   Future getCarts() async {
