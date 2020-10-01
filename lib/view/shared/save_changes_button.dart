@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class SaveChangesButton extends StatelessWidget {
   final bool enabled;
   final Function onPress;
+  final String text;
 
-  const SaveChangesButton({this.enabled, this.onPress});
+  const SaveChangesButton({@required this.enabled, @required this.onPress, this.text = 'Save'});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class SaveChangesButton extends StatelessWidget {
         width: double.infinity,
         child: FlatButton(
           child: Text(
-            'Save',
+            text,
             style: TextStyle(
               color: Colors.white,
               fontSize: 16.0,
