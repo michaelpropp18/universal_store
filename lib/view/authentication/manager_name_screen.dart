@@ -131,9 +131,15 @@ class ManagerNameScreen extends StatelessWidget {
                         viewModel.storePhone != '' &&
                         viewModel.storeAddress != '' &&
                         viewModel.storeWebsite != '' &&
+                        viewModel.storeCity != '' &&
+                        viewModel.storeState != '' &&
+                        viewModel.storeZip != '' &&
                         viewModel.storeNameError == '' &&
                         viewModel.storePhoneError == '' &&
                         viewModel.storeAddressError == '' &&
+                        viewModel.storeCityError == '' &&
+                        viewModel.storeStateError == '' &&
+                        viewModel.storeZipError == '' &&
                         viewModel.storeWebsiteError == '') {
                       Navigator.pushNamed(
                         context, RegisterManagerEmailRoute

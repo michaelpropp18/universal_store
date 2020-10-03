@@ -70,6 +70,9 @@ class AuthService {
         @required String storeWebsite,
         @required String storePhone,
         @required String storeAddress,
+        @required String storeCity,
+        @required String storeState,
+        @required String storeZip,
         @required String password}) async {
     AuthResultStatus _status;
     try {
@@ -78,7 +81,14 @@ class AuthService {
       if (result.user != null) {
         _status = AuthResultStatus.successful;
         await DatabaseService(uuid: result.user.uid)
-            .createNewManager(storeName: storeName, email: email, storeWebsite: storeWebsite, storePhone: storePhone, storeAddress: storeAddress);
+            .createNewManager(storeName: storeName,
+                              email: email,
+                              storeWebsite: storeWebsite,
+                              storePhone: storePhone,
+                              storeAddress: storeAddress,
+                              storeCity: storeCity,
+                              storeState: storeState,
+                              storeZip: storeZip);
         await CurrentUser.signIn();
       } else {
         _status = AuthResultStatus.undefined;

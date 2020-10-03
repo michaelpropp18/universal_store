@@ -56,10 +56,24 @@ class DatabaseService {
   }
 
   Future createNewManager(
-      {@required String storeName, @required String email, @required String storeWebsite, @required String storePhone, @required String storeAddress}) async {
+      {@required String storeName,
+      @required String email,
+      @required String storeWebsite,
+      @required String storePhone,
+      @required String storeAddress,
+      @required String storeCity,
+      @required String storeState,
+      @required String storeZip}) async {
     return await managers
         .document(uuid)
-        .setData({'storeName': storeName, 'email': email, 'storeWebsite': storeWebsite, 'storePhone': storePhone, 'storeAddress': storeAddress});
+        .setData({'storeName': storeName,
+                  'email': email,
+                  'storeWebsite': storeWebsite,
+                  'storePhone': storePhone,
+                  'storeAddress': storeAddress,
+                  'storeCity': storeCity,
+                  'storeState': storeState,
+                  'storeZip': storeZip});
   }
 
   Future getCustomer(String uid) async {

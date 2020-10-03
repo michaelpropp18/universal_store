@@ -343,9 +343,9 @@ class RegistrationViewModel with ChangeNotifier {
         storePhone: _storePhone,
         storeWebsite: _storeWebsite,
         storeAddress: _storeAddress,
-        // storeCity: _storeCity,
-        // storeState: _storeState,
-        // storeZip: _storeZip,
+        storeCity: _storeCity,
+        storeState: _storeState,
+        storeZip: _storeZip,
         email: _email,
         password: _password);
     _loading = false;
