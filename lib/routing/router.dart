@@ -4,7 +4,8 @@ import 'package:universal_store/view/authentication/account_type_screen.dart';
 import 'package:universal_store/view/authentication/customer_email_screen.dart';
 import 'package:universal_store/view/authentication/customer_name_screen.dart';
 import 'package:universal_store/view/authentication/forgot_password_screen.dart';
-import 'package:universal_store/view/authentication/manager_fields_screen.dart';
+import 'package:universal_store/view/authentication/manager_email_screen.dart';
+import 'package:universal_store/view/authentication/manager_name_screen.dart';
 import 'package:universal_store/view/customer/drawer/edit_screens.dart/edit_customer_email_screen.dart';
 import 'package:universal_store/view/customer/drawer/edit_screens.dart/edit_customer_first_screen.dart';
 import 'package:universal_store/view/customer/drawer/edit_screens.dart/edit_customer_last_screen.dart';
@@ -53,10 +54,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RegisterCustomerEmailPasswordRoute:
       return MaterialPageRoute(
           builder: (context) => RegisterCustomerEmailPasswordScreen());
-    case RegisterManagerRoute:
-      return MaterialPageRoute(builder: (context) => ManagerFieldsScreen());
+    case RegisterManagerNameRoute:
+      return MaterialPageRoute(builder: (context) => ManagerNameScreen());
     case ForgotPasswordRoute:
       return MaterialPageRoute(builder: (context) => ForgotPasswordScreen());
+    case RegisterManagerEmailRoute:
+      return MaterialPageRoute(builder: (context) => ManagerEmailScreen());
 
     //customer drawer
     case ProfileRoute:
