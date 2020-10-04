@@ -39,7 +39,7 @@ class Manager extends User {
   }
 
   deleteItemFromInventory(Item item) {
-    // TODO: Implement this
+    firestore.deleteItemFromInventory(item);
   }
 
   updateItemPrice(Item item, double price) {

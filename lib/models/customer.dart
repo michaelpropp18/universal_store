@@ -26,16 +26,22 @@ class Customer extends User {
     return await firestore.getNearbyStores();
   }
 
-  Future getFeaturedProdcuts(store_uid) {
-    // TODO return list of items to display to all users.
+  Future getFeaturedProducts(Manager store) async {   // TODO: just returns all items now. In the future, add a page where the manager can set featured products.
+    return await firestore.getStoreInventory(store);
   }
 
-  Future getSuggestedProducts() async {
-    // TODO return custom list of items to display for user. Doesn't really have to be custom, just make sure its not the same as featured products.
+  Future getSuggestedProducts() async {               // TODO: just returns the first item from each store now. In the future, add recommendation system.
+    List suggestedProducts = new List();
+    List stores = await this.getNearbyStores();
+    for (Manager store in stores) {
+      List storeInventory = await firestore.getStoreInventory(store);
+      suggestedProducts.add(storeInventory[0]);
+    }
+    return suggestedProducts;
   }
 
   Future createCart(Manager store) async {
-    // TODO
+    return await firestore.createCart(store);
   }
 
   Future getCarts() async {
@@ -43,7 +49,7 @@ class Customer extends User {
   }
 
   Future deleteCart(Cart cart) async {
-    // TODO
+    return await firestore.deleteCart(cart);
   }
 
   Future getOrders() async {

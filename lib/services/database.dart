@@ -38,13 +38,13 @@ class DatabaseService {
   Future userType() async {
     dynamic customer = await customers.document(uuid).get();
     if(customer.exists) {
-      return "customer";    // make enum
+      return 'customer';    // make enum
     }
     dynamic manager = await managers.document(uuid).get();
     if(manager.exists) {
-      return "manager";    // make enum
+      return 'manager';    // make enum
     }
-    return "ERROR_USER_NOT_FOUND";
+    return 'ERROR_USER_NOT_FOUND';
   }
 
   Future createNewCustomer(
@@ -115,35 +115,51 @@ class DatabaseService {
   }
   
   addItemToInventory(String itemName, double price, int stock) async {
-    await managers.document(uuid).collection("items").document().setData({
-      "itemName": itemName,
-      "price": price,
-      "stock": stock
+    await managers.document(uuid).collection('items').document().setData({
+      'itemName': itemName,
+      'price': price,
+      'stock': stock
     });
   }
 
+  deleteItemFromInventory(Item item) async {
+    await managers.document(uuid).collection('items').document(item.uid).delete();
+  }
+
   updateItemPrice(String itemUid, double price) async {
-    await managers.document(uuid).collection("items").document(itemUid).updateData({"price": price});
+    await managers.document(uuid).collection('items').document(itemUid).updateData({'price': price});
   }
 
   updateItemStock(String itemUid, int stock) async {
-    await managers.document(uuid).collection("items").document(itemUid).updateData({"stock": stock});
+    await managers.document(uuid).collection('items').document(itemUid).updateData({'stock': stock});
   }
 
   Future getInventory() async {
-    QuerySnapshot qs = await managers.document(uuid).collection("items").getDocuments();
+    QuerySnapshot qs = await managers.document(uuid).collection('items').getDocuments();
     List<DocumentSnapshot> documents = qs.documents;
     List<Item> items = new List();
     for (DocumentSnapshot document in documents) {
       Map itemData = document.data;
-      Item item = new Item(uid: document.documentID, name: itemData["itemName"], price: itemData["price"], stock: itemData["stock"]);
+      Item item = new Item(uid: document.documentID, name: itemData['itemName'], price: itemData['price'], stock: itemData['stock']);
+      items.add(item);
+    }
+    return items;
+  }
+
+  Future getStoreInventory(Manager store) async {
+    QuerySnapshot qs = await managers.document(store.uid).collection('items').getDocuments();
+    List<DocumentSnapshot> documents = qs.documents;
+    List<Item> items = new List();
+    for (DocumentSnapshot document in documents) {
+      Map itemData = document.data;
+      Item item = new Item(uid: document.documentID, name: itemData['itemName'], price: itemData['price'], stock: itemData['stock']);
       items.add(item);
     }
     return items;
   }
 
   Future getStoreOrders() async {
-    QuerySnapshot ordersQuery = await managers.document(uuid).collection("orders").getDocuments();
+    QuerySnapshot ordersQuery = await managers.document(uuid).collection('orders').getDocuments();
     List<DocumentSnapshot> orderDocuments = ordersQuery.documents;
     List<Order> orders = new List();
     for (DocumentSnapshot orderDocument in orderDocuments) {
@@ -158,14 +174,14 @@ class DatabaseService {
   }
 
   Future getCustomerOrders() async {
-    QuerySnapshot ordersQuery = await customers.document(uuid).collection("orders").getDocuments();
+    QuerySnapshot ordersQuery = await customers.document(uuid).collection('orders').getDocuments();
     List<DocumentSnapshot> customerOrderDocuments = ordersQuery.documents;
     List<Order> orders = new List();
     for (DocumentSnapshot customerOrderDocument in customerOrderDocuments) {
       Map orderCustomerData = customerOrderDocument.data;
       Manager manager = await getManager(orderCustomerData['store']);
       Customer customer = await getCustomer(uuid);
-      DocumentSnapshot orderDocument = await managers.document(orderCustomerData['store']).collection("orders").document(orderCustomerData['order']).get();
+      DocumentSnapshot orderDocument = await managers.document(orderCustomerData['store']).collection('orders').document(orderCustomerData['order']).get();
       Map orderData = orderDocument.data;
       List<CartItem> items = await getCartItems(manager, customer, orderData);
       Order order = new Order(orderDocument.documentID, manager, customer, (orderData['date'] as Timestamp).toDate(), items);
@@ -175,7 +191,7 @@ class DatabaseService {
   }
 
   Future getCustomerCarts() async {
-    QuerySnapshot cartsQuery = await customers.document(uuid).collection("carts").getDocuments();
+    QuerySnapshot cartsQuery = await customers.document(uuid).collection('carts').getDocuments();
     List<DocumentSnapshot> cartDocuments = cartsQuery.documents;
     List<Cart> carts = new List();
     for (DocumentSnapshot cartDocument in cartDocuments) {
@@ -199,6 +215,44 @@ class DatabaseService {
       items.add(cartItem);
     }
     return items;
+  }
+
+  Future createCart(Manager store) async {
+    await customers.document(uuid).collection('carts').document().setData({
+    'store': store.uid,
+    'items': []
+    });
+  }
+
+  Future deleteCart(Cart cart) async {
+    await customers.document(uuid).collection('carts').document(cart.uid).delete();
+  }
+
+  Future addItemToCart(Cart cart, Item item, int quantity) async {
+    if (quantity <= 0) {
+      return;
+    }
+    DocumentSnapshot cartDocument = await customers.document(uuid).collection('carts').document(cart.uid).get();
+    Map cartData = cartDocument.data;
+    cartData['items'].add({'item': item.uid, 'quantity': quantity});
+    await customers.document(uuid).collection('carts').document(cart.uid).updateData(cartData);
+  }
+
+  Future removeItemFromCart(Cart cart, Item item) async {
+    DocumentSnapshot cartDocument = await customers.document(uuid).collection('carts').document(cart.uid).get();
+    Map cartData = cartDocument.data;
+    cartData['items'].removeWhere((cartItem) => cartItem['item'] == item.uid);
+    await customers.document(uuid).collection('carts').document(cart.uid).updateData(cartData);
+  }
+
+  Future updateItemQuantityInCart(Cart cart, Item item, int quantity) async {
+    if (quantity <= 0) {
+      return removeItemFromCart(cart, item);
+    }
+    DocumentSnapshot cartDocument = await customers.document(uuid).collection('carts').document(cart.uid).get();
+    Map cartData = cartDocument.data;
+    cartData['items'].lastWhere((cartItem) => cartItem['item'] == item.uid)['quantity'] = quantity;
+    await customers.document(uuid).collection('carts').document(cart.uid).updateData(cartData);
   }
 
   Future getNearbyStores() async {    // TODO This currently just returns all stores, do something more appropriate

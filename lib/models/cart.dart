@@ -20,15 +20,21 @@ class Cart {
   }
 
   addItem(Item item, int quantity) async {
-    // TODO
+    items.add(new CartItem(item, quantity));
+    customer.firestore.addItemToCart(this, item, quantity);
   }
 
   removeItem(Item item) {
-    // TODO
+    items.removeWhere((cartItem) => cartItem.item.uid == item.uid);
+    customer.firestore.removeItemFromCart(this, item);
   }
 
   updateItemQuantity(Item item, int quantity) {
-    // TODO
+    if (quantity <= 0) {
+      return this.removeItem(item);
+    }
+    items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity = quantity;
+    customer.firestore.updateItemQuantityInCart(this, item, quantity);
   }
 
 }
