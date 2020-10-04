@@ -114,12 +114,16 @@ class DatabaseService {
     return managerData.data;
   }
   
-  addItemToInventory(String itemName, double price, int stock) async {
-    await managers.document(uuid).collection('items').document().setData({
+  addItemToInventory(String itemName, String barcode, String description, double price, int stock) async {
+    DocumentReference itemDocument = managers.document(uuid).collection('items').document();
+    await itemDocument.setData({
       'itemName': itemName,
+      'barcode': barcode,
+      'description': description,
       'price': price,
       'stock': stock
     });
+    await managers.document(uuid).collection('barcodes').document(barcode).setData({'item': itemDocument.documentID});
   }
 
   deleteItemFromInventory(Item item) async {
@@ -134,13 +138,30 @@ class DatabaseService {
     await managers.document(uuid).collection('items').document(itemUid).updateData({'stock': stock});
   }
 
+  Future getItemWithBarcodeCustomer(Manager store, String barcode) async {
+    DocumentSnapshot barcodeDocument = await managers.document(store.uid).collection('barcodes').document(barcode).get();
+    String itemUid = barcodeDocument.data['item'];
+    DocumentSnapshot itemDocument = await managers.document(store.uid).collection('items').document(itemUid).get();
+    Map itemData = itemDocument.data;
+    Item item = Item.fromData(itemUid, itemData);
+    return item;
+  }
+
+  Future getItemWithBarcodeManager(String barcode) async {
+    DocumentSnapshot barcodeDocument = await managers.document(uuid).collection('barcodes').document(barcode).get();
+    String itemUid = barcodeDocument.data['item'];
+    DocumentSnapshot itemDocument = await managers.document(uuid).collection('items').document(itemUid).get();
+    Map itemData = itemDocument.data;
+    Item item = Item.fromData(itemUid, itemData);
+    return item;
+  }
+
   Future getInventory() async {
     QuerySnapshot qs = await managers.document(uuid).collection('items').getDocuments();
     List<DocumentSnapshot> documents = qs.documents;
     List<Item> items = new List();
     for (DocumentSnapshot document in documents) {
-      Map itemData = document.data;
-      Item item = new Item(uid: document.documentID, name: itemData['itemName'], price: itemData['price'], stock: itemData['stock']);
+      Item item = Item.fromData(document.documentID, document.data);
       items.add(item);
     }
     return items;
@@ -151,8 +172,7 @@ class DatabaseService {
     List<DocumentSnapshot> documents = qs.documents;
     List<Item> items = new List();
     for (DocumentSnapshot document in documents) {
-      Map itemData = document.data;
-      Item item = new Item(uid: document.documentID, name: itemData['itemName'], price: itemData['price'], stock: itemData['stock']);
+      Item item = Item.fromData(document.documentID, document.data);
       items.add(item);
     }
     return items;

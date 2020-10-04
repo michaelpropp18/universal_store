@@ -14,8 +14,8 @@ class Customer extends User {
     this.lastName = customerData['lastName'];
   }
 
-  Future getItemWithBarcode(barcode) {
-    // TODO return item with barcode, null if none exists
+  Future getItemWithBarcode(Manager store, String barcode) async {
+    return await firestore.getItemWithBarcodeCustomer(store, barcode);
   }
 
   Future getStoreWithBarcode(barcode) {
