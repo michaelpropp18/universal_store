@@ -208,6 +208,7 @@ class DatabaseService {
     for (DocumentSnapshot managerDocument in managerDocuments) {
       stores.add(Manager.fromData(managerDocument.documentID, managerDocument.data));
     }
+    return stores;
   }
 
 }

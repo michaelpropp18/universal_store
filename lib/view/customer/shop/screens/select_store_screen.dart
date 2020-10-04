@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/view/customer/shop/widgets/stores_list.dart';
 
 class SelectStoreScreen extends StatelessWidget {
 
@@ -12,7 +13,7 @@ class SelectStoreScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text('Select Store', style: TextStyle(color: Colors.black)),
       ),
-      body: Container(),
+      body: StoresList(),
     );
   }
 }
