@@ -97,7 +97,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
   }
 
   addItem() {
-    manager.addItemToInventory(name, double.parse(price), int.parse(quantity));
+    manager.addItemToInventory(name, 'ENTER_BARCODE_HERE', 'ENTER_DESCRIPTION_HERE', double.parse(price), int.parse(quantity));
     Navigator.pop(context);
   }
 }

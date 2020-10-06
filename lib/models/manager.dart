@@ -34,12 +34,12 @@ class Manager extends User {
     firestore.updateStoreAddress(newAddress);
   }
 
-  addItemToInventory(String itemName, double price, int stock) {
-    firestore.addItemToInventory(itemName, price, stock);
+  addItemToInventory(String itemName, String barcode, String description, double price, int stock) {
+    firestore.addItemToInventory(itemName, barcode, description, price, stock);
   }
 
   deleteItemFromInventory(Item item) {
-    // TODO: Implement this
+    firestore.deleteItemFromInventory(item);
   }
 
   updateItemPrice(Item item, double price) {
@@ -56,6 +56,10 @@ class Manager extends User {
 
   Future getOrders() async {
     return await firestore.getStoreOrders();
+  }
+
+  Future getItemWithBarcode(String barcode) async {
+    return await firestore.getItemWithBarcodeManager(barcode);
   }
 
 }
