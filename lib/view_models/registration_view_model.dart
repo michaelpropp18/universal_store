@@ -337,15 +337,15 @@ class RegistrationViewModel with ChangeNotifier {
     _loading = true;
     notifyListeners();
 
+    // concatenate address strings
+    final storeFullAddress = '${_storeAddress}, ${_storeCity}, ${_storeState} ${_storeZip}';
+
     //register with firebase
     dynamic status = await _auth.registerManager(
         storeName: _storeName,
         storePhone: _storePhone,
         storeWebsite: _storeWebsite,
-        storeAddress: _storeAddress,
-        storeCity: _storeCity,
-        storeState: _storeState,
-        storeZip: _storeZip,
+        storeAddress: storeFullAddress,
         email: _email,
         password: _password);
     _loading = false;

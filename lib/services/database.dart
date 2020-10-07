@@ -60,20 +60,14 @@ class DatabaseService {
       @required String email,
       @required String storeWebsite,
       @required String storePhone,
-      @required String storeAddress,
-      @required String storeCity,
-      @required String storeState,
-      @required String storeZip}) async {
+      @required String storeAddress}) async {
     return await managers
         .document(uuid)
         .setData({'storeName': storeName,
                   'email': email,
                   'storeWebsite': storeWebsite,
                   'storePhone': storePhone,
-                  'storeAddress': storeAddress,
-                  'storeCity': storeCity,
-                  'storeState': storeState,
-                  'storeZip': storeZip});
+                  'storeAddress': storeAddress});
   }
 
   Future getCustomer(String uid) async {
