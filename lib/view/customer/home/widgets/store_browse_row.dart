@@ -16,7 +16,7 @@ class StoreBrowseRow extends StatelessWidget {
     return Column(
       children: [
         SizedBox(height: 20),
-        BrowseHeader(text: manager.storeName),
+        BrowseHeader(store: manager),
         Container(
           height: cardHeight, // TODO: figure out how to not do this
           child: ListView.builder(
