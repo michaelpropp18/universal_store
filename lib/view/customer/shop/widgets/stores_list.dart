@@ -41,7 +41,7 @@ class _StoresListState extends State<StoresList> {
                           subtitle: Text('${store.storePhone}'),
                           trailing: Icon(Icons.arrow_right),
                           onTap: () =>
-                              Navigator.pushNamed(context, ViewStoreRoute)));
+                              Navigator.pushNamed(context, ViewStoreRoute, arguments: store)));
                 });
           } else {
             return Container(

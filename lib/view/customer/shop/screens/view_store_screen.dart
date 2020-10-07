@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/manager.dart';
+import 'package:universal_store/view/customer/shop/widgets/stores_list.dart';
+import 'package:universal_store/view/manager/store_profile/header_tab.dart';
+import 'package:universal_store/view/shared/attribute.dart';
+import 'package:universal_store/view/shared/attribute_box.dart';
 
-class ViewStoreScreen extends StatelessWidget {
-  final String name;
-  final String email;
-  final String phone;
-  final String website;
+class ViewStoreScreen extends StatefulWidget {
+  final Manager store;
 
-  const ViewStoreScreen(
-      {@required this.name = '',
-      @required this.email = '',
-      @required this.phone = '',
-      @required this.website = ''});
+  const ViewStoreScreen({this.store});
 
+  @override
+  _ViewStoreScreenState createState() => _ViewStoreScreenState();
+}
+
+class _ViewStoreScreenState extends State<ViewStoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,14 +26,42 @@ class ViewStoreScreen extends StatelessWidget {
         title: Text('View Store', style: TextStyle(color: Colors.black)),
       ),
       body: Container(
-          child: Column(
-        children: [
-          Text(name),
-          Text(email),
-          Text(phone),
-          Text(website),
-        ],
-      )),
+        color: Colors.black12,
+        padding: const EdgeInsets.all(10.0),
+        child: ListView(
+          children: [
+            HeaderTab(
+              icon: Icons.store,
+              title: widget.store.storeName,
+            ),
+            AttributeBox(
+              header: 'General Information',
+              attributes: [
+                Attribute(
+                  header: 'Email',
+                  text: widget.store.email,
+                  showEditIcon: false,
+                ),
+                Attribute(
+                  header: 'Website',
+                  text: widget.store.storeWebsite,
+                  showEditIcon: false,
+                ),
+                Attribute(
+                  header: 'Phone',
+                  text: widget.store.storePhone,
+                  showEditIcon: false,
+                ),
+                Attribute(
+                  header: 'Address',
+                  text: widget.store.storeAddress,
+                  showEditIcon: false,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
