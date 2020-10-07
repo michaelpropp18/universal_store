@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/models/manager.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/customer/shop/widgets/stores_list.dart';
 import 'package:universal_store/view/manager/store_profile/header_tab.dart';
 import 'package:universal_store/view/shared/attribute.dart';
@@ -58,6 +59,19 @@ class _ViewStoreScreenState extends State<ViewStoreScreen> {
                   showEditIcon: false,
                 ),
               ],
+            ),
+            RaisedButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  side: BorderSide(color: Colors.blue)),
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, ShoppingCartRoute, ModalRoute.withName(HomeRoute));
+              },
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: Text('Start Shopping'.toUpperCase(),
+                  style: TextStyle(fontSize: 18)),
             ),
           ],
         ),

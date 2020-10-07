@@ -1,3 +1,4 @@
+import 'item.dart';
 import 'user.dart';
 import 'manager.dart';
 import 'order.dart';
@@ -26,16 +27,22 @@ class Customer extends User {
     return await firestore.getNearbyStores();
   }
 
-  Future getFeaturedProducts(Manager store) async {   // TODO: just returns all items now. In the future, add a page where the manager can set featured products.
+  Future getFeaturedProducts(Manager store) async {
+    // TODO: just returns all items now. In the future, add a page where the manager can set featured products.
     return await firestore.getStoreInventory(store);
   }
 
-  Future getSuggestedProducts() async {               // TODO: just returns the first item from each store now. In the future, add recommendation system.
+  Future getSuggestedProducts() async {
+    // TODO: just returns all items. In the future, add recommendation system.
     List suggestedProducts = new List();
     List stores = await this.getNearbyStores();
     for (Manager store in stores) {
       List storeInventory = await firestore.getStoreInventory(store);
-      suggestedProducts.add(storeInventory[0]);
+      if (storeInventory.length > 0) {
+        for (Item item in storeInventory) {
+           suggestedProducts.add(item);
+        }
+      }
     }
     return suggestedProducts;
   }

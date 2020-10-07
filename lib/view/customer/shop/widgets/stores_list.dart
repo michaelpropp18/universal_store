@@ -12,11 +12,6 @@ class StoresList extends StatefulWidget {
 class _StoresListState extends State<StoresList> {
   Customer user;
 
-  Future forceUpdate() async {
-    Customer asyncCustomer = await CurrentUser.asyncUser;
-    setState(() => user = asyncCustomer);
-  }
-
   Future getStores() async {
     return await CurrentUser.asyncUser.then((customer) {
       user = customer;
