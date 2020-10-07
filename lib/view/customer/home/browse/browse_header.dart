@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 
 class BrowseHeader extends StatelessWidget {
-  final String text;
+  final Manager store;
 
-  const BrowseHeader({this.text});
+  const BrowseHeader({ this.store});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,12 +15,12 @@ class BrowseHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, ViewStoreRoute),
+            onTap: () => Navigator.pushNamed(context, ViewStoreRoute, arguments: store),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  text,
+                  store.storeName,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
