@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/shared/edit_field.dart';
 import 'package:universal_store/view/shared/save_changes_button.dart';
@@ -11,6 +12,7 @@ class AddItemCodeScreen extends StatefulWidget {
 }
 
 class _AddItemCodeScreenState extends State<AddItemCodeScreen> {
+  Manager store;
   String number;
   String errorText;
 
@@ -51,7 +53,7 @@ class _AddItemCodeScreenState extends State<AddItemCodeScreen> {
             ),
             EditField(
               hintText: '01234567895',
-               onChanged: (e) {
+              onChanged: (e) {
                 setState(() {
                   number = e;
                   errorText = utilities.generateBarcodeError(number);
@@ -60,8 +62,9 @@ class _AddItemCodeScreenState extends State<AddItemCodeScreen> {
             ),
             SaveChangesButton(
                 enabled: errorText == '',
-                onPress: () =>
-                    Navigator.pushReplacementNamed(context, ShoppingCartRoute),
+                onPress: () => Navigator.pushReplacementNamed(
+                    context, ShoppingCartRoute,
+                    arguments: store),
                 text: 'Add Item'),
           ],
         ),

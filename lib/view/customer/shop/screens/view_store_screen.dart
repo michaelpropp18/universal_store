@@ -66,7 +66,8 @@ class _ViewStoreScreenState extends State<ViewStoreScreen> {
                   side: BorderSide(color: Colors.blue)),
               onPressed: () {
                 Navigator.pushNamedAndRemoveUntil(
-                    context, ShoppingCartRoute, ModalRoute.withName(HomeRoute));
+                    context, ShoppingCartRoute, ModalRoute.withName(HomeRoute),
+                    arguments: widget.store);
               },
               color: Colors.blue,
               textColor: Colors.white,

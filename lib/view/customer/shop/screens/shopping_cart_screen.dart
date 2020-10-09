@@ -1,15 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:universal_store/models/cart.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/customer.dart';
+import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/customer/home/widgets/hidden_shopping_cart_bottom.dart';
 import 'package:universal_store/view/customer/home/widgets/shopping_cart_bottom.dart';
 import 'package:universal_store/view/customer/home/widgets/shopping_cart_item.dart';
+import 'package:universal_store/view/customer/shop/widgets/stores_list.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
+  final Manager store;
+
+  const ShoppingCartScreen({this.store});
+
   @override
   _ShoppingCartScreenState createState() => _ShoppingCartScreenState();
 }
 
 class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
+  Cart shoppingCart;
+
+  Future getCart() async {
+    Customer user = CurrentUser.user;
+    dynamic carts = await user.getCarts();
+    for (Cart cart in carts) {
+      if (cart.store.uid == widget.store.uid) {
+        return cart;
+      }
+    }
+    Cart newCart = await user.createCart(widget.store);
+    return newCart;
+  }
+
   toggleBottom() {
     setState(() {
       showTotal = !showTotal;
@@ -34,18 +58,39 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          ShoppingCartItem(),
-          ShoppingCartItem(),
-          ShoppingCartItem(),
-          ShoppingCartItem(),
-          ShoppingCartItem(),
-          ShoppingCartItem(),
-          ShoppingCartItem(),
-          //ShoppingCartBottom()
-        ],
-      ),
+      body: FutureBuilder(
+          future: getCart(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              shoppingCart = snapshot.data;
+              return ListView.builder(
+                  itemCount: shoppingCart.items.length,
+                  itemBuilder: (context, index) {
+                    return ShoppingCartItem();
+                  });
+              /*
+              return ListView(
+                children: [
+                  ShoppingCartItem(),
+                  ShoppingCartItem(),
+                  ShoppingCartItem(),
+                  ShoppingCartItem(),
+                  ShoppingCartItem(),
+                  ShoppingCartItem(),
+                  ShoppingCartItem(),
+                  //ShoppingCartBottom()
+                ],
+              );
+              */
+            } else {
+              return Container(
+                child: SpinKitFadingCircle(
+                  color: Colors.black,
+                  size: 50.0,
+                ),
+              );
+            }
+          }),
       bottomNavigationBar: Container(
           child: showTotal
               ? ShoppingCartBottom(
