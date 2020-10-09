@@ -90,6 +90,20 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
                               setState(() => manager = CurrentUser.user));
                         },
                       ),
+                      Attribute(
+                        header: 'Barcode',
+                        text: "barcodeNumber",
+                        uid: snapshot.data.uid,
+                        onPressed: () async {
+                        },
+                      ),
+                      Attribute(
+                        header: 'Description',
+                        text: "itemDescription",
+                        uid: snapshot.data.uid,
+                        onPressed: () async {
+                        },
+                      ),
                     ],
                   ),
                   RaisedButton(
