@@ -21,33 +21,49 @@ class _StoresListState extends State<StoresList> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: getStores(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (context, i) {
-                  final store = snapshot.data[i];
-                  return Card(
-                      child: ListTile(
-                          leading: Icon(Icons.home),
-                          title: Text(store.storeName),
-                          subtitle: Text('${store.storePhone}'),
-                          trailing: Icon(Icons.arrow_right),
-                          onTap: () =>
-                              Navigator.pushNamed(context, ViewStoreRoute, arguments: store)));
-                });
-          } else {
-            return Container(
-              color: Colors.black12,
-              child: SpinKitFadingCircle(
-                color: Colors.black,
-                size: 50.0,
-              ),
-            );
-          }
-        });
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+      child: FutureBuilder(
+          future: getStores(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, i) {
+                    final store = snapshot.data[i];
+                    return Container(
+                      padding: EdgeInsets.all(2),
+                      child: Card(
+                          elevation: 4,
+                          child: ListTile(
+                              leading: Icon(Icons.store,
+                                  size: 35, color: Colors.black),
+                              title: Text(
+                                store.storeName,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              subtitle: Text('${store.storePhone}'),
+                              trailing: Icon(Icons.keyboard_arrow_right,
+                                  size: 30, color: Colors.black),
+                              onTap: () => Navigator.pushNamed(
+                                  context, ViewStoreRoute,
+                                  arguments: store))),
+                    );
+                  });
+            } else {
+              return Container(
+                color: Colors.black12,
+                child: SpinKitFadingCircle(
+                  color: Colors.black,
+                  size: 50.0,
+                ),
+              );
+            }
+          }),
+    );
   }
 }
 

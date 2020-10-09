@@ -9,13 +9,15 @@ class HiddenShoppingCartBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
-      height: 75,
+      height: 60,
       child: Column(
         children: [
           Divider(
             thickness: 2,
+            height: 2,
             color: Colors.black,
           ),
+          Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,

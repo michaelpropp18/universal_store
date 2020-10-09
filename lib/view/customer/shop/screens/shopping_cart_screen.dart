@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/customer/home/widgets/hidden_shopping_cart_bottom.dart';
 import 'package:universal_store/view/customer/home/widgets/shopping_cart_bottom.dart';
 import 'package:universal_store/view/customer/home/widgets/shopping_cart_item.dart';
@@ -29,7 +30,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add_shopping_cart),
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, AddItemCodeRoute),
           ),
         ],
       ),

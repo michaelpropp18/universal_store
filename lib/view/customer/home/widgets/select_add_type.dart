@@ -39,7 +39,7 @@ class SelectAddType extends StatelessWidget {
               color: Colors.white,
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, AddItemCodeRoute);
+                Navigator.pushNamed(context, SelectPreviousShoppingTrip);
               },
               child: Container(
                 padding: const EdgeInsets.all(10.0),

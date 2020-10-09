@@ -8,12 +8,14 @@ class ShoppingCartBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       padding: EdgeInsets.all(10),
-      height: 220,
+      height: 240,
       child: Column(
         children: [
           Divider(
             thickness: 2,
+            height: 2,
             color: Colors.black,
           ),
           Row(
@@ -21,7 +23,7 @@ class ShoppingCartBottom extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Sub total:',
+                'Sub-total:',
                 style: TextStyle(
                   color: Colors.black45,
                   fontWeight: FontWeight.bold,
@@ -59,7 +61,35 @@ class ShoppingCartBottom extends StatelessWidget {
                 Text('+ Tax: \$12.98', style: TextStyle(color: Colors.black87)),
             alignment: Alignment.centerLeft,
           ),
-          Divider(thickness: 2,),
+          Divider(
+            thickness: 2,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Total:',
+                style: TextStyle(
+                  color: Colors.black45,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(width: 10),
+              Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                Text(
+                  '\$123.13',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 26,
+                  ),
+                ),
+              ]),
+              Spacer(flex: 3),
+            ],
+          ),
+          Spacer(),
           Container(
             margin: const EdgeInsets.all(10),
             child: SizedBox(
