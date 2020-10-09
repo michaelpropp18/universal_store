@@ -27,11 +27,17 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     dynamic carts = await user.getCarts();
     for (Cart cart in carts) {
       if (cart.store.uid == widget.store.uid) {
+        setState(() {
+          shoppingCart = cart;
+        });
         return cart;
       }
     }
     Cart newCart = await user.createCart(widget.store);
-    return newCart;
+    setState(() {
+      shoppingCart = newCart;
+    });
+    return shoppingCart;
   }
 
   toggleBottom() {
@@ -54,8 +60,12 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add_shopping_cart),
-            onPressed: () => Navigator.pushNamed(context, AddItemCodeRoute,
-                arguments: shoppingCart),
+            onPressed: () async => Navigator.pushNamed(
+                    context, AddItemCodeRoute,
+                    arguments: shoppingCart)
+                .then((_) {
+              getCart();
+            }),
           ),
         ],
       ),
@@ -67,22 +77,27 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               return ListView.builder(
                   itemCount: shoppingCart.items.length,
                   itemBuilder: (context, index) {
-                    return ShoppingCartItem();
+                    return ShoppingCartItem(
+                      item: shoppingCart.items[index],
+                      onDecrement: () {
+                        int quantity = shoppingCart.items[index].quantity - 1;
+                        if (quantity == 0) {
+                          shoppingCart
+                              .removeItem(shoppingCart.items[index].item);
+                        } else {
+                          shoppingCart.updateItemQuantity(
+                              shoppingCart.items[index].item, quantity);
+                        }
+                      },
+                      onIncrement: () {
+                        int quantity = shoppingCart.items[index].quantity + 1;
+                        shoppingCart.updateItemQuantity(
+                            shoppingCart.items[index].item, quantity);
+                      },
+                      onDelete: () => shoppingCart
+                          .removeItem(shoppingCart.items[index].item),
+                    );
                   });
-              /*
-              return ListView(
-                children: [
-                  ShoppingCartItem(),
-                  ShoppingCartItem(),
-                  ShoppingCartItem(),
-                  ShoppingCartItem(),
-                  ShoppingCartItem(),
-                  ShoppingCartItem(),
-                  ShoppingCartItem(),
-                  //ShoppingCartBottom()
-                ],
-              );
-              */
             } else {
               return Container(
                 child: SpinKitFadingCircle(
@@ -96,6 +111,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           child: showTotal
               ? ShoppingCartBottom(
                   toggle: toggleBottom,
+                  cart: shoppingCart,
                 )
               : HiddenShoppingCartBottom(
                   toggle: toggleBottom,

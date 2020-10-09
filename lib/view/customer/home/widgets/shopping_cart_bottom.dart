@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/cart.dart';
+import 'package:universal_store/models/current_user.dart';
 
 class ShoppingCartBottom extends StatelessWidget {
   final Function toggle;
+  final Cart cart;
 
-  const ShoppingCartBottom({this.toggle});
+  const ShoppingCartBottom({this.toggle, this.cart});
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +114,13 @@ class ShoppingCartBottom extends StatelessWidget {
                   onPressed: () {}),
             ),
           ),
-          Text('Cancel Shopping Trip'),
+          GestureDetector(
+            onTap: () async {
+              await CurrentUser.user.deleteCart(cart);
+              Navigator.pop(context);
+            },
+            child: Text('Cancel Shopping Trip'),
+          ),
           Spacer(),
         ],
       ),

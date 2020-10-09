@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/cart_item.dart';
 
 class ShoppingCartItem extends StatelessWidget {
+  final CartItem item;
+  final Function onDelete;
+  final Function onIncrement;
+  final Function onDecrement;
+
+  const ShoppingCartItem(
+      {this.item, this.onDelete, this.onIncrement, this.onDecrement});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,11 +32,11 @@ class ShoppingCartItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Leather chair',
+                    item.item.name,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '\$122.19',
+                    '\$' + item.item.price.toStringAsFixed(2),
                     style: TextStyle(fontSize: 16),
                   ),
                   Spacer(),
@@ -40,18 +49,24 @@ class ShoppingCartItem extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text('-',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  )),
-                              Text('1',
+                              GestureDetector(
+                                onTap: onDecrement,
+                                child: Text('-',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    )),
+                              ),
+                              Text(item.quantity.toString(),
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold)),
-                              Text('+',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  )),
+                              GestureDetector(
+                                onTap: onIncrement,
+                                child: Text('+',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    )),
+                              ),
                             ]),
                         decoration: new BoxDecoration(
                             color: Colors.black12,
@@ -66,10 +81,13 @@ class ShoppingCartItem extends StatelessWidget {
               ),
             ),
             Spacer(),
-            Icon(
-              Icons.delete,
-              color: Colors.grey,
-              size: 30.0,
+            GestureDetector(
+              onTap: onDelete,
+              child: Icon(
+                Icons.delete,
+                color: Colors.grey,
+                size: 30.0,
+              ),
             ),
           ],
         ));

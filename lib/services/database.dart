@@ -291,7 +291,6 @@ class DatabaseService {
   Future getCartItems(Manager manager, Customer customer, Map orderData) async {
     List<CartItem> items = new List();
     for (Map cartItemData in orderData['items']) {
-      print(cartItemData['item']);
       DocumentSnapshot itemDocument = await managers
           .document(manager.uid)
           .collection('items')
@@ -300,7 +299,7 @@ class DatabaseService {
       Map itemData = itemDocument.data;
       Item item = new Item(
           uid: itemDocument.documentID,
-          name: itemData['name'],
+          name: itemData['itemName'],
           price: itemData['price'],
           stock: itemData['stock']);
       CartItem cartItem = new CartItem(item, cartItemData['quantity']);

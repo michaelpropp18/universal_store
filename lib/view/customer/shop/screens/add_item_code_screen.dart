@@ -73,8 +73,7 @@ class _AddItemCodeScreenState extends State<AddItemCodeScreen> {
                   Customer user = CurrentUser.user;
                   Item item = await user.getItemWithBarcode(widget.cart.store, number);
                   await widget.cart.addItem(item, 1);           
-                  Navigator.pushReplacementNamed(context, ShoppingCartRoute,
-                      arguments: widget.cart.store);
+                  Navigator.pop(context);
                 },
                 text: 'Add Item'),
           ],
