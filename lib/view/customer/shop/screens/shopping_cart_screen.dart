@@ -54,7 +54,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add_shopping_cart),
-            onPressed: () => Navigator.pushNamed(context, AddItemCodeRoute),
+            onPressed: () => Navigator.pushNamed(context, AddItemCodeRoute,
+                arguments: shoppingCart),
           ),
         ],
       ),

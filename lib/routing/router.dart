@@ -93,7 +93,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (context) => ViewStoreScreen(store: settings.arguments));
     case AddItemCodeRoute:
-      return MaterialPageRoute(builder: (context) => AddItemCodeScreen());
+      return MaterialPageRoute(builder: (context) => AddItemCodeScreen(cart: settings.arguments));
     case SelectStoreRoute:
       return MaterialPageRoute(builder: (context) => SelectStoreScreen());
     case SelectPreviousShoppingTrip:
