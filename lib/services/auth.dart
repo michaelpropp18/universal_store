@@ -78,7 +78,11 @@ class AuthService {
       if (result.user != null) {
         _status = AuthResultStatus.successful;
         await DatabaseService(uuid: result.user.uid)
-            .createNewManager(storeName: storeName, email: email, storeWebsite: storeWebsite, storePhone: storePhone, storeAddress: storeAddress);
+            .createNewManager(storeName: storeName,
+                              email: email,
+                              storeWebsite: storeWebsite,
+                              storePhone: storePhone,
+                              storeAddress: storeAddress);
         await CurrentUser.signIn();
       } else {
         _status = AuthResultStatus.undefined;

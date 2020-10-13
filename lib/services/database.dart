@@ -61,13 +61,13 @@ class DatabaseService {
       @required String storeWebsite,
       @required String storePhone,
       @required String storeAddress}) async {
-    return await managers.document(uuid).setData({
-      'storeName': storeName,
-      'email': email,
-      'storeWebsite': storeWebsite,
-      'storePhone': storePhone,
-      'storeAddress': storeAddress
-    });
+    return await managers
+        .document(uuid)
+        .setData({'storeName': storeName,
+                  'email': email,
+                  'storeWebsite': storeWebsite,
+                  'storePhone': storePhone,
+                  'storeAddress': storeAddress});
   }
 
   Future getCustomer(String uid) async {

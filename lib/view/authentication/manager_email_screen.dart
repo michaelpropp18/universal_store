@@ -10,7 +10,7 @@ import '../shared/error_text.dart';
 import 'widgets/input_field.dart';
 import 'widgets/submit_button.dart';
 
-class ManagerFieldsScreen extends StatelessWidget {
+class ManagerEmailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<RegistrationViewModel>(context);
@@ -30,24 +30,13 @@ class ManagerFieldsScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Text(
-                'Let\'s get you set up',
+                'Create a login',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
                 ),
               ),
               SizedBox(height: 20),
-              InputField(
-                error: viewModel.storeNameError != '',
-                textInputType: TextInputType.text,
-                hintText: 'Store Name',
-                onChanged: (t) {
-                  viewModel.storeName = t;
-                },
-                icon: Icons.person,
-              ),
-              ErrorText(viewModel.storeNameError),
-              SizedBox(height: 5),
               InputField(
                 error: viewModel.emailError != '',
                 textInputType: TextInputType.emailAddress,

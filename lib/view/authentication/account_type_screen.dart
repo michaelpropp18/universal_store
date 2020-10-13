@@ -51,7 +51,7 @@ class _AccountTypeState extends State<AccountType> {
                   fontColor: Colors.white,
                   text: 'Store Manager',
                   onPressed: () {
-                    Navigator.pushNamed(context, RegisterManagerRoute);
+                    Navigator.pushNamed(context, RegisterManagerNameRoute);
                   },
                 ),
                 SizedBox(height: 15),

@@ -30,6 +30,18 @@ class RegistrationViewModel with ChangeNotifier {
   /// Store Manager only
   String _storeName;
   String _storeNameError;
+  String _storePhone;
+  String _storePhoneError;
+  String _storeAddress;
+  String _storeAddressError;
+  String _storeWebsite;
+  String _storeWebsiteError;
+  String _storeCity;
+  String _storeCityError;
+  String _storeState;
+  String _storeStateError;
+  String _storeZip;
+  String _storeZipError;
 
   final AuthService _auth = AuthService();
 
@@ -53,6 +65,18 @@ class RegistrationViewModel with ChangeNotifier {
     // store manager only
     _storeName = '';
     _storeNameError = '';
+    _storePhone = '';
+    _storePhoneError = '';
+    _storeAddress = '';
+    _storeAddressError = '';
+    _storeWebsite = '';
+    _storeWebsiteError = '';
+    _storeCity = '';
+    _storeCityError = '';
+    _storeState = '';
+    _storeStateError = '';
+    _storeZip = '';
+    _storeZipError = '';
   }
 
   /////////////////////////////////////////////////
@@ -64,6 +88,60 @@ class RegistrationViewModel with ChangeNotifier {
       _storeNameError = 'Store name cannot be empty';
     } else {
       _storeNameError = '';
+    }
+    notifyListeners();
+  }
+
+  void checkStorePhoneError() {
+    if (_storePhone == '') {
+      _storePhoneError = 'Store phone number cannot be empty';
+    } else {
+      _storePhoneError = '';
+    }
+    notifyListeners();
+  }
+
+  void checkStoreAddressError() {
+    if (_storeAddress == '') {
+      _storeAddressError = 'Store address cannot be empty';
+    } else {
+      _storeAddressError = '';
+    }
+    notifyListeners();
+  }
+
+  void checkStoreWebsiteError() {
+    if (_storeWebsite == '') {
+      _storeWebsiteError = 'Store website cannot be empty';
+    } else {
+      _storeWebsiteError = '';
+    }
+    notifyListeners();
+  }
+
+  void checkStoreCityError() {
+    if (_storeCity == '') {
+      _storeCityError = 'City cannot be empty';
+    } else {
+      _storeCityError = '';
+    }
+    notifyListeners();
+  }
+
+  void checkStoreStateError() {
+    if (_storeState == '') {
+      _storeStateError = 'State cannot be empty';
+    } else {
+      _storeStateError = '';
+    }
+    notifyListeners();
+  }
+
+  void checkStoreZipError() {
+    if (_storeZip == '') {
+      _storeZipError = 'Zipcode cannot be empty';
+    } else {
+      _storeZipError = '';
     }
     notifyListeners();
   }
@@ -151,6 +229,18 @@ class RegistrationViewModel with ChangeNotifier {
     /// Store Manager only
     _storeName = '';
     _storeNameError = '';
+    _storePhone = '';
+    _storePhoneError = '';
+    _storeAddress = '';
+    _storeAddressError = '';
+    _storeWebsite = '';
+    _storeWebsiteError = '';
+    _storeCity = '';
+    _storeCityError = '';
+    _storeState = '';
+    _storeStateError = '';
+    _storeZip = '';
+    _storeZipError = '';
 
     notifyListeners();
   }
@@ -179,11 +269,9 @@ class RegistrationViewModel with ChangeNotifier {
   }
 
   bool managerInputValid() {
-    return _storeNameError == '' &&
-        _emailError == '' &&
+    return _emailError == '' &&
         _passwordError == '' &&
         _confirmPasswordError == '' &&
-        _storeName != '' &&
         _email != '' &&
         _password != '' &&
         _confirmPassword != '';
@@ -249,9 +337,17 @@ class RegistrationViewModel with ChangeNotifier {
     _loading = true;
     notifyListeners();
 
+    // concatenate address strings
+    final storeFullAddress = '${_storeAddress}, ${_storeCity}, ${_storeState} ${_storeZip}';
+
     //register with firebase
     dynamic status = await _auth.registerManager(
-        storeName: _storeName, storeAddress: "", email: _email, password: _password);   //TODO make storeAddress an input
+        storeName: _storeName,
+        storePhone: _storePhone,
+        storeWebsite: _storeWebsite,
+        storeAddress: storeFullAddress,
+        email: _email,
+        password: _password);
     _loading = false;
 
     //registration successful
@@ -335,6 +431,54 @@ class RegistrationViewModel with ChangeNotifier {
     return _storeNameError;
   }
 
+  String get storePhone {
+    return _storePhone;
+  }
+
+  String get storePhoneError {
+    return _storePhoneError;
+  }
+
+  String get storeAddress {
+    return _storeAddress;
+  }
+
+  String get storeAddressError {
+    return _storeAddressError;
+  }
+
+  String get storeWebsite {
+    return _storeWebsite;
+  }
+
+  String get storeWebsiteError {
+    return _storeWebsiteError;
+  }
+
+  String get storeCity {
+    return _storeCity;
+  }
+
+  String get storeCityError {
+    return _storeCityError;
+  }
+
+  String get storeState {
+    return _storeState;
+  }
+  
+  String get storeStateError {
+    return _storeStateError;
+  }
+
+  String get storeZip {
+    return _storeZip;
+  }
+  
+  String get storeZipError {
+    return _storeZipError;
+  }
+
   /////////////////////////////////////////////////
   /// Setters
   /////////////////////////////////////////////////
@@ -381,6 +525,42 @@ class RegistrationViewModel with ChangeNotifier {
   set storeName(String storeName) {
     _storeName = storeName;
     checkStoreNameError();
+    notifyListeners();
+  }
+
+  set storePhone(String storePhone) {
+    _storePhone = storePhone;
+    checkStorePhoneError();
+    notifyListeners();
+  }
+
+  set storeWebsite(String storeWebsite) {
+    _storeWebsite = storeWebsite;
+    checkStoreWebsiteError();
+    notifyListeners();
+  }
+
+  set storeAddress(String storeAddress) {
+    _storeAddress = storeAddress;
+    checkStoreAddressError();
+    notifyListeners();
+  }
+
+  set storeCity(String storeCity) {
+    _storeCity = storeCity;
+    checkStoreCityError();
+    notifyListeners();
+  }
+
+  set storeState(String storeState) {
+    _storeState = storeState;
+    checkStoreStateError();
+    notifyListeners();
+  }
+
+  set storeZip(String storeZip) {
+    _storeZip = storeZip;
+    checkStoreZipError();
     notifyListeners();
   }
 }
