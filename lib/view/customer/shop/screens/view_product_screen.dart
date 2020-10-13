@@ -18,7 +18,6 @@ class ViewProductScreen extends StatefulWidget {
 class _ViewProductScreenState extends State<ViewProductScreen> {
   @override
   Widget build(BuildContext context) {
-    print(widget.product);
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light, // this makes the status bar black

@@ -20,7 +20,6 @@ class _HomeStoresScreenState extends State<HomeStoresScreen> {
   dynamic user;
   dynamic suggestedProducts;
   dynamic suggestedStores;
-  dynamic suggestedStoreProducts1; // list of lists of products to display
   dynamic suggestedStoreProducts;
   final double cardHeight = 256;
 

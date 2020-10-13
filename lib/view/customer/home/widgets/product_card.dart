@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/models/item.dart';
+import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 
 class ProductCard extends StatelessWidget {

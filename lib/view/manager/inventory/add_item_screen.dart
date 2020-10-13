@@ -21,6 +21,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
   String priceError;
   String quantity;
   String quantityError;
+  String barcode;
+  String barcodeError;
   Manager manager = CurrentUser.user;
 
   @override
@@ -31,6 +33,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
     priceError = utilities.generatePriceError(price);
     quantity = '';
     quantityError = utilities.generateQuantityError(quantity);
+    barcode = '';
+    barcodeError = utilities.generateBarcodeError(barcode);
     super.initState();
   }
 
@@ -88,16 +92,33 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 },
               ),
               ErrorText(quantityError),
+              SizedBox(height: 10),
+              EditField(
+                error: barcodeError != '',
+                text: barcode,
+                hintText: 'Item Barcode',
+                onChanged: (e) {
+                  setState(() {
+                    barcode = e;
+                    barcodeError = utilities.generateBarcodeError(barcode);
+                  });
+                },
+              ),
+              ErrorText(barcodeError),
               SaveChangesButton(
                   onPress: addItem,
-                  enabled: nameError == '' && quantityError == '' && priceError == ''),
+                  enabled: nameError == '' &&
+                      quantityError == '' &&
+                      priceError == '' &&
+                      barcodeError == ''),
             ],
           ),
         ));
   }
 
   addItem() {
-    manager.addItemToInventory(name, 'ENTER_BARCODE_HERE', 'ENTER_DESCRIPTION_HERE', double.parse(price), int.parse(quantity));
+    manager.addItemToInventory(name, barcode,
+        'ENTER_DESCRIPTION_HERE', double.parse(price), int.parse(quantity));
     Navigator.pop(context);
   }
 }

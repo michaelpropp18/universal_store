@@ -16,6 +16,7 @@ import 'package:universal_store/view/customer/drawer/view_screens/privacy_screen
 import 'package:universal_store/view/customer/drawer/view_screens/profile_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/add_item_code_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/search_screen.dart';
+import 'package:universal_store/view/customer/shop/screens/select_from_shopping_trips_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/select_store_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/shopping_cart_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/view_product_screen.dart';
@@ -84,15 +85,19 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case SearchRoute:
       return MaterialPageRoute(builder: (context) => SearchScreen());
     case ShoppingCartRoute:
-      return MaterialPageRoute(builder: (context) => ShoppingCartScreen());
+      return MaterialPageRoute(builder: (context) => ShoppingCartScreen(store: settings.arguments));
     case ViewProductRoute:
-      return MaterialPageRoute(builder: (context) => ViewProductScreen(product: settings.arguments));
+      return MaterialPageRoute(
+          builder: (context) => ViewProductScreen(product: settings.arguments));
     case ViewStoreRoute:
-      return MaterialPageRoute(builder: (context) => ViewStoreScreen(store: settings.arguments));
+      return MaterialPageRoute(
+          builder: (context) => ViewStoreScreen(store: settings.arguments));
     case AddItemCodeRoute:
-      return MaterialPageRoute(builder: (context) => AddItemCodeScreen());
+      return MaterialPageRoute(builder: (context) => AddItemCodeScreen(cart: settings.arguments));
     case SelectStoreRoute:
       return MaterialPageRoute(builder: (context) => SelectStoreScreen());
+    case SelectPreviousShoppingTrip:
+      return MaterialPageRoute(builder: (context) => SelectFromShoppingTripsScreen());
 
     //primary manager routes
     case ManagerStoreRoute:
