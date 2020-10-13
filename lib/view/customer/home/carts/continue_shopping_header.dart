@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 
 class ContinueShoppingHeader extends StatelessWidget {
   final String text;
+  final Manager store;
 
-  const ContinueShoppingHeader({this.text});
+  const ContinueShoppingHeader({this.text, this.store});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +44,7 @@ class ContinueShoppingHeader extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18.0),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, ShoppingCartRoute);
+                Navigator.pushNamed(context, ShoppingCartRoute, arguments: store);
               },
             ),
           ),

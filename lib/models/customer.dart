@@ -1,3 +1,4 @@
+import 'item.dart';
 import 'user.dart';
 import 'manager.dart';
 import 'order.dart';
@@ -14,8 +15,8 @@ class Customer extends User {
     this.lastName = customerData['lastName'];
   }
 
-  Future getItemWithBarcode(barcode) {
-    // TODO return item with barcode, null if none exists
+  Future getItemWithBarcode(Manager store, String barcode) async {
+    return await firestore.getItemWithBarcodeCustomer(store, barcode);
   }
 
   Future getStoreWithBarcode(barcode) {
@@ -26,16 +27,28 @@ class Customer extends User {
     return await firestore.getNearbyStores();
   }
 
-  Future getFeaturedProdcuts(store_uid) {
-    // TODO return list of items to display to all users.
+  Future getFeaturedProducts(Manager store) async {
+    // TODO: just returns all items now. In the future, add a page where the manager can set featured products.
+    return await firestore.getStoreInventory(store);
   }
 
   Future getSuggestedProducts() async {
-    // TODO return custom list of items to display for user. Doesn't really have to be custom, just make sure its not the same as featured products.
+    // TODO: just returns all items. In the future, add recommendation system.
+    List suggestedProducts = new List();
+    List stores = await this.getNearbyStores();
+    for (Manager store in stores) {
+      List storeInventory = await firestore.getStoreInventory(store);
+      if (storeInventory.length > 0) {
+        for (Item item in storeInventory) {
+           suggestedProducts.add(item);
+        }
+      }
+    }
+    return suggestedProducts;
   }
 
   Future createCart(Manager store) async {
-    // TODO
+    return await firestore.createCart(store);
   }
 
   Future getCarts() async {
@@ -43,7 +56,7 @@ class Customer extends User {
   }
 
   Future deleteCart(Cart cart) async {
-    // TODO
+    return await firestore.deleteCart(cart);
   }
 
   Future getOrders() async {

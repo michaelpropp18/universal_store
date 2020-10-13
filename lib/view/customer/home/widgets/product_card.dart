@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/item.dart';
+import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 
 class ProductCard extends StatelessWidget {
+  final Item item;
   final int number;
 
-  const ProductCard({this.number = 9});
+  const ProductCard({this.item, this.number});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, ViewProductRoute),
+      onTap: () => Navigator.pushNamed(context, ViewProductRoute, arguments: item),
       child: Container(
           margin: EdgeInsets.all(10),
           padding: EdgeInsets.only(bottom: 10),
@@ -31,7 +34,7 @@ class ProductCard extends StatelessWidget {
                     topRight: Radius.circular(10),
                     topLeft: Radius.circular(10)),
                 child: Image.network(
-                  'https://picsum.photos/250?image=' + number.toString(),
+                  'https://picsum.photos/250?image=10',
                   height: 200,
                   width: 200,
                 ),
@@ -42,7 +45,7 @@ class ProductCard extends StatelessWidget {
                       bottomLeft: Radius.circular(10)),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
-                    child: Text('Product ' + number.toString(),
+                    child: Text(item.name,
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
                   )),

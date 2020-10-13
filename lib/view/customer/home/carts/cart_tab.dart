@@ -55,7 +55,6 @@ class CartTab extends StatelessWidget {
           GestureDetector(
             child: Icon(Icons.chevron_right),
             onTap: () {
-              print('got here');
               /*
               Navigator.pushNamed(
                 context,

@@ -22,18 +22,28 @@ class Help extends StatelessWidget {
               header: 'FAQ',
               attributes: [
                 Attribute(
-                  header: 'My stummy hurts',
-                  text: 'John from Legal says we are not allowed to tell you to take some tums but...',
+                  header: 'What is Universal Store?',
+                  text: 'The Universal Store seeks to improve the experience of shoppers by providing a tool to skip the lines and pay from your finger-tips.',
                   showEditIcon: false,
                 ),
                 Attribute(
-                  header: 'My refrigerator is broken',
-                  text: 'Oh we know :)',
+                  header: 'How do I use Universal Store to shop at my favorite places?',
+                  text: 'Select the + icon from the home screen. You will see a list of all your favorite store to shop. Once you scroll to find yours, select it and begin shopping!',
                   showEditIcon: false,
                 ),
                 Attribute(
-                  header: 'How do I use the internet?',
-                  text: 'Please delete our app',
+                  header: 'How do I add an item to my cart?',
+                  text: 'Once you have found an item in the store you would like to purchase, find the barcode on packaging. Select "scan barcode" and you will aim your phone''s camera at the barcode. Once the Universal Store recognises your item it will put in in your cart automatically!',
+                  showEditIcon: false,
+                ),
+                Attribute(
+                  header: 'How do I use Universal Store to pay for my items?',
+                  text: 'In your settings, you can add your preferred payment method to pay for your shopping trips. At the end of your shopping trip you can select that payment method and you''re all set! If you want to add multiple payment methods you can do so the same way you set up the first.',
+                  showEditIcon: false,
+                ),
+                Attribute(
+                  header: 'How can I be sure my payment information is secure with Universal Store',
+                  text: 'Universal Store uses the 3rd party payment service Stripe (tm) trusted by companies like xxx and xxx.',
                   showEditIcon: false,
                 ),
               ],

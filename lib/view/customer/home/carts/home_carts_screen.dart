@@ -16,8 +16,8 @@ class HomeCartsScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  ProductCard(number: 7),
-                  ProductCard(number: 143),
+                 // ProductCard(number: 7),
+                //  ProductCard(number: 143),
                 ],
               ),
             ),
@@ -26,8 +26,8 @@ class HomeCartsScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  ProductCard(number: 20),
-                  ProductCard(number: 60),
+                 // ProductCard(number: 20),
+                 // ProductCard(number: 60),
                 ],
               ),
             ),
