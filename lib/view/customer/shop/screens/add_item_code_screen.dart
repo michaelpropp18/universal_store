@@ -33,6 +33,7 @@ class _AddItemCodeScreenState extends State<AddItemCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         brightness: Brightness.light, // this makes the status bar black
         iconTheme: new IconThemeData(
@@ -71,8 +72,9 @@ class _AddItemCodeScreenState extends State<AddItemCodeScreen> {
                 enabled: errorText == '',
                 onPress: () async {
                   Customer user = CurrentUser.user;
-                  Item item = await user.getItemWithBarcode(widget.cart.store, number);
-                  await widget.cart.addItem(item, 1);           
+                  Item item =
+                      await user.getItemWithBarcode(widget.cart.store, number);
+                  await widget.cart.addItem(item, 1);
                   Navigator.pop(context);
                 },
                 text: 'Add Item'),
