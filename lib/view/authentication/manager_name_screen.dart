@@ -15,7 +15,7 @@ class ManagerNameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = Provider.of<RegistrationViewModel>(context);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      //resizeToAvoidBottomInset: false,
       body: Stack(children: [
         BackgroundGradient(),
         BackArrow(onSubmitted: () {
@@ -28,7 +28,7 @@ class ManagerNameScreen extends StatelessWidget {
             right: 20,
             top: 85.0,
           ),
-          child: Column(
+          child: ListView(
             children: <Widget>[
               Text(
                 'Let\'s get you set up',
