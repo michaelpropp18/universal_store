@@ -20,8 +20,12 @@ class Cart {
   }
 
   addItem(Item item, int quantity) async {
-    items.add(new CartItem(item, quantity));
-    customer.firestore.addItemToCart(this, item, quantity);
+    if (items.lastWhere((cartItem) => cartItem.item.uid == item.uid) != null) {
+      incrementItemQuantity(item);
+    } else {
+      items.add(new CartItem(item, quantity));
+      customer.firestore.addItemToCart(this, item, quantity);
+    }
   }
 
   removeItem(Item item) {
@@ -33,6 +37,18 @@ class Cart {
     if (quantity <= 0) {
       return this.removeItem(item);
     }
+    items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity = quantity;
+    customer.firestore.updateItemQuantityInCart(this, item, quantity);
+  }
+
+  incrementItemQuantity(Item item) {
+    int quantity = items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity + 1;
+    items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity = quantity;
+    customer.firestore.updateItemQuantityInCart(this, item, quantity);
+  }
+
+  decrementItemQuantity(Item item) {
+    int quantity = items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity - 1;
     items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity = quantity;
     customer.firestore.updateItemQuantityInCart(this, item, quantity);
   }

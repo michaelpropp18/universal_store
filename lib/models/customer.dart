@@ -55,6 +55,19 @@ class Customer extends User {
     return await firestore.getCustomerCarts();
   }
 
+  Future getCart(Manager store) async {
+    return await firestore.getCustomerCart(store);
+  }
+
+  Future cartExists(Manager store) async {
+    Cart cart = await firestore.getCustomerCart(store);
+    if (cart != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future deleteCart(Cart cart) async {
     return await firestore.deleteCart(cart);
   }
