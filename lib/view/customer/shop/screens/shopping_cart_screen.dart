@@ -111,10 +111,11 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           child: showTotal
               ? ShoppingCartBottom(
                   toggle: toggleBottom,
-                  cart: shoppingCart,
+                  cart: shoppingCart
                 )
               : HiddenShoppingCartBottom(
                   toggle: toggleBottom,
+                  cart: shoppingCart,
                 )),
     );
   }

@@ -3,14 +3,14 @@ import 'package:universal_store/models/cart.dart';
 import 'package:universal_store/models/current_user.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 
-class ShoppingCartBottom extends StatelessWidget {
-  final Function toggle;
+class CheckoutBottom extends StatelessWidget {
   final Cart cart;
 
-  const ShoppingCartBottom({this.toggle, this.cart});
+  const CheckoutBottom({this.cart});
 
   @override
   Widget build(BuildContext context) {
+    print(cart);
     return Container(
       color: Colors.white,
       padding: EdgeInsets.all(10),
@@ -37,7 +37,7 @@ class ShoppingCartBottom extends StatelessWidget {
               SizedBox(width: 10),
               Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                 Text(
-                  cart.subTotal.toStringAsFixed(2),
+                  'yeet', //cart.subTotal.toStringAsFixed(2),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,
@@ -45,24 +45,16 @@ class ShoppingCartBottom extends StatelessWidget {
                 ),
               ]),
               Spacer(),
-              GestureDetector(
-                onTap: toggle,
-                child: Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.black,
-                  size: 36.0,
-                ),
-              ),
             ],
           ),
           Align(
-            child: Text('+ Processing Fee: '+ cart.processingFee.toStringAsFixed(2),
+            child: Text('+ Processing Fee: '+ 'yeete',
                 style: TextStyle(color: Colors.black87)),
             alignment: Alignment.centerLeft,
           ),
           Align(
             child:
-                Text('+ Tax: '+ cart.tax.toStringAsFixed(2), style: TextStyle(color: Colors.black87)),
+            Text('+ Tax: '+ 'yteety', style: TextStyle(color: Colors.black87)),
             alignment: Alignment.centerLeft,
           ),
           Divider(
@@ -83,7 +75,7 @@ class ShoppingCartBottom extends StatelessWidget {
               SizedBox(width: 10),
               Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                 Text(
-                  cart.total.toStringAsFixed(2),
+                  'yeet2',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,
@@ -101,7 +93,7 @@ class ShoppingCartBottom extends StatelessWidget {
               width: double.infinity,
               child: FlatButton(
                   child: Text(
-                    'Check Out',
+                    'Purchase',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16.0,
@@ -112,15 +104,12 @@ class ShoppingCartBottom extends StatelessWidget {
                       side: BorderSide(color: Colors.white70)),
                   color: Colors.blue,
                   disabledColor: Colors.grey,
-                  onPressed: () => Navigator.pushNamed(context, CheckoutScreenRoute)),
+                  onPressed: () {}),
             ),
           ),
           GestureDetector(
-            onTap: () async {
-              await CurrentUser.user.deleteCart(cart);
-              Navigator.pop(context);
-            },
-            child: Text('Cancel Shopping Trip'),
+            onTap: () => Navigator.pop(context),
+            child: Text('Return to Shopping Cart'),
           ),
           Spacer(),
         ],
