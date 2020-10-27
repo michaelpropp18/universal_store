@@ -180,6 +180,7 @@ class DatabaseService {
         .collection('barcodes')
         .document(barcode)
         .get();
+        
     String itemUid = barcodeDocument.data['item'];
     DocumentSnapshot itemDocument = await managers
         .document(store.uid)

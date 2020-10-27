@@ -62,7 +62,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         title: Text('Shopping Cart', style: TextStyle(color: Colors.black)),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.add_shopping_cart),
+            icon: const Icon(Icons.camera_alt),
             onPressed: () async {
               String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
                   "#ff6666", "Cancel", false, ScanMode.DEFAULT);
@@ -77,14 +77,15 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 print('item does not exist');
               }
             },
-            /*
+          ),
+          IconButton(
+            icon: const Icon(Icons.add_shopping_cart),
             onPressed: () async => Navigator.pushNamed(
                     context, AddItemCodeRoute,
                     arguments: shoppingCart)
                 .then((_) {
               getCart();
             }),
-            */
           ),
         ],
       ),
@@ -99,6 +100,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                     return ShoppingCartItem(
                       item: shoppingCart.items[index],
                       onDecrement: () {
+                         shoppingCart.decrementItemQuantity(
+                            shoppingCart.items[index].item);
+                        /*
                         int quantity = shoppingCart.items[index].quantity - 1;
                         if (quantity == 0) {
                           shoppingCart
@@ -107,14 +111,15 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                           shoppingCart.updateItemQuantity(
                               shoppingCart.items[index].item, quantity);
                         }
+                        */
                       },
                       onIncrement: () {
-                        int quantity = shoppingCart.items[index].quantity + 1;
-                        shoppingCart.updateItemQuantity(
-                            shoppingCart.items[index].item, quantity);
+                        shoppingCart.incrementItemQuantity(
+                            shoppingCart.items[index].item);
                       },
-                      onDelete: () => shoppingCart
-                          .removeItem(shoppingCart.items[index].item),
+                      onDelete: () {
+                        shoppingCart.removeItem(shoppingCart.items[index].item);
+                      },
                     );
                   });
             } else {
