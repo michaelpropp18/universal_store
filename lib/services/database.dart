@@ -61,13 +61,13 @@ class DatabaseService {
       @required String storeWebsite,
       @required String storePhone,
       @required String storeAddress}) async {
-    return await managers
-        .document(uuid)
-        .setData({'storeName': storeName,
-                  'email': email,
-                  'storeWebsite': storeWebsite,
-                  'storePhone': storePhone,
-                  'storeAddress': storeAddress});
+    return await managers.document(uuid).setData({
+      'storeName': storeName,
+      'email': email,
+      'storeWebsite': storeWebsite,
+      'storePhone': storePhone,
+      'storeAddress': storeAddress
+    });
   }
 
   Future getCustomer(String uid) async {
@@ -180,7 +180,9 @@ class DatabaseService {
         .collection('barcodes')
         .document(barcode)
         .get();
-        
+    if (barcodeDocument == null || barcodeDocument.data == null) {
+      return null;
+    }
     String itemUid = barcodeDocument.data['item'];
     DocumentSnapshot itemDocument = await managers
         .document(store.uid)
@@ -198,12 +200,20 @@ class DatabaseService {
         .collection('barcodes')
         .document(barcode)
         .get();
+    if (barcodeDocument == null) {
+      print('returning null');
+      return null;
+    }
+    print('got here');
     String itemUid = barcodeDocument.data['item'];
     DocumentSnapshot itemDocument = await managers
         .document(uuid)
         .collection('items')
         .document(itemUid)
         .get();
+    if (!itemDocument.exists) {
+      return null;
+    }
     Map itemData = itemDocument.data;
     Item item = Item.fromData(itemUid, itemData);
     return item;
