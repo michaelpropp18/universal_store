@@ -325,6 +325,7 @@ class DatabaseService {
         .collection('carts')
         .document()
         .setData({'store': store.uid, 'items': []});
+    print('created cart');
   }
 
   Future deleteCart(Cart cart) async {
@@ -333,6 +334,7 @@ class DatabaseService {
         .collection('carts')
         .document(cart.uid)
         .delete();
+    print('deleted cart');
   }
 
   Future addItemToCart(Cart cart, Item item, int quantity) async {

@@ -100,7 +100,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                     return ShoppingCartItem(
                       item: shoppingCart.items[index],
                       onDecrement: () {
-                         shoppingCart.decrementItemQuantity(
+                        shoppingCart.decrementItemQuantity(
                             shoppingCart.items[index].item);
                         /*
                         int quantity = shoppingCart.items[index].quantity - 1;
@@ -139,6 +139,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 )
               : HiddenShoppingCartBottom(
                   toggle: toggleBottom,
+                  cart: shoppingCart,
                 )),
     );
   }

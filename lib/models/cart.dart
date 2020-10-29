@@ -10,13 +10,19 @@ class Cart {
   Manager store;
   List<CartItem> items;
   double total;
+  double subTotal;
+  double processingFee;
+  double tax;
 
   Cart(this.uid, this.store, this.customer, this.items) {
     double subtotal = 0;
     for (CartItem item in items) {
       subtotal += item.item.price * item.quantity;
     }
-    total = subtotal;
+    subTotal = subtotal;
+    tax = 0.089 * subTotal;
+    processingFee = 0.01 * subTotal;
+    total = subTotal + tax + processingFee;
   }
 
   addItem(Item item, int quantity) async {

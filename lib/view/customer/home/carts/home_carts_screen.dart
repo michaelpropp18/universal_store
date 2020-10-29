@@ -14,7 +14,6 @@ class _HomeCartsScreenState extends State<HomeCartsScreen> {
   Future getCarts() async {
     dynamic user = await CurrentUser.asyncUser;
     dynamic carts = await user.getCarts();
-    print(carts[1].store.storeName);
     return carts;
   }
 
