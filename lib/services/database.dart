@@ -8,6 +8,8 @@ import 'package:universal_store/models/order.dart';
 import 'package:universal_store/models/cart.dart';
 import 'package:universal_store/models/cart_item.dart';
 
+import '../utilities.dart';
+
 class DatabaseService {
   final String uuid;
   DatabaseService({this.uuid});
@@ -134,6 +136,7 @@ class DatabaseService {
 
   addItemToInventory(String itemName, String barcode, String description,
       double price, int stock) async {
+    barcode = formatBarcode(barcode);
     DocumentReference itemDocument =
         managers.document(uuid).collection('items').document();
     await itemDocument.setData({
@@ -175,6 +178,7 @@ class DatabaseService {
   }
 
   Future getItemWithBarcodeCustomer(Manager store, String barcode) async {
+    barcode = formatBarcode(barcode);
     DocumentSnapshot barcodeDocument = await managers
         .document(store.uid)
         .collection('barcodes')
@@ -195,6 +199,7 @@ class DatabaseService {
   }
 
   Future getItemWithBarcodeManager(String barcode) async {
+    barcode = formatBarcode(barcode);
     DocumentSnapshot barcodeDocument = await managers
         .document(uuid)
         .collection('barcodes')
