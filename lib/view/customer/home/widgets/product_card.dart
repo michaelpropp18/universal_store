@@ -34,7 +34,7 @@ class ProductCard extends StatelessWidget {
                     topRight: Radius.circular(10),
                     topLeft: Radius.circular(10)),
                 child: Image.network(
-                  'https://picsum.photos/250?image=10',
+                  'https://picsum.photos/250?image=21',
                   height: 200,
                   width: 200,
                 ),
