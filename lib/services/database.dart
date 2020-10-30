@@ -8,6 +8,8 @@ import 'package:universal_store/models/order.dart';
 import 'package:universal_store/models/cart.dart';
 import 'package:universal_store/models/cart_item.dart';
 
+import '../utilities.dart';
+
 class DatabaseService {
   final String uuid;
   DatabaseService({this.uuid});
@@ -61,13 +63,13 @@ class DatabaseService {
       @required String storeWebsite,
       @required String storePhone,
       @required String storeAddress}) async {
-    return await managers
-        .document(uuid)
-        .setData({'storeName': storeName,
-                  'email': email,
-                  'storeWebsite': storeWebsite,
-                  'storePhone': storePhone,
-                  'storeAddress': storeAddress});
+    return await managers.document(uuid).setData({
+      'storeName': storeName,
+      'email': email,
+      'storeWebsite': storeWebsite,
+      'storePhone': storePhone,
+      'storeAddress': storeAddress
+    });
   }
 
   Future getCustomer(String uid) async {
@@ -134,6 +136,7 @@ class DatabaseService {
 
   addItemToInventory(String itemName, String barcode, String description,
       double price, int stock) async {
+    barcode = formatBarcode(barcode);
     DocumentReference itemDocument =
         managers.document(uuid).collection('items').document();
     await itemDocument.setData({
@@ -175,11 +178,15 @@ class DatabaseService {
   }
 
   Future getItemWithBarcodeCustomer(Manager store, String barcode) async {
+    barcode = formatBarcode(barcode);
     DocumentSnapshot barcodeDocument = await managers
         .document(store.uid)
         .collection('barcodes')
         .document(barcode)
         .get();
+    if (barcodeDocument == null || barcodeDocument.data == null) {
+      return null;
+    }
     String itemUid = barcodeDocument.data['item'];
     DocumentSnapshot itemDocument = await managers
         .document(store.uid)
@@ -192,17 +199,26 @@ class DatabaseService {
   }
 
   Future getItemWithBarcodeManager(String barcode) async {
+    barcode = formatBarcode(barcode);
     DocumentSnapshot barcodeDocument = await managers
         .document(uuid)
         .collection('barcodes')
         .document(barcode)
         .get();
+    if (barcodeDocument == null) {
+      print('returning null');
+      return null;
+    }
+    print('got here');
     String itemUid = barcodeDocument.data['item'];
     DocumentSnapshot itemDocument = await managers
         .document(uuid)
         .collection('items')
         .document(itemUid)
         .get();
+    if (!itemDocument.exists) {
+      return null;
+    }
     Map itemData = itemDocument.data;
     Item item = Item.fromData(itemUid, itemData);
     return item;
@@ -314,6 +330,7 @@ class DatabaseService {
         .collection('carts')
         .document()
         .setData({'store': store.uid, 'items': []});
+    print('created cart');
   }
 
   Future deleteCart(Cart cart) async {
@@ -322,6 +339,7 @@ class DatabaseService {
         .collection('carts')
         .document(cart.uid)
         .delete();
+    print('deleted cart');
   }
 
   Future addItemToCart(Cart cart, Item item, int quantity) async {

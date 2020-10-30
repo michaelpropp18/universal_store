@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/routing/routing_constants.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class SelectAddType extends StatelessWidget {
   @override
@@ -37,9 +38,15 @@ class SelectAddType extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: RaisedButton(
               color: Colors.white,
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, SelectPreviousShoppingTrip);
+              onPressed: () async {
+                //Navigator.pop(context);
+                //Navigator.pushNamed(context, SelectPreviousShoppingTrip);
+                String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+                                                    "#ff6666", 
+                                                    "Cancel", 
+                                                    false, 
+                                                    ScanMode.DEFAULT);
+                            print(barcodeScanRes);
               },
               child: Container(
                 padding: const EdgeInsets.all(10.0),
