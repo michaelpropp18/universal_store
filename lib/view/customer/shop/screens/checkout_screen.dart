@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/models/cart.dart';
+import 'package:universal_store/view/customer/home/widgets/checkout_bottom.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final Cart cart;
@@ -24,6 +25,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       body: Container(
         child: Text(widget.cart.subTotal.toString()),
       ),
+      bottomNavigationBar: Container(
+          child: CheckoutBottom(
+        cart: widget.cart,
+      )),
     );
   }
 }
