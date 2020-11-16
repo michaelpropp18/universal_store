@@ -124,7 +124,7 @@ class ShoppingCartBottom extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () async {
-              await CurrentUser.user.deleteCart(cart);
+              //await CurrentUser.user.deleteCart(cart);
               Navigator.pop(context);
             },
             child: Text('Cancel Shopping Trip'),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/cart.dart';
 import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 
 class ContinueShoppingHeader extends StatelessWidget {
   final String text;
   final Manager store;
+  final Cart cart;
 
-  const ContinueShoppingHeader({this.text, this.store});
+  const ContinueShoppingHeader({this.text, this.store, this.cart});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +27,7 @@ class ContinueShoppingHeader extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              Text('Total: \$39.99'),
+              Text('Total: \$' + cart.total.toStringAsFixed(2)),
             ],
           ),
           SizedBox(
