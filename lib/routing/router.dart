@@ -17,7 +17,8 @@ import 'package:universal_store/view/customer/drawer/view_screens/privacy_screen
 import 'package:universal_store/view/customer/drawer/view_screens/profile_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/add_item_code_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/checkout_screen.dart';
-import 'package:universal_store/view/customer/shop/screens/payment_screen.dart';
+import 'package:universal_store/view/customer/shop/screens/checkout_payment_screen.dart';
+import 'package:universal_store/view/customer/shop/screens/receipt_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/search_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/select_from_shopping_trips_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/select_store_screen.dart';
@@ -111,7 +112,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (context) => CheckoutScreen(cart: settings.arguments));
     case CheckoutPaymentRoute:
       return MaterialPageRoute(
-          builder: (context) => PaymentScreen());
+          builder: (context) =>
+              CheckoutPaymentScreen(cart: settings.arguments));
+    case ReceiptRoute:
+      return MaterialPageRoute(
+          builder: (context) => ReceiptScreen(cart: settings.arguments));
 
     //primary manager routes
     case ManagerStoreRoute:

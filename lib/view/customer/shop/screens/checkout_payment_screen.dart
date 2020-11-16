@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/cart.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/customer/shop/widgets/payment_input.dart';
 import 'package:universal_store/view/shared/error_text.dart';
 
-class PaymentScreen extends StatelessWidget {
+class CheckoutPaymentScreen extends StatelessWidget {
+  final Cart cart;
+
+  const CheckoutPaymentScreen({this.cart});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +34,7 @@ class PaymentScreen extends StatelessWidget {
                 ),
                 PaymentInput(
                   title: 'Payment Amount',
-                  text: '\$12.99',
+                  text: '\$' + cart.total.toStringAsFixed(2),
                 ),
                 PaymentInput(
                   title: 'Name on card',
@@ -62,7 +68,9 @@ class PaymentScreen extends StatelessWidget {
                             side: BorderSide(color: Colors.white70)),
                         color: Colors.blue,
                         disabledColor: Colors.grey,
-                        onPressed: () {}),
+                        onPressed: () {
+                          Navigator.pushNamed(context, ReceiptRoute, arguments: cart);
+                        }),
                   ),
                 ),
                 Align(
@@ -75,7 +83,7 @@ class PaymentScreen extends StatelessWidget {
                     child: Text('Return to Checkout'),
                   ),
                 ),
-                ErrorText('test'),
+                ErrorText('Error Message Here'),
               ],
             ),
           )),

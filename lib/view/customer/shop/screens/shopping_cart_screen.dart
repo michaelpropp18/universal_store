@@ -102,16 +102,6 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       onDecrement: () {
                         shoppingCart.decrementItemQuantity(
                             shoppingCart.items[index].item);
-                        /*
-                        int quantity = shoppingCart.items[index].quantity - 1;
-                        if (quantity == 0) {
-                          shoppingCart
-                              .removeItem(shoppingCart.items[index].item);
-                        } else {
-                          shoppingCart.updateItemQuantity(
-                              shoppingCart.items[index].item, quantity);
-                        }
-                        */
                       },
                       onIncrement: () {
                         shoppingCart.incrementItemQuantity(
