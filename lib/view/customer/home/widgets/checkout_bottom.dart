@@ -111,7 +111,7 @@ class CheckoutBottom extends StatelessWidget {
                   color: Colors.blue,
                   disabledColor: Colors.grey,
                   onPressed: () {
-                    return Navigator.pushNamed(context, CheckoutRoute,
+                    return Navigator.pushNamed(context, CheckoutPaymentRoute,
                         arguments: cart);
                   }),
             ),
