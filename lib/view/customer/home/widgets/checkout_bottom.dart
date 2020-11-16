@@ -3,11 +3,10 @@ import 'package:universal_store/models/cart.dart';
 import 'package:universal_store/models/current_user.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 
-class ShoppingCartBottom extends StatelessWidget {
-  final Function toggle;
+class CheckoutBottom extends StatelessWidget {
   final Cart cart;
 
-  const ShoppingCartBottom({this.toggle, this.cart});
+  const CheckoutBottom({this.cart});
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +43,6 @@ class ShoppingCartBottom extends StatelessWidget {
                   ),
                 ),
               ]),
-              Spacer(),
-              GestureDetector(
-                onTap: toggle,
-                child: Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.black,
-                  size: 36.0,
-                ),
-              ),
             ],
           ),
           Align(
@@ -109,7 +99,7 @@ class ShoppingCartBottom extends StatelessWidget {
               width: double.infinity,
               child: FlatButton(
                   child: Text(
-                    'Check Out',
+                    'Go to Payment',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16.0,
@@ -121,7 +111,7 @@ class ShoppingCartBottom extends StatelessWidget {
                   color: Colors.blue,
                   disabledColor: Colors.grey,
                   onPressed: () {
-                    return Navigator.pushNamed(context, CheckoutRoute,
+                    return Navigator.pushNamed(context, CheckoutPaymentRoute,
                         arguments: cart);
                   }),
             ),
@@ -131,7 +121,7 @@ class ShoppingCartBottom extends StatelessWidget {
               //await CurrentUser.user.deleteCart(cart);
               Navigator.pop(context);
             },
-            child: Text('Cancel Shopping Trip'),
+            child: Text('Continue Shopping'),
           ),
           Spacer(),
         ],
