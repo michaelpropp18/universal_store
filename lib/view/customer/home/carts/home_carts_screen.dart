@@ -29,7 +29,7 @@ class _HomeCartsScreenState extends State<HomeCartsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     for (var i = 0; i < snapshot.data.length; i++) 
-                      ContinueShoppingHeader(text: snapshot.data[i].store.storeName, store: snapshot.data[i].store),
+                      ContinueShoppingHeader(text: snapshot.data[i].store.storeName, store: snapshot.data[i].store, cart: snapshot.data[i]),
                     /*
                     ContinueShoppingHeader(text: 'OutdoorMart'),
                     SingleChildScrollView(
