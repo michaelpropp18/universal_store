@@ -3,12 +3,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:universal_store/models/cart.dart';
 import 'package:universal_store/models/current_user.dart';
 import 'package:universal_store/models/customer.dart';
+import 'package:universal_store/models/item.dart';
 import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/customer/home/widgets/hidden_shopping_cart_bottom.dart';
 import 'package:universal_store/view/customer/home/widgets/shopping_cart_bottom.dart';
 import 'package:universal_store/view/customer/home/widgets/shopping_cart_item.dart';
 import 'package:universal_store/view/customer/shop/widgets/stores_list.dart';
+
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
   final Manager store;
@@ -59,6 +62,23 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         title: Text('Shopping Cart', style: TextStyle(color: Colors.black)),
         actions: <Widget>[
           IconButton(
+            icon: const Icon(Icons.camera_alt),
+            onPressed: () async {
+              String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+                  "#ff6666", "Cancel", false, ScanMode.DEFAULT);
+              Customer user = CurrentUser.user;
+              Item item =
+                  await user.getItemWithBarcode(widget.store, barcodeScanRes);
+              if (item != null) {
+                await shoppingCart.addItem(item, 1);
+                print(item.name);
+                print(barcodeScanRes);
+              } else {
+                print('item does not exist');
+              }
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.add_shopping_cart),
             onPressed: () async => Navigator.pushNamed(
                     context, AddItemCodeRoute,
@@ -80,6 +100,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                     return ShoppingCartItem(
                       item: shoppingCart.items[index],
                       onDecrement: () {
+                        shoppingCart.decrementItemQuantity(
+                            shoppingCart.items[index].item);
+                        /*
                         int quantity = shoppingCart.items[index].quantity - 1;
                         if (quantity == 0) {
                           shoppingCart
@@ -88,14 +111,15 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                           shoppingCart.updateItemQuantity(
                               shoppingCart.items[index].item, quantity);
                         }
+                        */
                       },
                       onIncrement: () {
-                        int quantity = shoppingCart.items[index].quantity + 1;
-                        shoppingCart.updateItemQuantity(
-                            shoppingCart.items[index].item, quantity);
+                        shoppingCart.incrementItemQuantity(
+                            shoppingCart.items[index].item);
                       },
-                      onDelete: () => shoppingCart
-                          .removeItem(shoppingCart.items[index].item),
+                      onDelete: () {
+                        shoppingCart.removeItem(shoppingCart.items[index].item);
+                      },
                     );
                   });
             } else {
@@ -115,6 +139,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                 )
               : HiddenShoppingCartBottom(
                   toggle: toggleBottom,
+                  cart: shoppingCart,
                 )),
     );
   }

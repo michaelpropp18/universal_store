@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/cart.dart';
 
 class HiddenShoppingCartBottom extends StatelessWidget {
   final Function toggle;
+  final Cart cart;
 
-  const HiddenShoppingCartBottom({this.toggle});
+  const HiddenShoppingCartBottom({this.toggle, this.cart});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class HiddenShoppingCartBottom extends StatelessWidget {
               SizedBox(width: 10),
               Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                 Text(
-                  '\$123.13',
+                  cart == null ? '' : '\$' + cart.subTotal.toStringAsFixed(2),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,

@@ -10,18 +10,46 @@ class Cart {
   Manager store;
   List<CartItem> items;
   double total;
+  double subTotal;
+  double processingFee;
+  double tax;
 
   Cart(this.uid, this.store, this.customer, this.items) {
     double subtotal = 0;
     for (CartItem item in items) {
       subtotal += item.item.price * item.quantity;
     }
-    total = subtotal;
+    subTotal = subtotal;
+    tax = 0.089 * subTotal;
+    processingFee = 0.01 * subTotal;
+    total = subTotal + tax + processingFee;
   }
 
   addItem(Item item, int quantity) async {
-    items.add(new CartItem(item, quantity));
-    customer.firestore.addItemToCart(this, item, quantity);
+    if (items.indexWhere((cartItem) => cartItem.item.uid == item.uid) != -1) {
+      incrementItemQuantity(item);
+    } else {
+      items.add(new CartItem(item, quantity));
+      customer.firestore.addItemToCart(this, item, quantity);
+    }
+  }
+
+  incrementItemQuantity(Item item) {
+    int quantity =
+        items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity +
+            1;
+    items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity =
+        quantity;
+    customer.firestore.updateItemQuantityInCart(this, item, quantity);
+  }
+
+  decrementItemQuantity(Item item) {
+    int quantity =
+        items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity -
+            1;
+    items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity =
+        quantity;
+    customer.firestore.updateItemQuantityInCart(this, item, quantity);
   }
 
   removeItem(Item item) {
@@ -33,8 +61,8 @@ class Cart {
     if (quantity <= 0) {
       return this.removeItem(item);
     }
-    items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity = quantity;
+    items.lastWhere((cartItem) => cartItem.item.uid == item.uid).quantity =
+        quantity;
     customer.firestore.updateItemQuantityInCart(this, item, quantity);
   }
-
 }

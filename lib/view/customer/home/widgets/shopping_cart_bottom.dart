@@ -36,7 +36,7 @@ class ShoppingCartBottom extends StatelessWidget {
               SizedBox(width: 10),
               Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                 Text(
-                  '\$123.13',
+                  cart == null ? '' : '\$' + cart.subTotal.toStringAsFixed(2),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,
@@ -55,13 +55,21 @@ class ShoppingCartBottom extends StatelessWidget {
             ],
           ),
           Align(
-            child: Text('+ Processing Fee: \$2.98',
+            child: Text(
+                cart == null
+                    ? '+ Processing Fee: '
+                    : '+ Processing Fee: \$' +
+                        cart.processingFee.toStringAsFixed(2),
                 style: TextStyle(color: Colors.black87)),
             alignment: Alignment.centerLeft,
           ),
           Align(
-            child:
-                Text('+ Tax: \$12.98', style: TextStyle(color: Colors.black87)),
+            child: Text(
+              cart == null
+                  ? '+ Tax: '
+                  : '+ Tax: \$' + cart.tax.toStringAsFixed(2),
+              style: TextStyle(color: Colors.black87),
+            ),
             alignment: Alignment.centerLeft,
           ),
           Divider(
@@ -82,7 +90,7 @@ class ShoppingCartBottom extends StatelessWidget {
               SizedBox(width: 10),
               Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                 Text(
-                  '\$123.13',
+                  cart == null ? '' : '\$' + cart.total.toStringAsFixed(2),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,
@@ -116,7 +124,7 @@ class ShoppingCartBottom extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () async {
-              await CurrentUser.user.deleteCart(cart);
+              //await CurrentUser.user.deleteCart(cart);
               Navigator.pop(context);
             },
             child: Text('Cancel Shopping Trip'),

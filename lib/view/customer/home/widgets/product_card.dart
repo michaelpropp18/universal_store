@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:universal_store/models/item.dart';
 import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
+import 'dart:math';
 
 class ProductCard extends StatelessWidget {
   final Item item;
@@ -34,7 +35,7 @@ class ProductCard extends StatelessWidget {
                     topRight: Radius.circular(10),
                     topLeft: Radius.circular(10)),
                 child: Image.network(
-                  'https://picsum.photos/250?image=10',
+                  'https://picsum.photos/250?image=' + (new Random()).nextInt(85).toString(),
                   height: 200,
                   width: 200,
                 ),

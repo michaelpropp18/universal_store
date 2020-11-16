@@ -45,6 +45,14 @@ String generateWebsiteError(website) {
   }
 }
 
+String formatBarcode(id) {
+  String newId = id;
+  while (newId.length > 0 && newId[0] == '0') {
+    newId = newId.substring(1);
+  }
+  return newId;
+}
+
 String generatePhoneError(phone) {
   if (phone == '') {
     return 'Phone number cannot be empty';
