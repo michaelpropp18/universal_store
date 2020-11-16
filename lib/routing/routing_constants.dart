@@ -32,6 +32,7 @@ const String ViewStoreRoute = '/view_store';
 const String AddItemCodeRoute = '/item_code';
 const String SelectStoreRoute = '/select_store';
 const String SelectPreviousShoppingTrip = '/select_previous_shopping_trip';
+const String CheckoutRoute = '/checkout_route';
 
 //primary manager routes
 const String ManagerStoreRoute = '/manager/store';

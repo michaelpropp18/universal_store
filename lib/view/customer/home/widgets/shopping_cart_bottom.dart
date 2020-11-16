@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/models/cart.dart';
 import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 
 class ShoppingCartBottom extends StatelessWidget {
   final Function toggle;
@@ -119,7 +120,10 @@ class ShoppingCartBottom extends StatelessWidget {
                       side: BorderSide(color: Colors.white70)),
                   color: Colors.blue,
                   disabledColor: Colors.grey,
-                  onPressed: () {}),
+                  onPressed: () {
+                    return Navigator.pushNamed(context, CheckoutRoute,
+                        arguments: cart);
+                  }),
             ),
           ),
           GestureDetector(
