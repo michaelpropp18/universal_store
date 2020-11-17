@@ -49,7 +49,7 @@ All dependent libraries are automatically installed when you run the project.
 ### macOS intial Setup
 
 1. Download the latest stable release of the Flutter SDK: https://flutter.dev/docs/development/tools/sdk/releases
-2. Extract the file in contained the downloaded zip
+2. Extract the file in contained the downloaded zip 
 3. Move the extracted flutter folder to the same level directory as the universal_store repo
 4. Add the flutter tool to your path:
 ```
