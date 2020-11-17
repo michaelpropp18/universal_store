@@ -7,8 +7,25 @@ import 'package:universal_store/routing/routing_constants.dart';
 
 class BrowseHeader extends StatelessWidget {
   final Manager store;
-
   const BrowseHeader({this.store});
+  Future getCart() async {
+    Customer user = await CurrentUser.asyncUser;
+    dynamic carts = await user.getCarts();
+    for (Cart cart in carts) {
+      if (cart.store.uid == store.uid) {
+        return cart;
+      }
+    }
+    await user.createCart(store);
+    carts = await user.getCarts();
+    for (Cart cart in carts) {
+      if (cart.store.uid == store.uid) {
+        return cart;
+      }
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,7 +66,8 @@ class BrowseHeader extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18.0),
               ),
-              onPressed: () {
+              onPressed: () async {
+                await getCart();
                 return Navigator.pushNamed(context, ShoppingCartRoute,
                     arguments: store);
               },

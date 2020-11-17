@@ -360,6 +360,17 @@ class DatabaseService {
         .document()
         .setData({'store': store.uid, 'items': []});
     print('created cart');
+    /*
+    await customers
+        .document(uuid)
+        .collection('carts')
+        .document()
+        .setData({'store': store.uid, 'items': []});
+    Cart cart = await getCustomerCart(store);
+    print('got here');
+    print(cart);
+    return cart;
+    */
   }
 
   Future deleteCart(Cart cart) async {

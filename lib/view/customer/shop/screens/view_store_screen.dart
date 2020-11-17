@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/cart.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/models/manager.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/customer/shop/widgets/stores_list.dart';
@@ -16,6 +19,23 @@ class ViewStoreScreen extends StatefulWidget {
 }
 
 class _ViewStoreScreenState extends State<ViewStoreScreen> {
+  Future getCart() async {
+    Customer user = CurrentUser.user;
+    dynamic carts = await user.getCarts();
+    for (Cart cart in carts) {
+      if (cart.store.uid == widget.store.uid) {
+        return cart;
+      }
+    }
+    await user.createCart(widget.store);
+    carts = await user.getCarts();
+    for (Cart cart in carts) {
+      if (cart.store.uid == widget.store.uid) {
+        return cart;
+      }
+    }
+    return null;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +84,8 @@ class _ViewStoreScreenState extends State<ViewStoreScreen> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   side: BorderSide(color: Colors.blue)),
-              onPressed: () {
+              onPressed: () async {
+                await getCart();
                 Navigator.pushNamedAndRemoveUntil(
                     context, ShoppingCartRoute, ModalRoute.withName(HomeRoute),
                     arguments: widget.store);

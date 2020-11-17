@@ -105,9 +105,9 @@ class ShoppingCartBottom extends StatelessWidget {
           Container(
             margin: const EdgeInsets.all(10),
             child: SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: FlatButton(
+                height: 50,
+                width: double.infinity,
+                child: FlatButton(
                   child: Text(
                     'Check Out',
                     style: TextStyle(
@@ -120,16 +120,17 @@ class ShoppingCartBottom extends StatelessWidget {
                       side: BorderSide(color: Colors.white70)),
                   color: Colors.blue,
                   disabledColor: Colors.grey,
-                  onPressed: () {
-                    return Navigator.pushNamed(context, CheckoutRoute,
-                        arguments: cart);
-                  }),
-            ),
+                  onPressed: cart.items.length > 0
+                      ? () => Navigator.pushNamed(context, CheckoutRoute,
+                          arguments: cart)
+                      : null,
+                )),
           ),
           GestureDetector(
             onTap: () async {
-              //await CurrentUser.user.deleteCart(cart);
-              Navigator.pop(context);
+              await CurrentUser.user.deleteCart(cart);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, HomeRoute, (route) => false);
             },
             child: Text('Cancel Shopping Trip'),
           ),

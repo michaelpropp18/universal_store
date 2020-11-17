@@ -6,7 +6,7 @@ class SelectAddType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 240,
+      height: 180,
       color: Colors.black12,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,6 +34,7 @@ class SelectAddType extends StatelessWidget {
               ),
             ),
           ),
+          /*
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: RaisedButton(
@@ -63,6 +64,7 @@ class SelectAddType extends StatelessWidget {
               ),
             ),
           ),
+          */
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: RaisedButton(

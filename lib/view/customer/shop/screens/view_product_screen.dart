@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:universal_store/models/cart.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/models/item.dart';
+import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/customer/home/widgets/product_card.dart';
 import 'package:universal_store/view/customer/shop/widgets/item_header_tab.dart';
 import 'package:universal_store/view/manager/store_profile/header_tab.dart';
@@ -16,6 +20,24 @@ class ViewProductScreen extends StatefulWidget {
 }
 
 class _ViewProductScreenState extends State<ViewProductScreen> {
+  Future getCart() async {
+    Customer user = CurrentUser.user;
+    dynamic carts = await user.getCarts();
+    for (Cart cart in carts) {
+      if (cart.store.uid == widget.product.store.uid) {
+        return cart;
+      }
+    }
+    await user.createCart(widget.product.store);
+    carts = await user.getCarts();
+    for (Cart cart in carts) {
+      if (cart.store.uid == widget.product.store.uid) {
+        return cart;
+      }
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +93,18 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   side: BorderSide(color: Colors.blue)),
-              onPressed: () {},
+              onPressed: () async {
+                Customer user = CurrentUser.user;
+                Cart cart = await getCart();
+                Item item = await user.getItemWithBarcode(
+                    widget.product.store, widget.product.barcode);
+                if (item != null) {
+                  await cart.addItem(item, 1);
+                }
+                Navigator.pushNamedAndRemoveUntil(
+                    context, ShoppingCartRoute, ModalRoute.withName(HomeRoute),
+                    arguments: widget.product.store);
+              },
               color: Colors.blue,
               textColor: Colors.white,
               child: Text('Add Item'.toUpperCase(),

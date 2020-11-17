@@ -74,7 +74,10 @@ class _StoreInventoryScreenState extends State<StoreInventoryScreen> {
                         ],
                       )
                     : Container(
-                        child: Align(child: Text('No inventory yet'), alignment: Alignment.center,),
+                        child: Align(
+                          child: Text('No inventory yet'),
+                          alignment: Alignment.center,
+                        ),
                         width: double.infinity,
                         height: double.infinity),
               ),
