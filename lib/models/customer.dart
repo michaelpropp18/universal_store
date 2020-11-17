@@ -19,7 +19,7 @@ class Customer extends User {
     return await firestore.getItemWithBarcodeCustomer(store, barcode);
   }
 
-  checkout(Cart cart) {
+  Future checkout(Cart cart) async {
     // TODO Sprint 5 
     /*
     1. Add shopping cart to user's history
@@ -27,6 +27,7 @@ class Customer extends User {
     3. Deduct items from store inventory
     4. Delete shopping cart from active shopping carts 
     */
+    await deleteCart(cart);
   } 
 
   Future getNearbyStores() async {

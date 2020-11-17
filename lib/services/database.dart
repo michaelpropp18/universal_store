@@ -359,6 +359,7 @@ class DatabaseService {
         .collection('carts')
         .document()
         .setData({'store': store.uid, 'items': []});
+    print('created cart');
     /*
     await customers
         .document(uuid)

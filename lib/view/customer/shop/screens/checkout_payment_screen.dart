@@ -143,11 +143,16 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                       color: Colors.blue,
                       disabledColor: Colors.grey,
                       onPressed: error == ''
-                          ? () {
-                              user.checkout(widget.cart);
+                          ? () async {
+                              await user.checkout(widget.cart);
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, HomeRoute, (route) => false);
+                              Navigator.pushNamed(context, ReceiptRoute, arguments: widget.cart);
+                              /*
                               Navigator.pushNamedAndRemoveUntil(context,
                                   ReceiptRoute, ModalRoute.withName(HomeRoute),
                                   arguments: widget.cart);
+                                  */
                               /*
                               Navigator.pushNamed(context, ReceiptRoute,
                                   arguments: widget.cart);

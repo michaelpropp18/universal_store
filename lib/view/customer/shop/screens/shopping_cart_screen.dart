@@ -36,11 +36,15 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         return cart;
       }
     }
+    /*
     Cart newCart = await user.createCart(widget.store);
+    print('did this here');
     setState(() {
       shoppingCart = newCart;
     });
     return shoppingCart;
+    */
+    return null;
   }
 
   toggleBottom() {
