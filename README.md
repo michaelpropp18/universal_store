@@ -30,7 +30,7 @@ Tools: Flutter depends on these tools being available in your environment.
 - Git for Windows 2.x, with the Use Git from the Windows Command Prompt option.
 
 
-**Dependent Libraries**
+**Dependent Libraries** 
 
 All dependent libraries are automatically installed when you run the project. 
 - sdk: flutter
