@@ -49,7 +49,7 @@ All dependent libraries are automatically installed when you run the project.
 ### macOS intial Setup
 
 1. Download the latest stable release of the Flutter SDK: https://flutter.dev/docs/development/tools/sdk/releases
-2. Extract the file in contained the downloaded zip 
+2. Extract the file in contained the downloaded zip
 3. Move the extracted flutter folder to the same level directory as the universal_store repo
 4. Add the flutter tool to your path:
 ```
@@ -120,7 +120,7 @@ Our app has not been launched to the app store yet since doing so requires a $10
 
 Once the Universal Store app is on the app store, a client can install searching for "Universal Store" in the app store search window, selecting the Universal Store app, and then clicking the download button. 
 
-To install a developer version on your physical phone, follow the instructions in https://flutter.dev/docs/get-started/install/macos or https://flutter.dev/docs/get-started/install/windows
+To install a developer version on your physical device, follow the instructions in https://flutter.dev/docs/get-started/install/macos or https://flutter.dev/docs/get-started/install/windows
 
 **Run Instructions**
 
