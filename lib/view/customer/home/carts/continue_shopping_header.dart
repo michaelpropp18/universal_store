@@ -24,7 +24,7 @@ class ContinueShoppingHeader extends StatelessWidget {
                 text,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 14,
                 ),
               ),
               Text('Total: \$' + cart.total.toStringAsFixed(2)),

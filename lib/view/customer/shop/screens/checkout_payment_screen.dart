@@ -145,8 +145,13 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                       onPressed: error == ''
                           ? () {
                               user.checkout(widget.cart);
+                              Navigator.pushNamedAndRemoveUntil(context,
+                                  ReceiptRoute, ModalRoute.withName(HomeRoute),
+                                  arguments: widget.cart);
+                              /*
                               Navigator.pushNamed(context, ReceiptRoute,
                                   arguments: widget.cart);
+                              */
                             }
                           : null,
                     ),

@@ -170,8 +170,11 @@ class ReceiptScreen extends StatelessWidget {
                           color: Colors.blue,
                           disabledColor: Colors.grey,
                           onPressed: () {
+                            Navigator.pop(context);
+                            /*
                             Navigator.pushNamedAndRemoveUntil(
                                 context, HomeRoute, (route) => false);
+                                */
                           }),
                     ),
                   ),
