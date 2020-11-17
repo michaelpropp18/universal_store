@@ -95,13 +95,33 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
                         text: "barcodeNumber",
                         uid: snapshot.data.uid,
                         onPressed: () async {
+                           Navigator.pushNamed(
+                            context,
+                            ManagerInventoryEditBarcode,
+                            arguments: snapshot.data.barcode,
+                          ).then((barcode) {
+                            if (barcode != null) {
+                              manager.updateItemBarcode(snapshot.data, barcode);
+                            }
+                          }).then((_) =>
+                              setState(() => manager = CurrentUser.user));
                         },
                       ),
                       Attribute(
                         header: 'Description',
                         text: "itemDescription",
                         uid: snapshot.data.uid,
-                        onPressed: () async {
+                         onPressed: () async {
+                           Navigator.pushNamed(
+                            context,
+                            ManagerInventoryEditDescription,
+                            arguments: snapshot.data.description,
+                          ).then((description) {
+                            if (description != null) {
+                              manager.updateItemDescription(snapshot.data, description);
+                            }
+                          }).then((_) =>
+                              setState(() => manager = CurrentUser.user));
                         },
                       ),
                     ],

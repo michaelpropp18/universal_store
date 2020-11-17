@@ -50,6 +50,14 @@ class Manager extends User {
     firestore.updateItemStock(item.uid, stock);
   }
 
+  updateItemBarcode(Item item, int barcode) {
+    //TODO Sprint 5
+  }
+
+  updateItemDescription(Item item, String description) {
+    //TODO Sprint 5
+  }
+
   Future getInventory() async {
     return await firestore.getInventory();
   }
