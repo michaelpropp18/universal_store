@@ -4,8 +4,9 @@ class PaymentInput extends StatelessWidget {
   final String title;
   final String hintText;
   final String text;
+  final Function onChanged;
 
-  const PaymentInput({this.title = '', this.hintText = '', this.text = ''});
+  const PaymentInput({this.title = '', this.hintText = '', this.text = '', this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,11 @@ class PaymentInput extends StatelessWidget {
             ),
             if (text == '')
               TextField(
+                onChanged: (i) {
+                  if (this.onChanged != null) {
+                    this.onChanged(i);
+                  }
+                },
                 style: TextStyle(
                   fontSize: 14,
                 ),

@@ -1,6 +1,71 @@
 library utilities;
 
 ///////////////////////////////////////////////////
+/// Credit Card Error Generation
+///////////////////////////////////////////////////
+
+String generateAllCardErrors(name, number, date, code, zip) {
+  if (generateNameError(name) != '') {
+    return generateNameError(name);
+  } else if (generateCardNumberError(number) != '') {
+    return generateCardNumberError(number);
+  } else if (generateCardDateError(date) != '') {
+    return generateCardDateError(date);
+  } else if (generateCardCodeError(code) != '') {
+    return generateCardCodeError(code);
+  } else if (generateCardZipError(zip) != '') {
+    return generateCardZipError(zip);
+  } else {
+    return '';
+  }
+}
+
+String generateCardNumberError(number) {
+  number = number.replaceAll(' ', '');
+  if (number == '') {
+    return 'Card number cannot be empty';
+  } else if (!RegExp(r'[\d]{12,}').hasMatch(number) ||
+      double.parse(number, (e) => null) == null) {
+    return 'Please enter a valid card number';
+  } else {
+    return '';
+  }
+}
+
+String generateCardDateError(date) {
+  if (date == '') {
+    return 'Date cannot be empty';
+  } else if (!RegExp(r'^(0?[1-9]|1[0-2])/(0?[1-9]|[12][0-9]|3[01])$')
+      .hasMatch(date)) {
+    return 'Date must be MM/YY';
+  } else {
+    return '';
+  }
+}
+
+String generateCardCodeError(code) {
+  if (code == '') {
+    return 'Security code cannot be empty';
+  } else if (!RegExp(r'[\d]{3}').hasMatch(code) ||
+      double.parse(code, (e) => null) == null) {
+    return 'Please enter a valid security code';
+  } else {
+    return '';
+  }
+}
+
+String generateCardZipError(zip) {
+  if (zip == '') {
+    return 'Zip code cannot be empty';
+  } else if (!RegExp(r'[\d]{5,}').hasMatch(zip) ||
+      double.parse(zip, (e) => null) == null) {
+    return 'Please enter a valid zip code';
+  } else {
+    return '';
+  }
+}
+
+///////////////////////////////////////////////////
 /// User Input Error Generation
 ///////////////////////////////////////////////////
 
