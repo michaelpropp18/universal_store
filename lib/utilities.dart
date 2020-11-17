@@ -161,3 +161,13 @@ String generateQuantityError(quantity) {
     return '';
   }
 }
+
+String generateDescriptionError(description) {
+  if (description == '') {
+    return 'Description cannot be empty';
+  } else if (description.length > 30) {
+    return 'Description is too long';
+  } else {
+    return '';
+  }
+}

@@ -50,6 +50,16 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                   text: widget.product.stock.toString(),
                   showEditIcon: false,
                 ),
+                Attribute(
+                  header: 'Description',
+                  text: widget.product.description,
+                  showEditIcon: false,
+                ),
+                Attribute(
+                  header: 'Barcode',
+                  text: widget.product.barcode,
+                  showEditIcon: false,
+                ),
               ],
             ),
             RaisedButton(

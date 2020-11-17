@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:universal_store/models/cart.dart';
+import 'package:universal_store/models/current_user.dart';
+import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/routing/routing_constants.dart';
 import 'package:universal_store/view/customer/shop/widgets/payment_input.dart';
 import 'package:universal_store/view/shared/error_text.dart';
@@ -22,6 +24,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
   String code;
   String zip;
   String error;
+  Customer user = CurrentUser.user;
 
   @override
   void initState() {
@@ -140,8 +143,11 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                       color: Colors.blue,
                       disabledColor: Colors.grey,
                       onPressed: error == ''
-                          ? () => Navigator.pushNamed(context, ReceiptRoute,
-                              arguments: widget.cart)
+                          ? () {
+                              user.checkout(widget.cart);
+                              Navigator.pushNamed(context, ReceiptRoute,
+                                  arguments: widget.cart);
+                            }
                           : null,
                     ),
                   ),
@@ -150,7 +156,6 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                   alignment: Alignment.center,
                   child: GestureDetector(
                     onTap: () async {
-                      //await CurrentUser.user.deleteCart(cart);
                       Navigator.pop(context);
                     },
                     child: Text('Return to Checkout'),
