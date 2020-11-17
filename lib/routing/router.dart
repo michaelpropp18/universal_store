@@ -26,6 +26,8 @@ import 'package:universal_store/view/customer/shop/screens/shopping_cart_screen.
 import 'package:universal_store/view/customer/shop/screens/view_product_screen.dart';
 import 'package:universal_store/view/customer/shop/screens/view_store_screen.dart';
 import 'package:universal_store/view/manager/analytics/analytics_screen.dart';
+import 'package:universal_store/view/manager/inventory/edit_item_barcode_screen.dart';
+import 'package:universal_store/view/manager/inventory/edit_item_description_screen.dart';
 import 'package:universal_store/view/manager/inventory/edit_item_price_screen.dart';
 import 'package:universal_store/view/manager/inventory/edit_item_quantity_screen.dart';
 import 'package:universal_store/view/manager/store_profile/edit_store_address_screen.dart';
@@ -151,6 +153,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (context) =>
               EditItemQuantityScreen(quantity: settings.arguments));
+    case ManagerInventoryEditBarcode:
+      return MaterialPageRoute(
+          builder: (context) =>
+              EditItemBarcodeScreen(barcode: settings.arguments));
+    case ManagerInventoryEditDescription:
+      return MaterialPageRoute(
+          builder: (context) =>
+              EditItemDescriptionScreen(description: settings.arguments));
+
     case ManagerInventoryAddItem:
       return MaterialPageRoute(builder: (context) => AddItemScreen());
 

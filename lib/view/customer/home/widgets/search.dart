@@ -6,7 +6,6 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, SearchRoute);
       },
       child: Padding(
         padding: const EdgeInsets.only(

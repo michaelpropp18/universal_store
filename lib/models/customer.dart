@@ -19,9 +19,15 @@ class Customer extends User {
     return await firestore.getItemWithBarcodeCustomer(store, barcode);
   }
 
-  Future getStoreWithBarcode(barcode) {
-    // TODO return store that has the item with this barcode
-  }
+  checkout(Cart cart) {
+    // TODO Sprint 5 
+    /*
+    1. Add shopping cart to user's history
+    2. Add shopping cart to respective store's history
+    3. Deduct items from store inventory
+    4. Delete shopping cart from active shopping carts 
+    */
+  } 
 
   Future getNearbyStores() async {
     return await firestore.getNearbyStores();
@@ -53,6 +59,19 @@ class Customer extends User {
 
   Future getCarts() async {
     return await firestore.getCustomerCarts();
+  }
+
+  Future getCart(Manager store) async {
+    return await firestore.getCustomerCart(store);
+  }
+
+  Future cartExists(Manager store) async {
+    Cart cart = await firestore.getCustomerCart(store);
+    if (cart != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future deleteCart(Cart cart) async {

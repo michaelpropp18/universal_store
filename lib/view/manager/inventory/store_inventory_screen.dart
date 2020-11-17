@@ -52,26 +52,31 @@ class _StoreInventoryScreenState extends State<StoreInventoryScreen> {
               body: Container(
                 color: Colors.black12,
                 padding: const EdgeInsets.all(10.0),
-                child: ListView(
-                  children: [
-                    StoreInventoryBox(
-                      header: 'Items',
-                      inventoryItems: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) {
-                          return StoreItem(
-                              quantity: snapshot.data[index].stock,
-                              price: snapshot.data[index].price,
-                              name: snapshot.data[index].name,
-                              onUpdate: forceUpdate,
-                              uid: snapshot.data[index].uid);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                child: snapshot.data.length > 0
+                    ? ListView(
+                        children: [
+                          StoreInventoryBox(
+                            header: 'Items',
+                            inventoryItems: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index) {
+                                return StoreItem(
+                                    quantity: snapshot.data[index].stock,
+                                    price: snapshot.data[index].price,
+                                    name: snapshot.data[index].name,
+                                    onUpdate: forceUpdate,
+                                    uid: snapshot.data[index].uid);
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(
+                        child: Align(child: Text('No inventory yet'), alignment: Alignment.center,),
+                        width: double.infinity,
+                        height: double.infinity),
               ),
             );
           } else {

@@ -35,7 +35,7 @@ class Manager extends User {
   }
 
   addItemToInventory(String itemName, String barcode, String description, double price, int stock) {
-    firestore.addItemToInventory(itemName, barcode, description, price, stock);
+    firestore.addItemToInventory(itemName, barcode, description, price, stock, this);
   }
 
   deleteItemFromInventory(Item item) {
@@ -48,6 +48,14 @@ class Manager extends User {
 
   updateItemStock(Item item, int stock) {
     firestore.updateItemStock(item.uid, stock);
+  }
+
+  updateItemBarcode(Item item, int barcode) {
+    //TODO Sprint 5
+  }
+
+  updateItemDescription(Item item, String description) {
+    //TODO Sprint 5
   }
 
   Future getInventory() async {

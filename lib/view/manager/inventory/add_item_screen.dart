@@ -23,6 +23,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
   String quantityError;
   String barcode;
   String barcodeError;
+  String description;
+  String descriptionError;
   Manager manager = CurrentUser.user;
 
   @override
@@ -35,13 +37,15 @@ class _AddItemScreenState extends State<AddItemScreen> {
     quantityError = utilities.generateQuantityError(quantity);
     barcode = '';
     barcodeError = utilities.generateBarcodeError(barcode);
+    description = '';
+    descriptionError = utilities.generateDescriptionError(description);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        //resizeToAvoidBottomInset: false,
         appBar: AppBar(
           brightness: Brightness.light, // this makes the status bar black
           iconTheme: new IconThemeData(
@@ -49,76 +53,92 @@ class _AddItemScreenState extends State<AddItemScreen> {
           backgroundColor: Colors.white,
           title: Text('Add item', style: TextStyle(color: Colors.black)),
         ),
+        backgroundColor: Color.fromARGB(0xFF, 0xDC, 0xDC, 0xDC),
         body: Container(
-          color: Colors.black12,
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-          child: Column(
-            children: [
-              EditField(
-                error: nameError != '',
-                text: name,
-                hintText: 'Item name',
-                onChanged: (e) {
-                  setState(() {
-                    name = e;
-                    nameError = utilities.generateNameError(name);
-                  });
-                },
-              ),
-              ErrorText(nameError),
-              SizedBox(height: 10),
-              EditField(
-                error: priceError != '',
-                text: price,
-                hintText: 'Item price',
-                onChanged: (e) {
-                  setState(() {
-                    price = e;
-                    priceError = utilities.generatePriceError(price);
-                  });
-                },
-              ),
-              ErrorText(priceError),
-              SizedBox(height: 10),
-              EditField(
-                error: quantityError != '',
-                text: quantity,
-                hintText: 'Item Quantity',
-                onChanged: (e) {
-                  setState(() {
-                    quantity = e;
-                    quantityError = utilities.generateQuantityError(quantity);
-                  });
-                },
-              ),
-              ErrorText(quantityError),
-              SizedBox(height: 10),
-              EditField(
-                error: barcodeError != '',
-                text: barcode,
-                hintText: 'Item Barcode',
-                onChanged: (e) {
-                  setState(() {
-                    barcode = e;
-                    barcodeError = utilities.generateBarcodeError(barcode);
-                  });
-                },
-              ),
-              ErrorText(barcodeError),
-              SaveChangesButton(
-                  onPress: addItem,
-                  enabled: nameError == '' &&
-                      quantityError == '' &&
-                      priceError == '' &&
-                      barcodeError == ''),
-            ],
+          child: SingleChildScrollView(
+                      child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                EditField(
+                  error: nameError != '',
+                  text: name,
+                  hintText: 'Item name',
+                  onChanged: (e) {
+                    setState(() {
+                      name = e;
+                      nameError = utilities.generateNameError(name);
+                    });
+                  },
+                ),
+                ErrorText(nameError),
+                SizedBox(height: 10),
+                EditField(
+                  error: priceError != '',
+                  text: price,
+                  hintText: 'Item price',
+                  onChanged: (e) {
+                    setState(() {
+                      price = e;
+                      priceError = utilities.generatePriceError(price);
+                    });
+                  },
+                ),
+                ErrorText(priceError),
+                SizedBox(height: 10),
+                EditField(
+                  error: quantityError != '',
+                  text: quantity,
+                  hintText: 'Item Quantity',
+                  onChanged: (e) {
+                    setState(() {
+                      quantity = e;
+                      quantityError = utilities.generateQuantityError(quantity);
+                    });
+                  },
+                ),
+                ErrorText(quantityError),
+                SizedBox(height: 10),
+                EditField(
+                  error: barcodeError != '',
+                  text: barcode,
+                  hintText: 'Item Barcode',
+                  onChanged: (e) {
+                    setState(() {
+                      barcode = e;
+                      barcodeError = utilities.generateBarcodeError(barcode);
+                    });
+                  },
+                ),
+                ErrorText(barcodeError),
+                SizedBox(height: 10),
+                EditField(
+                  error: descriptionError != '',
+                  text: description,
+                  hintText: 'Item Description',
+                  onChanged: (e) {
+                    setState(() {
+                      description = e;
+                      descriptionError = utilities.generateDescriptionError(description);
+                    });
+                  },
+                ),
+                ErrorText(descriptionError),
+                SaveChangesButton(
+                    onPress: addItem,
+                    enabled: nameError == '' &&
+                        quantityError == '' &&
+                        priceError == '' &&
+                        barcodeError == ''),
+              ],
+            ),
           ),
         ));
   }
 
   addItem() {
-    manager.addItemToInventory(name, barcode,
-        'ENTER_DESCRIPTION_HERE', double.parse(price), int.parse(quantity));
+    manager.addItemToInventory(name, barcode, description,
+        double.parse(price), int.parse(quantity));
     Navigator.pop(context);
   }
 }
