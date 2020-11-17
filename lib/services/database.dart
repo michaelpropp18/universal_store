@@ -135,7 +135,7 @@ class DatabaseService {
   }
 
   addItemToInventory(String itemName, String barcode, String description,
-      double price, int stock) async {
+      double price, int stock, Manager store) async {
     barcode = formatBarcode(barcode);
     DocumentReference itemDocument =
         managers.document(uuid).collection('items').document();
@@ -144,7 +144,8 @@ class DatabaseService {
       'barcode': barcode,
       'description': description,
       'price': price,
-      'stock': stock
+      'stock': stock,
+      'store': store.uid
     });
     await managers
         .document(uuid)
@@ -193,6 +194,9 @@ class DatabaseService {
         .collection('items')
         .document(itemUid)
         .get();
+    if (!itemDocument.exists) {
+      return null;
+    }
     Map itemData = itemDocument.data;
     Item item = Item.fromData(itemUid, itemData);
     return item;
@@ -209,7 +213,6 @@ class DatabaseService {
       print('returning null');
       return null;
     }
-    print('got here');
     String itemUid = barcodeDocument.data['item'];
     DocumentSnapshot itemDocument = await managers
         .document(uuid)
@@ -230,7 +233,9 @@ class DatabaseService {
     List<DocumentSnapshot> documents = qs.documents;
     List<Item> items = new List();
     for (DocumentSnapshot document in documents) {
+      Map itemData = document.data;
       Item item = Item.fromData(document.documentID, document.data);
+      item.store = await getManager(itemData['store']);
       items.add(item);
     }
     return items;
@@ -242,7 +247,9 @@ class DatabaseService {
     List<DocumentSnapshot> documents = qs.documents;
     List<Item> items = new List();
     for (DocumentSnapshot document in documents) {
+      Map itemData = document.data;
       Item item = Item.fromData(document.documentID, document.data);
+      item.store = await getManager(itemData['store']);
       items.add(item);
     }
     return items;
@@ -304,6 +311,23 @@ class DatabaseService {
     return carts;
   }
 
+  Future getCustomerCart(Manager store) async {
+    DocumentSnapshot cartDocument = await customers
+        .document(uuid)
+        .collection('carts')
+        .document(store.uid)
+        .get();
+    if (!cartDocument.exists) {
+      return null;
+    }
+    Map cartData = cartDocument.data;
+    Manager manager = await getManager(cartData['store']);
+    Customer customer = await getCustomer(uuid);
+    List<CartItem> items = await getCartItems(manager, customer, cartData);
+    Cart cart = new Cart(cartDocument.documentID, manager, customer, items);
+    return cart;
+  }
+
   Future getCartItems(Manager manager, Customer customer, Map orderData) async {
     List<CartItem> items = new List();
     for (Map cartItemData in orderData['items']) {
@@ -312,12 +336,17 @@ class DatabaseService {
           .collection('items')
           .document(cartItemData['item'])
           .get();
+      if (!itemDocument.exists) {
+        continue;
+      }
       Map itemData = itemDocument.data;
+      itemData['store'] = await getManager(itemData['store']);
       Item item = new Item(
           uid: itemDocument.documentID,
           name: itemData['itemName'],
           price: itemData['price'],
-          stock: itemData['stock']);
+          stock: itemData['stock'],
+          store: itemData['store']);
       CartItem cartItem = new CartItem(item, cartItemData['quantity']);
       items.add(cartItem);
     }

@@ -35,7 +35,7 @@ class Manager extends User {
   }
 
   addItemToInventory(String itemName, String barcode, String description, double price, int stock) {
-    firestore.addItemToInventory(itemName, barcode, description, price, stock);
+    firestore.addItemToInventory(itemName, barcode, description, price, stock, this);
   }
 
   deleteItemFromInventory(Item item) {

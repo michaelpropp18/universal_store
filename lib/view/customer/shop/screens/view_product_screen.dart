@@ -41,6 +41,11 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
               header: 'General Information',
               attributes: [
                 Attribute(
+                  header: 'Store',
+                  text: widget.product.store.storeName,
+                  showEditIcon: false,
+                ),
+                Attribute(
                   header: 'Price',
                   text: '\$' + widget.product.price.toStringAsFixed(2),
                   showEditIcon: false,

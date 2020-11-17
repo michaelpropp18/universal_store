@@ -92,7 +92,7 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
                       ),
                       Attribute(
                         header: 'Barcode',
-                        text: "barcodeNumber",
+                        text: snapshot.data.barcode,
                         uid: snapshot.data.uid,
                         onPressed: () async {
                            Navigator.pushNamed(
@@ -109,7 +109,7 @@ class _InventoryItemScreenState extends State<InventoryItemScreen> {
                       ),
                       Attribute(
                         header: 'Description',
-                        text: "itemDescription",
+                        text: snapshot.data.description,
                         uid: snapshot.data.uid,
                          onPressed: () async {
                            Navigator.pushNamed(
