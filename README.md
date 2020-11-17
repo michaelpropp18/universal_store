@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## Git practices
 
-Commits:
+Commits: 
 1. Create a new branch for each major task
 2. Commit early and often
 3. Write purposeful commit messages
