@@ -35,7 +35,6 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
         return cart;
       }
     }
-    print('oops');
     return null;
   }
 
