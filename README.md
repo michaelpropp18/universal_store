@@ -1,4 +1,4 @@
-# universal_store
+# Universal Store Overview
 
 In recent years, people have been doing more and more of their shopping online, which means that smaller physical stores without an online presence have been seeing less consumer traffic. This semester, we created the Universal Store app to help alleviate that problem. The Universal Store enables physical stores to display their inventory in an app. Customers can browse for particular products and can receive targeted promotions based on their shopping history. The Universal Store also serves as a shopping cart interface allowing customers to scan in-store items and checkout in the app. This makes the in-person shopping experience much more convenient, and at the same time encourages valuable customers to shop at physical stores.
 
@@ -106,8 +106,6 @@ All checkmarks should be green with the exception of the emulator (if it has not
 - Verify the AVD configuration is correct, and select Finish.
 - In Android Virtual Device Manager, click Run in the toolbar. The emulator starts up and displays the default canvas for your selected OS version and device.
 
-We recommend visiting https://flutter.dev/docs/get-started/install/windows to troubleshoot
-
 **macOS Build Instructions**
 
 Follow steps 5 - 7 in the macOS set-up instructions to build.
@@ -117,9 +115,12 @@ Follow steps 5 - 7 in the macOS set-up instructions to build.
 Follow steps 7 - 9 in the windows set-up instructions to build. 
 
 **Installation of Actual Application**
+
 Our app has not been launched to the app store yet since doing so requires a $100 apple development membership and approval from Apple. 
 
 Once the Universal Store app is on the app store, a client can install searching for "Universal Store" in the app store search window, selecting the Universal Store app, and then clicking the download button. 
+
+To install a developer version on your physical phone, follow the instructions in https://flutter.dev/docs/get-started/install/macos or https://flutter.dev/docs/get-started/install/windows
 
 **Run Instructions**
 
@@ -127,6 +128,14 @@ Once the Universal Store app is installed on your phone, simply double click the
 
 **Troubleshooting**
 
+Common issues:
+
+1. If you receive a flutter not found message, check that your flutter path is valid. We recommend adding this to your bash_profile, else you need to set this every time you open a new command prompt.
+2. If you are unable to launch an emulator in macOS, check that the lastest version of xCode is installed
+3. If you are unable to launch an emulator in Windows, check that the latest version of AndroidStudio is installed
+4. We recommend placing the flutter sdk folder in the same directory as the universal_store folder itself. This ensures that the universal store can run flutter properly. You can place the flutter folder in a different directory, but will need to adjust the flutter path accordingly. 
+
+We highly recommend visiting https://flutter.dev/docs/ to troubleshoot any issues as this is much more comprehensive then our list above. Running ```flutter doctor``` will tell you exactly which components are not working, and https://flutter.dev/docs/  contains documentation of how to fix these specific issues.
 
 
 
