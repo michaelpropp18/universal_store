@@ -116,4 +116,17 @@ Follow steps 5 - 7 in the macOS set-up instructions to build.
 
 Follow steps 7 - 9 in the windows set-up instructions to build. 
 
+**Installation of Actual Application**
+Our app has not been launched to the app store yet since doing so requires a $100 apple development membership and approval from Apple. 
+
+Once the Universal Store app is on the app store, a client can install searching for "Universal Store" in the app store search window, selecting the Universal Store app, and then clicking the download button. 
+
+**Run Instructions**
+
+Once the Universal Store app is installed on your phone, simply double click the application to run. 
+
+**Troubleshooting**
+
+
+
 
