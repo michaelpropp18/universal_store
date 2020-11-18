@@ -1,8 +1,7 @@
-import 'package:universal_store/models/item.dart';
-
-import 'customer.dart';
-import 'manager.dart';
 import 'cart_item.dart';
+import 'customer.dart';
+import 'item.dart';
+import 'manager.dart';
 
 class Cart {
   String uid;

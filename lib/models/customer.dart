@@ -21,12 +21,12 @@ class Customer extends User {
 
   Future checkout(Cart cart) async {
     // TODO Sprint 5 
-    /*
-    1. Add shopping cart to user's history
-    2. Add shopping cart to respective store's history
-    3. Deduct items from store inventory
-    4. Delete shopping cart from active shopping carts 
-    */
+    //1. Add shopping cart to user's history (orders?)
+    //2. Add shopping cart to respective store's history (orders?)
+    //3. Deduct items from store inventory
+
+
+    //4. Delete shopping cart from active shopping carts (already completed below)
     await deleteCart(cart);
   } 
 
