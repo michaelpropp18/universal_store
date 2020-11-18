@@ -218,6 +218,70 @@ We highly recommend visiting https://flutter.dev/docs/ to troubleshoot any issue
 - Click "Sign in"
 - To reset your password, click "Forgot Password" and enter your email for instructions to reset
 
+## Customer Browse Stores/Products
+- Login with a valid customer account
+- Select "Browse" on home screen
+- Click on an item to view additional information
+- Click on a store header to view additional information
+
+## Customer Start New Shopping Trip
+- Login with a valid customer account
+
+Method 1:
+- Click the "+" in the bottom right corner
+- Select "Shopping Trip"
+- Select the store you would like to shop at from the drop down
+- Click "Start Shopping"
+
+Method 2:
+- Browse for a store you are interested in through the browse section
+- Click "Shop" by that store's header
+
+Method 3:
+- Browse for a product you are intereseted in through the browse section
+- Click the product for more information
+- Click "Add Item" to start a shopping trip at the store with that product
+
+## Customer Add Item
+- Login with a valid customer account
+
+Method 1:
+- Create a new shopping trip as described above
+- Click the camera icon in the top right corner of the shopping cart screen
+- Scan the barcode of the item you wish to add using your device's camera 
+
+Method 2:
+- Create a new shopping trip as described above
+- Click the shopping cart + icon in the top right corner of the shopping cart screen
+- Manually enter the barcode number of the item you wish to add
+
+Method 3:
+- Browse for a product you are intereseted in through the browse section
+- Click the product for more information
+- Click "Add Item" to start a shopping trip and add that item to the cart
+
+## Customer Checkout
+- Login with a valid customer account
+- Start a shopping trip as described above
+- Add at least one item as described above
+- Click the ">" to expand the bottom menu
+- Click the "checkout" button
+- Confirm that the items in the cart are correct and then clikc "Go to payment"
+- Enter your payment information and click "Confirm Payment"
+- Show the receipt produced to the store clerk if necessary
+
+## Customer View/Edit Profile
+- Login with a valid customer account
+- Click the drawer icon in the top left corner of the home screen
+- Select Profile
+- Click the pencil icon to edit any field in the profile
+- Click "save" to save changes
+
+## Customer View Payment/Privacy/Help/
+- Login with a valid customer account
+- Click the drawer icon in the top left corner of the home screen
+- Select Purchases/Payment/Privacy/Help
+
 ## Manager View/Edit Profile
 - Login with a valid manager account
 - Click "My Store" to view store pfofile
