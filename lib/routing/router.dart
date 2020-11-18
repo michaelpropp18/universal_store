@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//imports organized by section
 import 'package:universal_store/view/authentication/account_type_screen.dart';
 import 'package:universal_store/view/authentication/customer_email_screen.dart';
 import 'package:universal_store/view/authentication/customer_name_screen.dart';

@@ -1,8 +1,8 @@
+import 'cart.dart';
 import 'item.dart';
-import 'user.dart';
 import 'manager.dart';
 import 'order.dart';
-import 'cart.dart';
+import 'user.dart';
 
 class Customer extends User {
   String firstName;

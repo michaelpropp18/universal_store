@@ -1,5 +1,5 @@
-import 'user.dart';
 import 'item.dart';
+import 'user.dart';
 
 class Manager extends User {
   String storeName;

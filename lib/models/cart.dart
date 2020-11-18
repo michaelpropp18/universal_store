@@ -19,8 +19,8 @@ class Cart {
       subtotal += item.item.price * item.quantity;
     }
     subTotal = subtotal;
-    tax = 0.089 * subTotal;
-    processingFee = 0.01 * subTotal;
+    tax = 0.089 * subTotal; //0.089 is simulating tax in the area 
+    processingFee = 0.01 * subTotal; //0.01 is simulating the processing fee
     total = subTotal + tax + processingFee;
   }
 
