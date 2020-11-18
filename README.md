@@ -52,6 +52,13 @@ Manager Dashboard Screen(s)
 ## Known bugs
 - Navigating home after generating a receipt briefly shows the login screen (issue #115)
 - Incrementing, decrementing, or removing items from the shopping cart can lag with slow internet (issue #116) 
+- Manager editing product barcode or description does not produce any change (issue #117)
+
+## Unimplemented Items
+- Random images are displayed in place of actual product images (images were a bonus feature)
+- Search bar not implmeneted yet (search was a bonus feature)
+- Manager analytics section is empty (analytics was a bonus feature)
+- Payment information is not actually stored / processed (as discussed with client)
 
 # Install Guide
 
@@ -167,7 +174,7 @@ Follow steps 7 - 9 in the windows set-up instructions to build.
 
 **Installation of Actual Application**
 
-Our app has not been launched to the app store yet since doing so requires a $100 apple development membership and approval from Apple. 
+Our app has not been launched to the app store yet since doing so requires a $100 Apple Developer license and approval from Apple. 
 
 Once the Universal Store app is on the app store, a client can install searching for "Universal Store" in the app store search window, selecting the Universal Store app, and then clicking the download button. 
 
@@ -187,6 +194,49 @@ Common issues:
 4. We recommend placing the flutter sdk folder in the same directory as the universal_store folder itself. This ensures that the universal store can run flutter properly. You can place the flutter folder in a different directory, but will need to adjust the flutter path accordingly. 
 
 We highly recommend visiting https://flutter.dev/docs/ to troubleshoot any issues as this is much more comprehensive then our list above. Running ```flutter doctor``` will tell you exactly which components are not working, and https://flutter.dev/docs/  contains documentation of how to fix these specific issues.
+
+# User Guide
+
+## New Customer Registration
+- Open the Universal Store app on your device
+- On the login screen, click "Create Account"
+- Click "Customer"
+- Enter first and last name
+- Enter email, password, and then confirm password. Passwords must match and be at least 6 characters long. 
+- Click "Create Account"
+
+## New Manager Registration
+- Open the Universal Store App on your device
+- On the login screen, click "Create Account"
+- Click "Store Manager"
+- Enter store name, phone number, website, and address
+- Enter email, password, and then confirm password. Passwords must match and be at least 6 characters long. 
+- Click "Create Account"
+
+## Existing User Login
+- Enter valid email and password
+- Click "Sign in"
+- To reset your password, click "Forgot Password" and enter your email for instructions to reset
+
+## Manager View/Edit Profile
+- Login with a valid manager account
+- Click "My Store" to view store pfofile
+- Click the pencil icon to edit any field in the profile
+- Click "save" to save changes
+
+## Manager View/Edit Inventory
+- Login with a valid manager account
+- Click "My Inventory" to view store inventory
+- Click on the "+" button to add a new item. Then enter the item's name, price, quantity, barcode, and descritption and click "save"
+- Click the ">" button to view more information about any given inventory item
+- To edit an existing inventory item, click the pencil icon next to the field. Click "save" to save changes. 
+- To delete an existing inventory item, click the "delete" button. 
+
+
+
+
+
+
 
 
 
