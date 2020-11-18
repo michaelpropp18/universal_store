@@ -2,7 +2,58 @@
 
 In recent years, people have been doing more and more of their shopping online, which means that smaller physical stores without an online presence have been seeing less consumer traffic. This semester, we created the Universal Store app to help alleviate that problem. The Universal Store enables physical stores to display their inventory in an app. Customers can browse for particular products and can receive targeted promotions based on their shopping history. The Universal Store also serves as a shopping cart interface allowing customers to scan in-store items and checkout in the app. This makes the in-person shopping experience much more convenient, and at the same time encourages valuable customers to shop at physical stores.
 
-## Install Guide
+# Release Notes Universal Store 1.0
+
+## New Features
+Login Screen(s)
+- Customer Login
+- Customer Registration
+- Manager Login
+- Manager Registration
+- Forgot Password Reset (with generated email)
+
+Customer Home Screen(s)
+- Browse Suggested Products
+- Browse Nearby Stores & Inventories
+- View Current Shopping Carts List
+- Create new shopping trip
+
+Customer Shopping Cart Screen(s)
+- Add item by typing or scanning barcode 
+- Add item by browsing products in home screen
+- Increment,decrement, and remove item
+- View subtotal, processing fee, tax, and total
+
+Customer Checkout Screen(s)
+- View preliminary receipt to confirm purchase(s)
+- Enter payment information
+- Generate final receipt of purchase(s)
+
+Customer Drawer Screen(s)
+- View and edit profile information
+- View past purchases
+- View payment information UI (no actual payment processing implemented)
+- View privacy notice
+- Frequently Asked Questions
+- Sign Out
+
+Manager Dashboard Screen(s)
+- View and edit store profile
+- View and edit store inventory
+- Sign out
+
+## Bug Fixes
+- Cancelling a shopping trip now deletes the shopping cart rather than solely emptying its contents
+- An item can now be added from browse even if the shopping cart did not exist previously
+- Carts displayed on home screen now display accurate total prices
+- Navigating home from a shopping cart now forces an automatic refresh to ensure home screen has the most updated content
+- Attempting to create a new shopping cart at a store with an existing shopping cart will now bring the user to the existing shopping cart rather than creating a new one
+
+## Known bugs
+- Navigating home after generating a receipt briefly shows the login screen (issue #115)
+- Incrementing, decrementing, or removing items from the shopping cart can lag with slow internet (issue #116) 
+
+# Install Guide
 
 This install guide is taken from https://flutter.dev/docs/ with modifications for our specific project.
 
@@ -33,7 +84,7 @@ Tools: Flutter depends on these tools being available in your environment.
 **Dependent Libraries** 
 
 All dependent libraries are automatically installed when you run the project. 
-- sdk: flutter
+- sdk: flutter (installation steps below)
 - firebase_auth: 0.16.1
 - cloud_firestore: 0.13.7
 - provider: 4.1.3
