@@ -1,8 +1,7 @@
-import 'package:universal_store/models/item.dart';
-
-import 'customer.dart';
-import 'manager.dart';
 import 'cart_item.dart';
+import 'customer.dart';
+import 'item.dart';
+import 'manager.dart';
 
 class Cart {
   String uid;
@@ -20,8 +19,8 @@ class Cart {
       subtotal += item.item.price * item.quantity;
     }
     subTotal = subtotal;
-    tax = 0.089 * subTotal;
-    processingFee = 0.01 * subTotal;
+    tax = 0.089 * subTotal; //0.089 is simulating tax in the area 
+    processingFee = 0.01 * subTotal; //0.01 is simulating the processing fee
     total = subTotal + tax + processingFee;
   }
 

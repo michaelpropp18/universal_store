@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'auth_exception_handler.dart';
 import 'database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:universal_store/models/current_user.dart';
 import 'package:universal_store/models/customer.dart';
 import 'package:universal_store/models/manager.dart';

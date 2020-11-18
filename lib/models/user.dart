@@ -1,5 +1,5 @@
-import 'package:universal_store/services/database.dart';
 import 'package:universal_store/services/auth.dart';
+import 'package:universal_store/services/database.dart';
 
 abstract class User {
   final String uid;

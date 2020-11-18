@@ -93,6 +93,7 @@ class RegistrationViewModel with ChangeNotifier {
   }
 
   void checkStorePhoneError() {
+    //Note: we allow for letters in the phone number in case the store wants to include letters in their phone number
     if (_storePhone == '') {
       _storePhoneError = 'Store phone number cannot be empty';
     } else {
@@ -180,6 +181,15 @@ class RegistrationViewModel with ChangeNotifier {
     } else {
       _emailError = '';
     }
+    /* More robust check email to be implmented in future
+    if (email == '') {
+      _emailError = 'Email field cannot be empty';
+    } else if (!RegExp(r'.+\@.+\..+').hasMatch(email)) {
+      _emailError = 'Please enter a valid email';
+    } else {
+      _emailError = '';
+    }
+    */
     notifyListeners();
   }
 

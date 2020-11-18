@@ -12,6 +12,7 @@ class Order {
   DateTime date;
   List<CartItem> items;
 
+  //Future iterations might require customer, date, items, etc. although they are not currently used
   Order(this.uid, this.store, this.customer, this.date, this.items) {
     double subtotal = 0;
     for (CartItem item in items) {
