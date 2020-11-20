@@ -178,6 +178,42 @@ class DatabaseService {
         .updateData({'stock': stock});
   }
 
+  subtractItemStock(Manager store, String itemUid, int quantity) async {
+    if (quantity <= 0) {
+      return;
+    }
+    DocumentSnapshot itemDocument = await managers
+        .document(store.uid)
+        .collection('items')
+        .document(itemUid)
+        .get();
+    int oldStock = itemDocument.data['stock'];
+    int newStock = oldStock - quantity;
+    await managers
+        .document(store.uid)
+        .collection('items')
+        .document(itemUid)
+        .updateData({'stock': newStock});
+  }
+
+  addItemStock(Manager store, String itemUid, int quantity) async {
+    if (quantity <= 0) {
+      return;
+    }
+    DocumentSnapshot itemDocument = await managers
+        .document(store.uid)
+        .collection('items')
+        .document(itemUid)
+        .get();
+    int oldStock = itemDocument.data['stock'];
+    int newStock = oldStock + quantity;
+    await managers
+        .document(store.uid)
+        .collection('items')
+        .document(itemUid)
+        .updateData({'stock': newStock});
+  }
+
   Future getItemWithBarcodeCustomer(Manager store, String barcode) async {
     barcode = formatBarcode(barcode);
     DocumentSnapshot barcodeDocument = await managers
@@ -266,7 +302,8 @@ class DatabaseService {
       Customer customer = await getCustomer(orderData['customer']);
       List<CartItem> items = await getCartItems(manager, customer, orderData);
       Order order = new Order(orderDocument.documentID, manager, customer,
-          (orderData['date'] as Timestamp).toDate(), items);
+          (orderData['date'] as Timestamp).toDate(), items, orderData['total'],
+          orderData['subTotal'], orderData['processingFee'], orderData['tax']);
       orders.add(order);
     }
     return orders;
@@ -289,10 +326,57 @@ class DatabaseService {
       Map orderData = orderDocument.data;
       List<CartItem> items = await getCartItems(manager, customer, orderData);
       Order order = new Order(orderDocument.documentID, manager, customer,
-          (orderData['date'] as Timestamp).toDate(), items);
+          (orderData['date'] as Timestamp).toDate(), items, orderData['total'],
+          orderData['subTotal'], orderData['processingFee'], orderData['tax']);
       orders.add(order);
     }
     return orders;
+  }
+
+  Future customerCheckout(Cart cart) async {
+    String orderId = await addStoreOrder(cart);
+    await addCustomerOrder(orderId, cart);
+    for (CartItem item in cart.items) {
+      subtractItemStock(cart.store, item.item.uid, item.quantity);
+    }
+    await deleteCart(cart);
+  }
+
+  Future addStoreOrder(Cart cart) async {
+    DocumentReference orderDocument =
+      managers.document(cart.store.uid).collection('orders').document();
+    await orderDocument.setData({
+      'store': cart.store.uid,
+      'customer': cart.customer.uid,
+      'items': toFirestoreItems(cart.items),
+      'date': Timestamp.now(),
+      'total': cart.total,
+      'subTotal': cart.subTotal,
+      'processingFee': cart.processingFee,
+      'tax': cart.tax
+    });
+    return orderDocument.documentID;
+  }
+
+  Future addCustomerOrder(String orderId, Cart cart) async {
+    DocumentReference orderDocument =
+    customers.document(cart.customer.uid).collection('orders').document();
+    await orderDocument.setData({
+      'store': cart.store.uid,
+      'order': orderId
+    });
+    return orderDocument.documentID;
+  }
+
+  List toFirestoreItems(List<CartItem> items) {
+    List<Map> firestoreItems = List();
+    for (CartItem item in items) {
+      Map itemMap = Map();
+      itemMap['item'] = item.item.uid;
+      itemMap['quantity'] = item.quantity;
+      firestoreItems.add(itemMap);
+    }
+    return firestoreItems;
   }
 
   Future getCustomerCarts() async {

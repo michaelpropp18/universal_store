@@ -24,10 +24,7 @@ class Customer extends User {
     //1. Add shopping cart to user's history (orders?)
     //2. Add shopping cart to respective store's history (orders?)
     //3. Deduct items from store inventory
-
-
-    //4. Delete shopping cart from active shopping carts (already completed below)
-    await deleteCart(cart);
+    await firestore.customerCheckout(cart);
   } 
 
   Future getNearbyStores() async {

@@ -8,18 +8,15 @@ class Order {
   final String uid;
   Manager store;
   Customer customer;
-  double total;
-  DateTime date;
   List<CartItem> items;
+  DateTime date;
+  double total;
+  double subTotal;
+  double processingFee;
+  double tax;
 
   //Future iterations might require customer, date, items, etc. although they are not currently used
-  Order(this.uid, this.store, this.customer, this.date, this.items) {
-    double subtotal = 0;
-    for (CartItem item in items) {
-      subtotal += item.item.price * item.quantity;
-    }
-    total = subtotal;
-  }
+  Order(this.uid, this.store, this.customer, this.date, this.items, this.total, this.subTotal, this.processingFee, this.tax);
 
   Order.fromCart(this.uid, Cart cart) {
     // TODO generate order from cart
