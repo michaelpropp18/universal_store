@@ -6,22 +6,22 @@ In recent years, people have been doing more and more of their shopping online, 
 
 ## New Features
 Login Screen(s)
-- Customer Login
-- Customer Registration
-- Manager Login
-- Manager Registration
-- Forgot Password Reset (with generated email)
+- Customer login
+- Customer registration
+- Manager login
+- Manager registration
+- Forgot password reset (with generated email)
 
 Customer Home Screen(s)
-- Browse Suggested Products
-- Browse Nearby Stores & Inventories
-- View Current Shopping Carts List
+- Browse suggested products
+- Browse nearby stores & inventories
+- View current shopping carts list
 - Create new shopping trip
 
 Customer Shopping Cart Screen(s)
 - Add item by typing or scanning barcode 
 - Add item by browsing products in home screen
-- Increment,decrement, and remove item
+- Increment, decrement, and remove item
 - View subtotal, processing fee, tax, and total
 
 Customer Checkout Screen(s)
@@ -35,7 +35,7 @@ Customer Drawer Screen(s)
 - View payment information UI (no actual payment processing implemented)
 - View privacy notice
 - Frequently Asked Questions
-- Sign Out
+- Sign out
 
 Manager Dashboard Screen(s)
 - View and edit store profile
